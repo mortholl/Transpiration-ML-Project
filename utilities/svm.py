@@ -34,11 +34,9 @@ def svm_search(x_train, x_test, y_train, y_test, params):
     print(f"The permutation-based feature importance is {p_importances}")
     return svr_cv
 
-# Data visualization
-
 
 def svm_visualize(x, y, svr, times, name):
-    plt.figure(figsize=(20, 5))
+    svm_fig = plt.figure(figsize=(20, 5))
     y_pred = svr.predict(x)
     plt.plot(times, y_pred, linestyle='dotted', label='Model prediction')
     plt.plot(times, y, linestyle='solid', label='Measured')
@@ -47,3 +45,5 @@ def svm_visualize(x, y, svr, times, name):
     plt.title(name)
     plt.xlabel('Time')
     plt.ylabel('Average transpiration (mm/d)')
+    plt.show()
+    return svm_fig
