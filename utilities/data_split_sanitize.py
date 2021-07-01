@@ -3,7 +3,7 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from utilities.data_dict import DataDict
+from utilities.data_import import DataDict
 
 # data_dict_list = user specified subset of data_dict
 # targets = desired transpiration dictionary
@@ -55,3 +55,34 @@ def split_data(x, y):
     print("m = ", m, "instances in training set")
     print("n = ", n, "number of features")
     return x, x_train, x_test, x_val, y, y_train, y_test, y_val
+
+
+def season_split(x, y, times, seasons):
+    # Split x and y into seasons based on the month of the corresponding timestamps
+    # Based on the input season(s), return x, y, and the timestamps for that season(s)
+    new_x = []
+    new_y = []
+    new_times = []
+    for i, time in enumerate(times):
+        month = time[5:7]
+        if 'spring' in seasons:
+            if month == '09' or month == '10' or month == '11':
+                new_x.append(x[i])
+                new_y.append(y[i])
+                new_times.append(time)
+        if 'summer' in seasons:
+            if month == '12' or month == '01' or month == '02':
+                new_x.append(x[i])
+                new_y.append(y[i])
+                new_times.append(time)
+        if 'fall' in seasons:
+            if month == '03' or month == '04' or month == '05':
+                new_x.append(x[i])
+                new_y.append(y[i])
+                new_times.append(time)
+        if 'winter' in seasons:
+            if month == '06' or month == '07' or month == '08':
+                new_x.append(x[i])
+                new_y.append(y[i])
+                new_times.append(time)
+    return new_x, new_y, new_times
