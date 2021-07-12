@@ -2,11 +2,11 @@
 # Input features: solar, temp, humidity, vpd, rainfall, soil, gwl_1718, gwl_1920, gwl
 # Targets: transpiration_1718, transpiration_1920, transpiration
 
-from utilities.data_import import DataDict
+from utilities.data_import import GatumData
 from utilities.data_split_sanitize import sanitizer, split_data, season_split
 from utilities import svm
 
-DataDict = DataDict()
+DataDict = GatumData()
 # Import data by desired features, split by season into dry and wet models
 data_dict_list = [DataDict.solar, DataDict.temp, DataDict.humidity, DataDict.vpd, DataDict.rainfall]
 X, Y, timestamp = sanitizer(data_dict_list, DataDict.transpiration)
