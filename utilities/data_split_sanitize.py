@@ -3,7 +3,7 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from utilities.data_import import GatumData
+import math
 
 # data_dict_list = user specified subset of data_dict
 # targets = desired transpiration dictionary
@@ -21,15 +21,15 @@ def sanitizer(data_dict_list, targets):
         for data_dict in data_dict_list:
             feature = data_dict.get(time, 'missing')  # search dictionary for time stamp
             if feature == 'missing':
-                feature = data_dict.get(date, 'missing')  # check if the dictionary is using the date only
+                feature = data_dict.get(date, 'missing')  # check if the dictionary is using the date
             features.append(feature)
-        if all(feature != 'missing' for feature in features):
+        if all(feature != 'missing' for feature in features) and math.isnan(targets[key]) == False:
             x.append(features)
             y.append(targets[key])
             timestamp.append(time)
 
     x = np.array(x)
-    y = np.array(y)  # * 86400 conversion factor to [mm/d]
+    y = np.array(y)  #
     print(f"Mean overall transpiration is {round(np.mean(y), 4)} mm/d")
     print(f'\nStandard deviation:', np.std(y))
     return x, y, timestamp

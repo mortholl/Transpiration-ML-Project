@@ -20,4 +20,4 @@ params = {
 svr = svm.svm_search(X_train, X_test, Y_train, Y_test, params)
 
 # Visualize model performance
-fig = svm.svm_visualize(X, Y, svr, timestamp, name="National Drive model for daily transpiration")
+fig = svm.svm_visualize(X, Y, svr, timestamp, name="National Drive model for hourly transpiration")
