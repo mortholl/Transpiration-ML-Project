@@ -1,0 +1,2 @@
+st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code,st_USDA_soil_texture
+81.5,Flat,15.7,NA,378,"Naturally regenerated, unmanaged",7.6,NA,ST2,"GWlevel 7.5m; medium groundwater level, sparse understory vegetation, some Tamarix-species within the shrub layer Populus euphratica is a phreatophytic tree species; tree cover 35% due to low groundwater level",NA,NA,750,SAND,Flat,drought,CHN_YIN_ST2_DRO,sand

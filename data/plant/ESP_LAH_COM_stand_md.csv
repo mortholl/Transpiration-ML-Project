@@ -1,0 +1,2 @@
+st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code,st_USDA_soil_texture
+7,Flat,13.5,48,1666.7,Orchard,3.2,1.5,NA,"Commercial hedgerow olive orchard. See Lopez-Bernal et al. (2015, Irrig. Sci.) for further details",33,19,60,CLAY,Gentle slope (<2 %),"Commercial hedgerow olive orchard. See Lopez-Bernal et al. (2015, Irrig. Sci.) for further details",ESP_LAH_COM,clay

@@ -1,0 +1,2 @@
+env_leafarea_seasonal,env_netrad,env_plant_watpot,env_ppfd_in,env_precip,env_remarks,env_rh,env_swc_deep_depth,env_swc_shallow_depth,env_sw_in,env_ta,env_time_daylight,env_timestep,env_time_zone,env_vpd,env_ws,si_code
+stand level,Not provided,leaf: predawn and midday,Clearing,Clearing,"Where MET data is missing, it may be gap-filled by regression with nearby MET data (~5 km distant), provided in spreadsheet ""sapfluxnet_metadata_AUS_MAR_HSD_HIG"" ",Clearing,NA,NA,Not provided,Clearing,FALSE,30,"34UTC+10:00, K",Clearing,Clearing,AUS_MAR_UBD

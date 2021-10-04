@@ -1,0 +1,2 @@
+st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code,st_USDA_soil_texture
+39,S,36.96,28.3,1228,"Plantation, managed",16.69,8.1,NA,NA,62.9,8.8,70,LOAM,Strong Slope (>10%),NA,CZE_BIK,sandy clay loam

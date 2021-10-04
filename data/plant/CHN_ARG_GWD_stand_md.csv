@@ -1,0 +1,2 @@
+st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code,st_USDA_soil_texture
+84.3,Flat,5.8,NA,59,"Naturally regenerated, unmanaged",4.4,0.045,GWD,"GWlevel 6.6m; low groundwater level, no understory and shrub vegetation Populus euphratica is a phreatophytic tree species; tree cover 5% due to low groundwater level",NA,NA,660,SAND,Flat,NA,CHN_ARG_GWD,sand

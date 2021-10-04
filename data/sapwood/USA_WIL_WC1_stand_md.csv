@@ -1,0 +1,2 @@
+st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code
+66,NA,28,NA,NA,"Naturally regenerated, unmanaged",24.3,NA,WC1 Willow Creek Flux Stand,"R. Poyatos: data set measured in 2000. Another data set present for 2015. I label this one as WC1, the other as WC2",NA,NA,NA,NA,NA,NA,USA_WIL_WC1

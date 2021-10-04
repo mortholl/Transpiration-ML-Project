@@ -1,0 +1,7 @@
+si_addcontr_email,si_addcontr_firstname,si_addcontr_institution,si_addcontr_lastname,si_code,si_contact_email,si_contact_firstname,si_contact_institution,si_contact_lastname,si_country,si_dendro_network,si_dist_mgmt,si_elev,si_flux_network,si_igbp,si_lat,si_long,si_name,si_paper,si_remarks,is_inside_country,si_mat,si_map,si_biome
+NA,NA,NA,NA,DEU_HIN_TER,heinrich@gfz-potsdam.de,Ingo,"Helmholtz Centre Potsdam
+GFZ German Research Centre for Geosciences
+Department 5: Geoarchives
+Telegrafenberg
+14473 Potsdam
+",Heinrich,DEU,FALSE,NULL,95,FALSE,ENF,53.330949,13.193212,Hinnensee,NA,NA,TRUE,8.683656962934744,606.4080763990775,Woodland/Shrubland

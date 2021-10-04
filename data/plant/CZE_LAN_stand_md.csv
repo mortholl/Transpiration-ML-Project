@@ -1,0 +1,2 @@
+st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code,st_USDA_soil_texture
+110,Flat,30.3,17.8,240,"Naturally regenerated, unmanaged",36,6.04,NA,NA,71.8,10.4,100,LOAM,Flat,NA,CZE_LAN,sandy loam

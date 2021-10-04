@@ -1,0 +1,7 @@
+sp_basal_area_perc,sp_leaf_habit,sp_name,sp_ntrees,si_code
+24,evergreen,Abies balsamea,19,USA_CHE_ASP
+3,cold deciduous,Betula papyrifera,11,USA_CHE_ASP
+3,cold deciduous,Acer rubrum,5,USA_CHE_ASP
+4,cold deciduous,Acer saccharum,5,USA_CHE_ASP
+30,cold deciduous,Populus tremuloides,104,USA_CHE_ASP
+12,evergreen,Thuja occidentalis,10,USA_CHE_ASP

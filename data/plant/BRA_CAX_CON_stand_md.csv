@@ -1,0 +1,2 @@
+st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code
+NA,Flat,35.8,8,481,"Naturally regenerated, unmanaged",NA,5.3,NA,See Nature paper for soil data,79,15.5,NA,SAND,Flat,Control,BRA_CAX_CON

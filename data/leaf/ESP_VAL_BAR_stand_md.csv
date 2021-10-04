@@ -1,0 +1,2 @@
+st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code,st_USDA_soil_texture
+70,Flat,32.8,32.6348259535,987,"Naturally regenerated, unmanaged",10.6,2.1,Barrol,NA,9.8131287201,57.5520453264,50,NA,Flat,NA,ESP_VAL_BAR,silty clay loam

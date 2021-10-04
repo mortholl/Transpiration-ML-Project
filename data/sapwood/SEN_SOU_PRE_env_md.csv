@@ -1,0 +1,2 @@
+env_leafarea_seasonal,env_netrad,env_plant_watpot,env_ppfd_in,env_precip,env_remarks,env_rh,env_swc_deep_depth,env_swc_shallow_depth,env_sw_in,env_ta,env_time_daylight,env_timestep,env_time_zone,env_vpd,env_ws,si_code
+tree level,Not provided,leaf: predawn and midday,Not provided,Clearing,"swc_shallow 25cm, swc_deep 75cm, trees use also water from the water table 30m deep (roots were found)",Clearing,75,25,Clearing,Clearing,FALSE,60,"16UTC±00:00, Z",Not provided,Clearing,SEN_SOU_PRE

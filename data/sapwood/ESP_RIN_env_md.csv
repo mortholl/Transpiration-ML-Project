@@ -1,0 +1,2 @@
+env_leafarea_seasonal,env_netrad,env_plant_watpot,env_ppfd_in,env_precip,env_remarks,env_rh,env_swc_deep_depth,env_swc_shallow_depth,env_sw_in,env_ta,env_time_daylight,env_timestep,env_time_zone,env_vpd,env_ws,si_code
+NULL,Not provided,leaf: predawn and midday,Not provided,Clearing,"Soil water content was not measured on a sub-daily routine but every other week, and thus, I have not included those data. Leaf area was only measured directly at the end of the season.",Clearing,NA,NA,Clearing,Clearing,FALSE,60,"17UTC+01:00, A",Clearing,Clearing,ESP_RIN

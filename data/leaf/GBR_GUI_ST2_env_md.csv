@@ -1,0 +1,2 @@
+env_leafarea_seasonal,env_netrad,env_plant_watpot,env_ppfd_in,env_precip,env_remarks,env_rh,env_swc_deep_depth,env_swc_shallow_depth,env_sw_in,env_ta,env_time_daylight,env_timestep,env_time_zone,env_vpd,env_ws,si_code
+NA,Clearing,leaf: predawn and midday,Clearing,Clearing,All data except soil water content collected at stand 1,Clearing,NA,15,Not provided,Clearing,FALSE,15,"16UTC±00:00, Z",Clearing,Clearing,GBR_GUI_ST2

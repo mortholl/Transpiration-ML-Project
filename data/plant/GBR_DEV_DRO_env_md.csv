@@ -1,0 +1,2 @@
+env_leafarea_seasonal,env_netrad,env_plant_watpot,env_ppfd_in,env_precip,env_remarks,env_rh,env_swc_deep_depth,env_swc_shallow_depth,env_sw_in,env_ta,env_time_daylight,env_timestep,env_time_zone,env_vpd,env_ws,si_code
+NULL,Above canopy,leaf: predawn and midday,Above canopy,Above canopy,NA,Above canopy,NA,20,Not provided,Above canopy,FALSE,60,"16UTC±00:00, Z",Not provided,Above canopy,GBR_DEV_DRO

@@ -1,0 +1,2 @@
+st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code
+50,S,60,NA,2000,"Plantation, managed",22,NA,"Various (3 species): Larix sibirica, Larix gmelinii, Pinus sibirica",NA,NA,NA,NA,NA,Gentle slope (<2 %),NA,RUS_POG_VAR

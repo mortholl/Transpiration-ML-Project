@@ -1,0 +1,2 @@
+env_leafarea_seasonal,env_netrad,env_plant_watpot,env_ppfd_in,env_precip,env_remarks,env_rh,env_swc_deep_depth,env_swc_shallow_depth,env_sw_in,env_ta,env_time_daylight,env_timestep,env_time_zone,env_vpd,env_ws,si_code
+NA,Clearing,NA,Clearing,Clearing,NA,Clearing,NA,10,Clearing,Clearing,FALSE,15,"5UTC-09:00, V",Not provided,Above canopy,USA_BNZ_BLA

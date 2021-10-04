@@ -1,0 +1,2 @@
+env_leafarea_seasonal,env_netrad,env_plant_watpot,env_ppfd_in,env_precip,env_remarks,env_rh,env_swc_deep_depth,env_swc_shallow_depth,env_sw_in,env_ta,env_time_daylight,env_timestep,env_time_zone,env_vpd,env_ws,si_code
+NA,Not provided,NA,Not provided,Above canopy,"Precipitation (mm) and Global incident radiation,(Ki; W / m2) are in another time step (10 minutes) and will be send be email, following instructions given by SapFlux Team",Above canopy,NA,NA,Above canopy,Above canopy,TRUE,30,"13UTC-03:00, P",Above canopy,Not provided,BRA_SAN

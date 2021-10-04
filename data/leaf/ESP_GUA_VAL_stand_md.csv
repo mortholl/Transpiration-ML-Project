@@ -1,0 +1,2 @@
+st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code,st_USDA_soil_texture
+45,Flat,17.64,NA,781,"Naturally regenerated, unmanaged",12,3.8,Valsaín,Stand historically coppiced. Last coppicing event took place 45 years ago. Most of the stems within the plot (and the monitored ones) have vegetative origin ,NA,NA,125,LOAM,Undulated/Variable,NA,ESP_GUA_VAL,loam

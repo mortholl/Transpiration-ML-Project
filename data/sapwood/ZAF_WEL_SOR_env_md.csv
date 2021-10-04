@@ -1,0 +1,2 @@
+env_leafarea_seasonal,env_netrad,env_plant_watpot,env_ppfd_in,env_precip,env_remarks,env_rh,env_swc_deep_depth,env_swc_shallow_depth,env_sw_in,env_ta,env_time_daylight,env_timestep,env_time_zone,env_vpd,env_ws,si_code
+species level,Not provided,leaf: predawn and midday,Not provided,Clearing,Point measurements of soil moisture at deeper layers (30-60 cm) with CS616 probes (~hourly intervals).,Clearing,NA,NA,Clearing,Clearing,FALSE,60,"18UTC+02:00, B",Not provided,Clearing,ZAF_WEL_SOR

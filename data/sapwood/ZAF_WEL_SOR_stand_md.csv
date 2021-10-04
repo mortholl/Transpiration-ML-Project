@@ -1,0 +1,2 @@
+st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code,st_USDA_soil_texture
+50,Flat,8.8,20,580,"Naturally regenerated, unmanaged",25,1.8,Sort,"The stand is in a terraced area, locally flat, but in a N-facing slope of ~15 deg.",60,20,65,LOAM,"Medium Slope (>2 %, <5%)",NA,ZAF_WEL_SOR,sandy clay loam

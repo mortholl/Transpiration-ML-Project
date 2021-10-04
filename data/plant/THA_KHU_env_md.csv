@@ -1,0 +1,2 @@
+env_leafarea_seasonal,env_netrad,env_plant_watpot,env_ppfd_in,env_precip,env_remarks,env_rh,env_swc_deep_depth,env_swc_shallow_depth,env_sw_in,env_ta,env_time_daylight,env_timestep,env_time_zone,env_vpd,env_ws,si_code
+NULL,Not provided,leaf: predawn and midday,Clearing,Clearing,a column with leaf water potential data (predawn&midday) has been added despite no automatic header,Clearing,80,20,Clearing,Clearing,FALSE,30,"28UTC+07:00, G",Not provided,Clearing,THA_KHU
