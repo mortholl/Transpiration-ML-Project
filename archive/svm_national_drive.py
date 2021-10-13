@@ -1,7 +1,7 @@
 # Build and visualize the model for the National Drive data
 
 from utilities.data_import import NationalDriveData
-from utilities.data_split_sanitize import sanitizer, split_data, season_split
+from archive.data_split_sanitize import sanitizer, split_data
 from utilities import svm
 
 DataDict = NationalDriveData()

@@ -3,7 +3,7 @@
 # Targets: transpiration_1718, transpiration_1920, transpiration
 
 from utilities.data_import import GatumData
-from utilities.data_split_sanitize import sanitizer, split_data, season_split
+from archive.data_split_sanitize import sanitizer, split_data
 from utilities import svm
 
 DataDict = GatumData()

@@ -3,13 +3,10 @@ ARG_MAZ_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,ws,precip,swc_sha
 ARG_TRE_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,ws,precip,swc_shallow,ppfd_in,ext_rad,,
 AUS_RIC_EUC_ELE_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,ppfd_in,netrad,ws,precip,swc_shallow,ext_rad,
 AUS_WOM_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,netrad,ws,precip,swc_shallow,ppfd_in,ext_rad,
-AUT_TSC_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,netrad,ws,precip,swc_shallow,ext_rad,,,
 CAN_TUR_P39_POS_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,ppfd_in,netrad,ws,precip,swc_shallow,swc_deep,ext_rad
 CAN_TUR_P39_PRE_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,ppfd_in,netrad,ws,precip,swc_shallow,swc_deep,ext_rad
 CAN_TUR_P74_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,ppfd_in,netrad,ws,precip,swc_shallow,swc_deep,sw_in,vpd,ext_rad
 CHE_DAV_SEE_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,ppfd_in,netrad,ws,precip,swc_shallow,swc_deep,sw_in,ext_rad
-CHE_PFY_CON_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,netrad,ws,precip,swc_shallow,ext_rad,,,
-CHE_PFY_IRR_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,netrad,ws,precip,swc_shallow,ext_rad,,,
 CRI_TAM_TOW_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,vpd,sw_in,ppfd_in,netrad,ws,precip,swc_shallow,rh,ext_rad,
 CZE_BIK_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,sw_in,netrad,ws,precip,swc_shallow,swc_deep,ppfd_in,vpd,ext_rad
 CZE_KRT_KRT_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,sw_in,ws,precip,swc_shallow,ppfd_in,vpd,ext_rad,,
@@ -33,10 +30,7 @@ ESP_SAN_B_100_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,ppfd_in,netrad,ws
 ESP_TIL_MIX_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,ws,precip,swc_shallow,ppfd_in,ext_rad,,
 ESP_TIL_OAK_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,ws,precip,swc_shallow,ppfd_in,ext_rad,,
 ESP_TIL_PIN_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,ws,precip,swc_shallow,ppfd_in,ext_rad,,
-ESP_VAL_BAR_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,netrad,ws,precip,swc_shallow,vpd,ext_rad,,,
 ESP_VAL_SOR_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,sw_in,netrad,ws,precip,swc_shallow,ppfd_in,vpd,ext_rad,
-ESP_YUN_C2_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,swc_shallow,ext_rad,,,,,,
-ESP_YUN_T3_THI_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,swc_shallow,ext_rad,,,,,,
 FIN_PET_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,ppfd_in,ws,precip,swc_shallow,sw_in,vpd,ext_rad,,
 FRA_HES_HE1_NON_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,vpd,sw_in,netrad,ws,precip,swc_shallow,swc_deep,ppfd_in,rh,ext_rad
 FRA_HES_HE2_NON_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,vpd,sw_in,netrad,ws,precip,swc_shallow,swc_deep,ppfd_in,rh,ext_rad
@@ -51,7 +45,6 @@ GUF_GUY_GUY_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,ppfd_in,netra
 GUF_GUY_ST2_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,ppfd_in,netrad,ws,precip,swc_shallow,swc_deep,ext_rad
 IDN_JAM_OIL_env_data.csv,TIMESTAMP,TIMESTAMP_solar,ta,rh,vpd,sw_in,netrad,ws,precip,swc_shallow,ppfd_in,ext_rad,
 IDN_JAM_RUB_env_data.csv,TIMESTAMP,TIMESTAMP_solar,ta,rh,vpd,sw_in,netrad,ws,precip,swc_shallow,ppfd_in,ext_rad,
-IDN_PON_STE_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,netrad,precip,swc_shallow,swc_deep,ext_rad,,,
 ISR_YAT_YAT_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,ppfd_in,netrad,ws,precip,swc_shallow,swc_deep,ext_rad
 ITA_FEI_S17_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,ws,precip,swc_shallow,swc_deep,ppfd_in,ext_rad,
 ITA_KAE_S20_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,ws,precip,swc_shallow,swc_deep,ppfd_in,ext_rad,
@@ -79,7 +72,6 @@ USA_HIL_HF1_PRE_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,ppfd_in,n
 USA_HIL_HF2_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,ppfd_in,netrad,ws,precip,swc_shallow,swc_deep,ext_rad
 USA_HUY_LIN_NON_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,sw_in,ws,precip,swc_shallow,ppfd_in,vpd,ext_rad,,
 USA_INM_env_data.csv,TIMESTAMP,TIMESTAMP_solar,ta,rh,vpd,sw_in,ppfd_in,ws,precip,swc_shallow,ext_rad,,
-USA_MOR_SF_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,netrad,ws,precip,swc_shallow,ext_rad,,,
 USA_ORN_ST1_AMB_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,sw_in,ppfd_in,netrad,ws,precip,swc_shallow,vpd,ext_rad,
 USA_ORN_ST2_AMB_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,sw_in,ppfd_in,netrad,ws,precip,swc_shallow,vpd,ext_rad,
 USA_ORN_ST3_ELE_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,sw_in,ppfd_in,netrad,ws,precip,swc_shallow,vpd,ext_rad,
@@ -98,7 +90,6 @@ USA_TNY_env_data.csv,TIMESTAMP,TIMESTAMP_solar,ta,rh,vpd,sw_in,ppfd_in,ws,precip
 USA_UMB_CON_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,ppfd_in,netrad,ws,precip,swc_shallow,swc_deep,ext_rad
 USA_UMB_GIR_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,ppfd_in,netrad,ws,precip,swc_shallow,swc_deep,ext_rad
 USA_WIL_WC1_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,vpd,sw_in,netrad,ws,precip,swc_shallow,swc_deep,ppfd_in,rh,ext_rad
-USA_WIL_WC2_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,netrad,ws,precip,swc_shallow,swc_deep,ext_rad,,,,
 USA_WVF_env_data.csv,TIMESTAMP,TIMESTAMP_solar,ta,rh,vpd,sw_in,ppfd_in,ws,precip,swc_shallow,ext_rad,,
 ZAF_FRA_FRA_env_data.csv,TIMESTAMP,TIMESTAMP_solar,ta,rh,vpd,sw_in,ws,precip,swc_shallow,ppfd_in,ext_rad,,
 ZAF_NOO_E3_IRR_env_data.csv,TIMESTAMP,solar_TIMESTAMP,ta,rh,vpd,sw_in,netrad,ws,precip,swc_shallow,swc_deep,ppfd_in,ext_rad
