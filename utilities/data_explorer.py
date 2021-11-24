@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 
+# Examines data and comes up with a site list based on available environmental data
 
 directory = 'data/plant'
 column_dict = {}

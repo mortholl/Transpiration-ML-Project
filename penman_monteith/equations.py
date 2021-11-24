@@ -1,16 +1,18 @@
-from math import exp, pi, sqrt, log
+from math import exp, log
 from Penman_Monteith.dics import *
+
+# MLT: The following code was taken from the Photo3 database and altered for use in this project.
 
 # ASSUMPTIONS:
 # Wind and humidity are measured at a height of 2 m
-# Wind speed is always 2 m *alter if data are available*
-# Eucalyptus canopy is 20 m tall
+# Wind speed at any time stamp is equal to the monthly average at the location
+# Canopy is 20 m tall
 # Stomatal resistance is 100 s/m
-# zero displacement height and roughness length governing momentum transfer can be estimated by d = 2/3h and z = 0.123h
+# Zero displacement height and roughness length governing momentum transfer can be estimated by d = 2/3h and z = 0.123h
 
 
-def evfPen(phi, ta, qa):
-	# phi = solar radiation intensity (W/m2), ta = atmospheric temperature (K), qa = specific humidity (kg/kg)
+def evfPen(phi, ta, qa, u):
+	# phi = solar radiation intensity (W/m2), ta = atmospheric temperature (K), qa = specific humidity (kg/kg), u = wind speed (m/s)
 	"""Penman-Monteith transpiration (um/sec)"""
 
 	GAMMA_W = (P_ATM*CP_A)/(.622*LAMBDA_W)
@@ -22,9 +24,10 @@ def evfPen(phi, ta, qa):
 		return VPD(ta, qa)*.622/P_ATM
 
 	# gs and ga equations here
-	ra = log((2 - 2/3*20)/0.123/20)*log((2 - 2/3*0.12)/0.1/0.123/20)/(0.41**2)/2
+	h = 20  # canopy height, m
+	ra = log(abs(2 - 2/3*h)/0.123/h)*log(abs(2 - 2/3*h)/0.1/0.123/h)/(0.41**2)/u  # can't take absolute value - need to fix this
 	ga = 1/ra
-	rs = 100/0.5/24/20
+	rs = 100/0.5/24/20  # convert 100 s/m to units of ???
 	gs = 1/rs
 
 	return ((LAMBDA_W*GAMMA_W*ga/1000.*RHO_A*drh(ta, qa) + delta_s(ta)*phi)*(R*ta/P_ATM)*gs*1000000.) / \
@@ -48,4 +51,4 @@ def esat(ta):
 
 def qaRh(rh, ta):
 	"""Specific humidity (kg/kg), input of rh in %, ta in K"""
-	return 0.622*rh/100.*esat(ta)/P_ATM  # needs to be in kg/kg
+	return 0.622*rh/100.*esat(ta)/P_ATM  # kg/kg

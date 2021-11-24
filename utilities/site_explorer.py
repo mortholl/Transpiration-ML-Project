@@ -1,6 +1,8 @@
 import pandas as pd
 import os
 
+# Examines site list to pull additional relevant data for mapping and create species types breakdowns
+
 site_list = pd.read_csv('data/site_list.csv')
 sites = site_list['Unnamed: 0'].tolist()
 print(f'There are {len(sites)} sites.')
@@ -56,9 +58,21 @@ print(f'There are {len(species_dict)} unique species in the dataset.')
 species_names_df = pd.DataFrame.from_dict(species_dict, orient='index', columns=['Count'])
 species_names_df.to_csv('data/species_dist.csv')
 
-species_types = species_df['Type'].tolist()
-type_dict = {type_name: species_types.count(type_name) for type_name in set(species_types)}
-print(type_dict)
-print(f'There are {len(type_dict)} species types in the dataset.')
-type_df = pd.DataFrame.from_dict(type_dict, orient='index', columns=['Count'])
+
+unique_species = []
+species_types = {'evergreen': 0, 'deciduous': 0, 'missing': 0}
+for row in species_df.iterrows():
+    species = row[1][0]
+    if species not in unique_species:
+        unique_species.append(species)
+        functional_type = str(row[1][1])
+        if 'evergreen' in functional_type:
+            species_types['evergreen'] += 1
+        elif 'deciduous' in functional_type:
+            species_types['deciduous'] += 1
+        else:
+            print(f'Species {species} not an evergreen or deciduous functional type')
+            species_types['missing'] +=1
+print(species_types)
+type_df = pd.DataFrame.from_dict(species_types, orient='index', columns=['Count'])
 type_df.to_csv('data/species_types.csv')
