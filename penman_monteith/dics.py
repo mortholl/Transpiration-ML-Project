@@ -1,4 +1,4 @@
-# MLT: The following code was taken from the Photo3 database for use in this project.
+# MLT: The following code was taken from the Photo3 code repository for use in this project.
 
 timestepM = 30  # Model change in time at each step (min)
 timestepD = 30  # timestep of input data
