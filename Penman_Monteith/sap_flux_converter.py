@@ -15,7 +15,7 @@ for filename in os.listdir('data/modeling_data/targets'):
     for filename_leaf in os.listdir('data/leaf'):  # Saves the subset of available leaf data, converted to um/sec
         if location in filename_leaf and 'sapf_data' in filename_leaf:
             leaf_df = pd.read_csv('data/leaf/'+location+'_sapf_data.csv')
-            leaf_df['Average Sap Flux'] = leaf_df.iloc[:, 2:].mean(axis=1) * 10000 / 3600  # conversion factor included from cm to um
+            leaf_df['Average Sap Flux'] = leaf_df.iloc[:, 2:].mean(axis=1) * 10000 / 3600  # conversion factor included from cm/hr to um/s
             leaf_df[['TIMESTAMP', 'Average Sap Flux']].to_csv('Penman_Monteith/sap_flux_um-sec/'+location+'_um-sec.csv')
             break  # breaks the file finding loop after the csv is created
     print(f'{location} complete')
