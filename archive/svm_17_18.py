@@ -4,7 +4,7 @@
 
 from utilities.data_import import GatumData
 from archive.data_split_sanitize import sanitizer, split_data
-from utilities import svm
+from archive import svm
 
 DataDict = GatumData()
 

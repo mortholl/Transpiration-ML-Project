@@ -4,7 +4,7 @@ import datetime
 
 # Calculates average sap flux data in desired units
 
-begin_time = datetime.datetime.now()
+# begin_time = datetime.datetime.now()
 
 for filename in os.listdir('data/modeling_data/targets'):
     location = filename.split('_sapf')[0]
@@ -20,5 +20,5 @@ for filename in os.listdir('data/modeling_data/targets'):
             break  # breaks the file finding loop after the csv is created
     print(f'{location} complete')
 
-end_time = datetime.datetime.now()
-print(f'The runtime was {end_time - begin_time}.')
+# end_time = datetime.datetime.now()
+# print(f'The runtime was {end_time - begin_time}.')

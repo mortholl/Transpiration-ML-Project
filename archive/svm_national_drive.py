@@ -2,7 +2,7 @@
 
 from utilities.data_import import NationalDriveData
 from archive.data_split_sanitize import sanitizer, split_data
-from utilities import svm
+from archive import svm
 
 DataDict = NationalDriveData()
 

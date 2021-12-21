@@ -8,7 +8,7 @@ import csv
 # Organizes features and targets into csv files
 
 
-def feature_generator(feature_list, file_list):  # Returns two dictionaries, features and targets
+def data_import(feature_list, file_list):  # Returns two numpy arrays, x features and y targets
     # The feature names list must exactly match the column names in the SAPFLUXNET database
     # Can pass an empty list to use all files in the directory
     feature_directory = 'data/modeling_data/features'
@@ -37,15 +37,18 @@ def feature_generator(feature_list, file_list):  # Returns two dictionaries, fea
         df_out[feature] = value_list
     df_out['Average Sap Flux'] = y_dict['Average Sap Flux']
     df_out.to_csv('data/modeling_data/working_data.csv', index=False)
-    return x_dict, y_dict  # optional return values, can be useful for debugging
+    data = np.loadtxt('data/modeling_data/working_data.csv', skiprows=1, delimiter=',')
+    x = data[:, 0:-1]
+    y = data[:, -1]
+    print(f'The number of data points is {len(x)}.')
+    return x, y
 
-
-begin_time = datetime.datetime.now()
+# begin_time = datetime.datetime.now()
 
 # Test code below
 # feature_names = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow', 'precip']
 # file_names = ['ARG_MAZ']
 # feature_generator(feature_names, file_names)
 
-end_time = datetime.datetime.now()
-print(f'The runtime was {end_time - begin_time}.')
+# end_time = datetime.datetime.now()
+# print(f'The runtime was {end_time - begin_time}.')

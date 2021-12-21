@@ -4,7 +4,7 @@
 
 from utilities.data_import import GatumData
 from archive.data_split_sanitize import sanitizer, split_data, season_split
-from utilities import svm
+from archive import svm
 
 DataDict = GatumData()
 # Import data by desired features, split by season into dry and wet models

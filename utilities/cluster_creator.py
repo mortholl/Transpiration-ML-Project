@@ -3,10 +3,11 @@ import pandas as pd
 import numpy as np
 from sklearn.cluster import KMeans
 
-# This file creates clusters of locations sorted into sets related by either climate or plant functional type
+# This file creates clusters of locations sorted into sets related by climate or plant functional type
 
 
-class ClassCreator:
+class ClusterCreator:
+
     def __init__(self):
         self.site_df = []  # working site dataframe
         self.k_cluster_dict = {}  # dictionary of site clusters based on K-Means labels
@@ -44,7 +45,7 @@ class ClassCreator:
         self.site_df['Average Wind Speed'] = wind_speeds
         self.site_df.to_csv('data/modeling_data/cluster_info.csv', index=False)
 
-    def k_means_classes(self):  # Implement K-means to come up with clusters of similar climate statistics
+    def k_means_clusters(self):  # Implement K-means to come up with clusters of similar climate statistics
         self.site_df = pd.read_csv('data/modeling_data/cluster_info.csv')
         sites = self.site_df['Site'].values
         maps = self.site_df['MAP'].values
@@ -68,7 +69,7 @@ class ClassCreator:
                 if k_mean == k:
                     self.k_cluster_dict[k].append(sites[i])
 
-    def func_type_classes(self):  # Return dictionary of functional types with sites
+    def func_type_clusters(self):  # Return dictionary of functional types with sites
         self.site_df = pd.read_csv('data/modeling_data/cluster_info.csv')
         sites = self.site_df['Site'].values
         func_types = self.site_df['Functional Type'].values
@@ -80,7 +81,7 @@ class ClassCreator:
                 if func == func_type:
                     self.func_cluster_dict[int(func_type)].append(sites[i])
 
-    def biome_classes(self):  # Return dictionary of biomes with sites
+    def biome_clusters(self):  # Return dictionary of biomes with sites
         self.site_df = pd.read_csv('data/modeling_data/cluster_info.csv')
         sites = self.site_df['Site'].values
         biomes = self.site_df['Biome'].values
@@ -94,10 +95,18 @@ class ClassCreator:
                 if b == biome:
                     self.biome_cluster_dict[biome].append(sites[i])
 
+    @classmethod
+    def build_clusters(cls):
+        creator = ClusterCreator()
+        creator.preprocess()
+        creator.k_means_clusters()
+        creator.func_type_clusters()
+        creator.biome_clusters()
+        return creator
 
-if __name__ == "__main__":
-    creator = ClassCreator()
-    creator.preprocess()
-    creator.k_means_classes()
-    creator.func_type_classes()
-    creator.biome_classes()
+# if __name__ == "__main__":
+#     creator = ClusterCreator()
+#     creator.preprocess()
+#     creator.k_means_clusters()
+#     creator.func_type_clusters()
+#     creator.biome_clusters()
