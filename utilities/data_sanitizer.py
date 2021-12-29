@@ -30,7 +30,7 @@ def data_import(feature_list, file_list):  # Returns two numpy arrays, x feature
             for feature in feature_list:
                 x_dict[feature].extend(np.ndarray.tolist(combined_df[feature].values))
             y_dict[target].extend(np.ndarray.tolist(combined_df[target].values))
-            print(f'{location} complete')
+            print(f'{location} data loaded')
     df_out = pd.DataFrame()
     for feature in feature_list:
         value_list = x_dict[feature]

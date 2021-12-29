@@ -19,14 +19,12 @@ my_files = func_clusters[0]  # can select using the cluster dictionaries or use 
 
 # Import data and scale X inputs
 X, Y = data_import(my_features, my_files)
-Y = Y/3600
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
 #  Split to training/validation sets: 80% training, 10% test, 10% validation
 X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=0.2, random_state=42)
 X_test, X_val, Y_test, Y_val = train_test_split(X_test, Y_test, test_size=0.5, random_state=42)
-
 
 # Set random seeds for reproducibility
 keras.backend.clear_session()
@@ -44,16 +42,20 @@ model = keras.models.Sequential([
 ])
 
 model.compile(loss='mse', optimizer=keras.optimizers.SGD(lr=0.0001), metrics=['mae'])
-
 early_stopping_cb = keras.callbacks.EarlyStopping(patience=20, restore_best_weights=True)
-history = model.fit(X_train, Y_train, epochs=200, batch_size=20, validation_data=(X_val, Y_val), callbacks=early_stopping_cb)
+history = model.fit(X_train, Y_train, epochs=30, batch_size=20, validation_data=(X_val, Y_val), callbacks=early_stopping_cb)
 
 mse_test, mae_test = model.evaluate(X_test, Y_test)
 Y_pred = model.predict(X_test)
 r2 = r2_score(Y_test, Y_pred)
+Y_pred_train = model.predict(X_train)
+r2_train = r2_score(Y_train, Y_pred_train)
 print(f'R2 was {r2}')
 print(f'MSE was {mse_test}')
 print(f'MAE was {mae_test}')
+print(f'R2 of the training set was {r2_train}')
+if r2_train > r2:
+    print(f'Model may be overfitting because {r2_train} > {r2}')
 
 plt.scatter(Y_test, Y_pred)
 plt.xlabel("True values")
