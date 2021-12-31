@@ -6,9 +6,13 @@ from utilities.cluster_creator import ClusterCreator
 from utilities.data_sanitizer import data_import
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-from sklearn.inspection import permutation_importance
 import datetime
 import numpy as np
+from sklearn.metrics import mean_absolute_error
+from tensorflow.keras.wrappers.scikit_learn import KerasRegressor
+from sklearn.model_selection import GridSearchCV
+from sklearn.inspection import permutation_importance
+import pickle
 
 begin_time = datetime.datetime.now()
 
@@ -19,10 +23,36 @@ func_clusters = cluster_creator.func_cluster_dict
 biome_clusters = cluster_creator.biome_cluster_dict
 
 my_features = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow', 'precip']
-with open('Neural_Networks/ann_results.csv', 'w', newline='') as csvfile:
-    csvfile.write(f'Data set, n locations, n data points, R2 test, R2 train, MAE, {",".join(my_features)} \n')
 
-    # Loop over all clusters to create random forest models
+
+# Define model creation in function
+def create_model(n_hidden=2, n_neuron=20, regul_weight=0.01, lr=0.001):
+    model = keras.models.Sequential()
+    model.add(keras.layers.Dense(n_neuron, activation='relu', input_shape=(X_train.shape[1:]),
+                                 kernel_regularizer=keras.regularizers.l2(regul_weight)))
+    for i in range(1, n_hidden):
+        model.add(keras.layers.Dense(n_neuron, activation='relu',
+                                     kernel_regularizer=keras.regularizers.l2(regul_weight)))
+    keras.layers.BatchNormalization()
+    model.add(keras.layers.Dense(1, name='output', activation=None))
+    model.compile(loss='mse', optimizer=keras.optimizers.Adam(learning_rate=lr))
+    return model
+
+
+# Wrap model in scikit learn estimator, define parameters to test
+sk_estimator = KerasRegressor(build_fn=create_model, epochs=20, batch_size=32, verbose=0)
+param_grid = {'n_hidden': [3, 5],
+              'n_neuron': [8, 16],
+              'epochs': [50, 80],
+              # 'regul_weight': [1e-1, 1e-2, 1e-3],
+              # 'lr': [1e-2, 1e-3, 1e-4],
+              }
+
+
+with open('Neural_Networks/ann_results.csv', 'w', newline='') as csvfile:
+    csvfile.write(f'Data set, n locations, n data points, R2 test, R2 train, MAE, {",".join(my_features)}, Best parameters \n')
+
+    # Loop over all clusters
     for identifier, cluster_group in zip(['k_means_', 'func_', 'biome_'], [k_clusters, func_clusters, biome_clusters]):
         for data_cluster in cluster_group:
             # Get data
@@ -33,47 +63,39 @@ with open('Neural_Networks/ann_results.csv', 'w', newline='') as csvfile:
             X, Y = data_import(my_features, my_files)
             n_points = len(X)
             scaler = StandardScaler()
+            outfile = 'Neural_Networks/models/'+model_name+'_scaler.sav'
+            pickle.dump(scaler, open(outfile, 'wb'))
             X_scaled = scaler.fit_transform(X)
             X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=0.2, random_state=42)
-            X_test, X_val, Y_test, Y_val = train_test_split(X_test, Y_test, test_size=0.5, random_state=42)
+            X_val, X_test, Y_val, Y_test = train_test_split(X_test, Y_test, test_size=0.5, random_state=42)
 
             # Set random seeds for reproducibility
             keras.backend.clear_session()
             np.random.seed(42)
             tf.random.set_seed(42)
 
-            # Create loop for hyperparameter testing here
-            model = keras.models.Sequential([
-                keras.layers.Dense(30, activation='relu', name='hidden1', input_shape=X_train.shape[1:]),
-                keras.layers.Dense(20, activation='relu', name='hidden2'),
-                keras.layers.Dense(20, activation='relu', name='hidden3'),
-                keras.layers.Dense(20, activation='relu', name='hidden4'),
-                keras.layers.BatchNormalization(),
-                keras.layers.Dense(1, name='output', activation=None)
-            ])
-
-            model.compile(loss='mse', optimizer=keras.optimizers.SGD(lr=0.0001), metrics=['mae'])
-            early_stopping_cb = keras.callbacks.EarlyStopping(patience=20, restore_best_weights=True)
-            history = model.fit(X_train, Y_train, epochs=100, batch_size=30, validation_data=(X_val, Y_val),
-                                callbacks=early_stopping_cb)
-
+            # Run GridSearchCV to find best model
+            ann_grid = GridSearchCV(sk_estimator, param_grid, cv=5, scoring='r2', verbose=3, n_jobs=5)
+            ann_grid.fit(X_train, Y_train)
 
             # Get metrics
-            mse, mae = model.evaluate(X_test, Y_test)
+            model = ann_grid.best_estimator_
             Y_pred = model.predict(X_test)
+            mae = mean_absolute_error(Y_test, Y_pred)
             r2 = r2_score(Y_test, Y_pred)
-            Y_pred_train = model.predict(X_train)
-            r2_train = r2_score(Y_train, Y_pred_train)
-            feature_importances = permutation_importance(model, X_train, Y_pred_train, scoring='r2', random_state=42)
-
+            r2_train = ann_grid.best_score_
+            feature_importances = permutation_importance(model, X_train, Y_train)
+            feature_importances = feature_importances.importances_mean
+            feature_importances = feature_importances / np.sum(feature_importances)
+            feature_importances = f'{[feature for feature in feature_importances]}'.replace('[', '').replace(']', '')
             plt.scatter(Y_test, Y_pred)
             plt.xlabel('True values')
             plt.ylabel('Predicted values')
             plt.savefig('Neural_Networks/plots/'+model_name+'.png')
             plt.clf()
             outfile = 'Neural_Networks/models/'+model_name+'.h5'
-            model.save(outfile)
-            csvfile.write(f'{model_name}, {n_files}, {n_points}, {r2}, {r2_train}, {mae}, {feature_importances.importances_mean} \n')
+            model.model.save(outfile)
+            csvfile.write(f'{model_name}, {n_files}, {n_points}, {r2}, {r2_train}, {mae}, {feature_importances}, {ann_grid.best_params_} \n')
             print(f'{model_name} complete')
 
 end_time = datetime.datetime.now()

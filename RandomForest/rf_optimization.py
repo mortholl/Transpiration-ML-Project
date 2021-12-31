@@ -7,6 +7,7 @@ from utilities.data_sanitizer import data_import
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import datetime
+from sklearn.model_selection import GridSearchCV
 import pickle
 
 begin_time = datetime.datetime.now()
@@ -18,10 +19,17 @@ func_clusters = cluster_creator.func_cluster_dict
 biome_clusters = cluster_creator.biome_cluster_dict
 
 my_features = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow', 'precip']
-with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
-    csvfile.write(f'Data set, n locations, n data points, R2 test, R2 train, MAE, {",".join(my_features)} \n')
 
-    # Loop over all clusters to create random forest models
+param_grid = {'n_estimators': [200, 600, 800],
+              'max_depth': [8, 10, 12],
+              }
+
+rf = RandomForestRegressor(n_estimators=500, max_depth=9, random_state=42)
+
+with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
+    csvfile.write(f'Data set, n locations, n data points, R2 test, R2 train, MAE, {",".join(my_features)}, Best parameters \n')
+
+    # Loop over all clusters
     for identifier, cluster_group in zip(['k_means_', 'func_', 'biome_'], [k_clusters, func_clusters, biome_clusters]):
         for data_cluster in cluster_group:
             # Get data
@@ -36,17 +44,17 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
             X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=0.2, random_state=42)
             X_test, X_val, Y_test, Y_val = train_test_split(X_test, Y_test, test_size=0.5, random_state=42)
 
-            # Create hyperparameter testing loop here
-            rf = RandomForestRegressor(n_estimators=500, max_depth=9, random_state=42)
-            rf.fit(X_train, Y_train)
+            # Grid search to find optimal hyperparameters
+            rf_grid = GridSearchCV(rf, param_grid, cv=5, scoring='r2', verbose=3, n_jobs=5)
+            rf_grid.fit(X_train, Y_train)
 
             # Get metrics
-            feature_importances = [str(round(n, 4)) for n in rf.feature_importances_]
-            Y_pred = rf.predict(X_test)
+            model = rf_grid.best_estimator_
+            feature_importances = [str(round(n, 4)) for n in model.feature_importances_]
+            Y_pred = model.predict(X_test)
             mae = mean_absolute_error(Y_test, Y_pred)
             r2 = r2_score(Y_test, Y_pred)
-            Y_pred_train = rf.predict(X_train)
-            r2_train = r2_score(Y_train, Y_pred_train)
+            r2_train = rf_grid.best_score_
             plt.scatter(Y_test, Y_pred)
             plt.xlabel('True values')
             plt.ylabel('Predicted values')
@@ -54,7 +62,7 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
             plt.clf()
             outfile = 'RandomForest/models/'+model_name+'.sav'
             pickle.dump(rf, open(outfile, 'wb'))
-            csvfile.write(f'{n_files}, {n_points}, {model_name}, {r2}, {r2_train}, {mae}, {",".join(feature_importances)} \n')
+            csvfile.write(f'{n_files}, {n_points}, {model_name}, {r2}, {r2_train}, {mae}, {",".join(feature_importances)}, {rf_grid.best_params_} \n')
             print(f'{model_name} complete')
 
 end_time = datetime.datetime.now()

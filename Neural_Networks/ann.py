@@ -7,6 +7,9 @@ from sklearn.metrics import r2_score
 import tensorflow as tf
 from tensorflow import keras
 import matplotlib.pyplot as plt
+from tensorflow.keras.wrappers.scikit_learn import KerasRegressor
+from sklearn.model_selection import GridSearchCV
+from sklearn.inspection import permutation_importance
 
 
 cluster_creator = ClusterCreator.build_clusters()
@@ -15,12 +18,37 @@ func_clusters = cluster_creator.func_cluster_dict
 biome_clusters = cluster_creator.biome_cluster_dict
 
 my_features = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow', 'precip']
-my_files = func_clusters[0]  # can select using the cluster dictionaries or use [] for all
+my_files = biome_clusters['Tropical rain forest']  # can select using the cluster dictionaries or use [] for all
+n_files = len(my_files)
+
+# Define model creation in function
+def create_model(n_hidden=2, n_neuron=20, regul_weight=0.01, lr=0.001):
+    model = keras.models.Sequential()
+    model.add(keras.layers.Dense(n_neuron, activation='relu', input_shape=(X_train.shape[1:]),
+                                 kernel_regularizer=keras.regularizers.l2(regul_weight)))
+    for i in range(1, n_hidden):
+        model.add(keras.layers.Dense(n_neuron, activation='relu',
+                                     kernel_regularizer=keras.regularizers.l2(regul_weight)))
+    keras.layers.BatchNormalization()
+    model.add(keras.layers.Dense(1, name='output', activation=None))
+    model.compile(loss='mse', optimizer=keras.optimizers.Adam(learning_rate=lr))
+    return model
+
+
+# Wrap model in scikit learn estimator
+sk_estimator = KerasRegressor(build_fn=create_model, epochs=20, batch_size=32, verbose=0)
+param_grid = {'n_hidden': [4],
+              'n_neuron': [16],
+              'epochs': [2],
+              # 'regul_weight': [1e-1, 1e-2, 1e-3],
+              # 'lr': [1e-2, 1e-3, 1e-4],
+              }
 
 # Import data and scale X inputs
 X, Y = data_import(my_features, my_files)
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
+n_points = len(X)
 
 #  Split to training/validation sets: 80% training, 10% test, 10% validation
 X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=0.2, random_state=42)
@@ -31,31 +59,32 @@ keras.backend.clear_session()
 np.random.seed(42)
 tf.random.set_seed(42)
 
-# Build neural network
-model = keras.models.Sequential([
-    keras.layers.Dense(30, activation='relu', name='hidden1', input_shape=X_train.shape[1:]),
-    keras.layers.Dense(20, activation='relu', name='hidden2'),
-    keras.layers.Dense(20, activation='relu', name='hidden3'),
-    keras.layers.Dense(20, activation='relu', name='hidden4'),
-    keras.layers.BatchNormalization(),
-    keras.layers.Dense(1, name='output', activation=None)
-])
+# Run GridSearchCV to find best model
+ann_grid = GridSearchCV(sk_estimator, param_grid, cv=2, scoring='r2', verbose=3)
+ann_grid.fit(X_train, Y_train)
 
-model.compile(loss='mse', optimizer=keras.optimizers.SGD(lr=0.0001), metrics=['mae'])
-early_stopping_cb = keras.callbacks.EarlyStopping(patience=20, restore_best_weights=True)
-history = model.fit(X_train, Y_train, epochs=30, batch_size=20, validation_data=(X_val, Y_val), callbacks=early_stopping_cb)
-
-mse_test, mae_test = model.evaluate(X_test, Y_test)
+# Get metrics
+model_name = 'test'
+model = ann_grid.best_estimator_
+mae = ann_grid.error_score
 Y_pred = model.predict(X_test)
 r2 = r2_score(Y_test, Y_pred)
-Y_pred_train = model.predict(X_train)
-r2_train = r2_score(Y_train, Y_pred_train)
-print(f'R2 was {r2}')
-print(f'MSE was {mse_test}')
-print(f'MAE was {mae_test}')
-print(f'R2 of the training set was {r2_train}')
-if r2_train > r2:
-    print(f'Model may be overfitting because {r2_train} > {r2}')
+r2_train = ann_grid.best_score_
+feature_importances = permutation_importance(model, X_train, Y_train)
+feature_importances = feature_importances.importances_mean
+feature_importances = feature_importances / np.sum(feature_importances)
+feature_importances = f'{[feature for feature in feature_importances]}'.replace('[', '').replace(']', '')
+plt.scatter(Y_test, Y_pred)
+plt.xlabel('True values')
+plt.ylabel('Predicted values')
+plt.savefig('Neural_Networks/plots/'+model_name+'.png')
+plt.clf()
+outfile = 'Neural_Networks/models/'+model_name+'.h5'
+model.model.save(outfile)
+with open('Neural_Networks/ann_results_test.csv', 'w', newline='') as csvfile:
+    csvfile.write(f'Data set, n locations, n data points, R2 test, R2 train, MAE, {",".join(my_features)}, Best parameters \n')
+    csvfile.write(f'{model_name}, {n_files}, {n_points}, {r2}, {r2_train}, {mae}, {feature_importances}, {ann_grid.best_params_} \n')
+print(f'{model_name} complete')
 
 plt.scatter(Y_test, Y_pred)
 plt.xlabel("True values")
