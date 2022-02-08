@@ -4,6 +4,7 @@ from utilities.data_sanitizer import data_import
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import r2_score
+from sklearn.metrics import mean_absolute_error
 import tensorflow as tf
 from tensorflow import keras
 import matplotlib.pyplot as plt
@@ -66,8 +67,8 @@ ann_grid.fit(X_train, Y_train)
 # Get metrics
 model_name = 'test'
 model = ann_grid.best_estimator_
-mae = ann_grid.error_score
 Y_pred = model.predict(X_test)
+mae = mean_absolute_error(Y_test, Y_pred)
 r2 = r2_score(Y_test, Y_pred)
 r2_train = ann_grid.best_score_
 feature_importances = permutation_importance(model, X_train, Y_train)
@@ -77,6 +78,11 @@ feature_importances = f'{[feature for feature in feature_importances]}'.replace(
 plt.scatter(Y_test, Y_pred)
 plt.xlabel('True values')
 plt.ylabel('Predicted values')
+plt.title(model_name)
+r2_label = 'R2 = ' + str(round(r2, 3))
+mae_label = 'MAE = ' + str(int(round(mae, 0)))
+plt.annotate(r2_label, (max(Y_test), 10))
+plt.annotate(mae_label, (max(Y_test), 100))
 plt.savefig('Neural_Networks/plots/'+model_name+'.png')
 plt.clf()
 outfile = 'Neural_Networks/models/'+model_name+'.h5'
@@ -89,4 +95,9 @@ print(f'{model_name} complete')
 plt.scatter(Y_test, Y_pred)
 plt.xlabel("True values")
 plt.ylabel("Predicted values")
+plt.title(model_name)
+r2_label = 'R2 = ' + str(round(r2, 3))
+mae_label = 'MAE = ' + str(int(round(mae, 0)))
+plt.annotate(r2_label, (0.8*max(Y_test), 0.1*max(Y_pred)))
+plt.annotate(mae_label, (0.8*max(Y_test), 0.2*max(Y_pred)))
 plt.show()

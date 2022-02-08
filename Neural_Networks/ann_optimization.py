@@ -22,6 +22,8 @@ k_clusters = cluster_creator.k_cluster_dict
 func_clusters = cluster_creator.func_cluster_dict
 biome_clusters = cluster_creator.biome_cluster_dict
 
+
+# Pick relevant features
 my_features = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow', 'precip']
 
 
@@ -40,10 +42,10 @@ def create_model(n_hidden=2, n_neuron=20, regul_weight=0.01, lr=0.001):
 
 
 # Wrap model in scikit learn estimator, define parameters to test
-sk_estimator = KerasRegressor(build_fn=create_model, epochs=20, batch_size=32, verbose=0)
-param_grid = {'n_hidden': [3, 5],
-              'n_neuron': [8, 16],
-              'epochs': [50, 80],
+sk_estimator = KerasRegressor(build_fn=create_model, batch_size=32, verbose=0)
+param_grid = {'n_hidden': [8, 10],
+              'n_neuron': [24, 32],
+              'epochs': [120, 150],
               # 'regul_weight': [1e-1, 1e-2, 1e-3],
               # 'lr': [1e-2, 1e-3, 1e-4],
               }
@@ -66,16 +68,14 @@ with open('Neural_Networks/ann_results.csv', 'w', newline='') as csvfile:
             outfile = 'Neural_Networks/models/'+model_name+'_scaler.sav'
             pickle.dump(scaler, open(outfile, 'wb'))
             X_scaled = scaler.fit_transform(X)
-            X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=0.2, random_state=42)
-            X_val, X_test, Y_val, Y_test = train_test_split(X_test, Y_test, test_size=0.5, random_state=42)
+            X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=0.1, random_state=42)
 
             # Set random seeds for reproducibility
             keras.backend.clear_session()
             np.random.seed(42)
             tf.random.set_seed(42)
 
-            # Run GridSearchCV to find best model
-            ann_grid = GridSearchCV(sk_estimator, param_grid, cv=5, scoring='r2', verbose=3, n_jobs=5)
+            ann_grid = GridSearchCV(sk_estimator, param_grid, cv=5, scoring='r2', verbose=3, n_jobs=1, return_train_score=True)
             ann_grid.fit(X_train, Y_train)
 
             # Get metrics
@@ -91,6 +91,11 @@ with open('Neural_Networks/ann_results.csv', 'w', newline='') as csvfile:
             plt.scatter(Y_test, Y_pred)
             plt.xlabel('True values')
             plt.ylabel('Predicted values')
+            plt.title(model_name)
+            r2_label = 'R2 = ' + str(round(r2, 3))
+            mae_label = 'MAE = ' + str(int(round(mae, 0)))
+            plt.annotate(r2_label, (0.8*max(Y_test), 0.1*max(Y_pred)))
+            plt.annotate(mae_label, (0.8*max(Y_test), 0.2*max(Y_pred)))
             plt.savefig('Neural_Networks/plots/'+model_name+'.png')
             plt.clf()
             outfile = 'Neural_Networks/models/'+model_name+'.h5'

@@ -20,8 +20,8 @@ biome_clusters = cluster_creator.biome_cluster_dict
 
 my_features = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow', 'precip']
 
-param_grid = {'n_estimators': [200, 600, 800],
-              'max_depth': [8, 10, 12],
+param_grid = {'n_estimators': [600, 800, 1200],
+              'max_depth': [20, 25, 30],
               }
 
 rf = RandomForestRegressor(n_estimators=500, max_depth=9, random_state=42)
@@ -41,11 +41,10 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
             n_points = len(X)
             scaler = StandardScaler()
             X_scaled = scaler.fit_transform(X)
-            X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=0.2, random_state=42)
-            X_test, X_val, Y_test, Y_val = train_test_split(X_test, Y_test, test_size=0.5, random_state=42)
+            X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=0.1, random_state=42)
 
             # Grid search to find optimal hyperparameters
-            rf_grid = GridSearchCV(rf, param_grid, cv=5, scoring='r2', verbose=3, n_jobs=5)
+            rf_grid = GridSearchCV(rf, param_grid, cv=5, scoring='r2', verbose=3, n_jobs=5, return_train_score=True)
             rf_grid.fit(X_train, Y_train)
 
             # Get metrics
@@ -58,11 +57,16 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
             plt.scatter(Y_test, Y_pred)
             plt.xlabel('True values')
             plt.ylabel('Predicted values')
+            plt.title(model_name)
+            r2_label = 'R2 = ' + str(round(r2, 3))
+            mae_label = 'MAE = ' + str(int(round(mae, 0)))
+            plt.annotate(r2_label, (0.8*max(Y_test), 0.1*max(Y_pred)))
+            plt.annotate(mae_label, (0.8*max(Y_test), 0.2*max(Y_pred)))
             plt.savefig('RandomForest/plots/'+model_name+'.png')
             plt.clf()
             outfile = 'RandomForest/models/'+model_name+'.sav'
             pickle.dump(rf, open(outfile, 'wb'))
-            csvfile.write(f'{n_files}, {n_points}, {model_name}, {r2}, {r2_train}, {mae}, {",".join(feature_importances)}, {rf_grid.best_params_} \n')
+            csvfile.write(f'{model_name}, {n_files}, {n_points}, {r2}, {r2_train}, {mae}, {",".join(feature_importances)}, {rf_grid.best_params_} \n')
             print(f'{model_name} complete')
 
 end_time = datetime.datetime.now()

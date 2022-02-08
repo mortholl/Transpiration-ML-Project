@@ -53,7 +53,7 @@ class ClusterCreator:
         wind_speeds = self.site_df['Average Wind Speed'].values
         data = np.asarray([maps, mats, wind_speeds])
         data = data.transpose()
-        k = 5
+        k = 4
         # for k in range(2, 15):  # use to test different numbers of clusters
         kmeans = KMeans(n_clusters=k, random_state=42, n_init=6)
         kmeans.fit(data)
@@ -104,9 +104,10 @@ class ClusterCreator:
         creator.biome_clusters()
         return creator
 
-# if __name__ == "__main__":
-#     creator = ClusterCreator()
-#     creator.preprocess()
-#     creator.k_means_clusters()
-#     creator.func_type_clusters()
-#     creator.biome_clusters()
+
+if __name__ == "__main__":
+    creator = ClusterCreator()
+    creator.preprocess()
+    creator.k_means_clusters()
+    creator.func_type_clusters()
+    creator.biome_clusters()
