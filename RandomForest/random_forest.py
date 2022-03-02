@@ -8,6 +8,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import datetime
 import pickle
+from sklearn.model_selection import GridSearchCV
 
 
 begin_time = datetime.datetime.now()
@@ -20,19 +21,23 @@ biome_clusters = cluster_creator.biome_cluster_dict
 
 # Select desired features and files
 my_features = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow', 'precip']
-my_files = biome_clusters['Tropical rain forest']  # can select using the cluster dictionaries or use [] for all
+my_files = []  # can select using the cluster dictionaries or use [] for all
+
+param_grid = {'n_estimators': [600, 800, 1200],
+              'max_depth': [20, 25],
+              }
 
 # Import data and scale X inputs
 X, Y = data_import(my_features, my_files)
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
-#  Split to training/validation sets: 80% training, 10% test, 10% validation
+#  Split to training/validation sets: 90% training, 10% test
 X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=0.2, random_state=42)
-X_test, X_val, Y_test, Y_val = train_test_split(X_test, Y_test, test_size=0.5, random_state=42)
 
 rf = RandomForestRegressor(n_estimators=500, max_depth=9, random_state=42)
-rf.fit(X_train, Y_train)
+rf_grid = GridSearchCV(rf, param_grid, cv=5, scoring='r2', verbose=3, n_jobs=5, return_train_score=True)
+rf_grid.fit(X_train, Y_train)
 
 feature_importances = [str(round(n, 4)) for n in rf.feature_importances_]
 print(feature_importances)

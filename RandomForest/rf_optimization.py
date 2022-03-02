@@ -21,7 +21,7 @@ biome_clusters = cluster_creator.biome_cluster_dict
 my_features = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow', 'precip']
 
 param_grid = {'n_estimators': [600, 800, 1200],
-              'max_depth': [20, 25, 30],
+              'max_depth': [20, 25],
               }
 
 rf = RandomForestRegressor(n_estimators=500, max_depth=9, random_state=42)
@@ -55,10 +55,10 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
             r2 = r2_score(Y_test, Y_pred)
             r2_train = rf_grid.best_score_
             plt.scatter(Y_test, Y_pred)
-            plt.xlabel('True values')
-            plt.ylabel('Predicted values')
+            plt.xlabel('True values [$cm^3/s$]')
+            plt.ylabel('Predicted values [$cm^3/s$]')
             plt.title(model_name)
-            r2_label = 'R2 = ' + str(round(r2, 3))
+            r2_label = '$R^2$ = ' + str(round(r2, 3))
             mae_label = 'MAE = ' + str(int(round(mae, 0)))
             plt.annotate(r2_label, (0.8*max(Y_test), 0.1*max(Y_pred)))
             plt.annotate(mae_label, (0.8*max(Y_test), 0.2*max(Y_pred)))

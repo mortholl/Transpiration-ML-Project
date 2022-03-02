@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import numpy as np
 from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
 
 # This file creates clusters of locations sorted into sets related by climate or plant functional type
 
@@ -54,9 +55,19 @@ class ClusterCreator:
         data = np.asarray([maps, mats, wind_speeds])
         data = data.transpose()
         k = 4
+        # k_list = []
+        # inertia_list = []
         # for k in range(2, 15):  # use to test different numbers of clusters
         kmeans = KMeans(n_clusters=k, random_state=42, n_init=6)
         kmeans.fit(data)
+        #     k_list.append(k)
+        #     inertia_list.append(kmeans.inertia_)
+        # plt.scatter(k_list, inertia_list)
+        # plt.xlabel('Number of clusters k')
+        # plt.ylabel('Inertia score')
+        # plt.savefig('data/k-means-elbow.png')
+        # plt.show()
+        # plt.clf()
         # print(f'Best inertia when k = {k} was {kmeans.score(data)}.')
         labels = kmeans.labels_
         self.site_df['K-Means Label'] = labels

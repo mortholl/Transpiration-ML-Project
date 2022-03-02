@@ -19,7 +19,7 @@ func_clusters = cluster_creator.func_cluster_dict
 biome_clusters = cluster_creator.biome_cluster_dict
 
 my_features = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow', 'precip']
-my_files = biome_clusters['Tropical rain forest']  # can select using the cluster dictionaries or use [] for all
+my_files = []  # can select using the cluster dictionaries or use [] for all
 n_files = len(my_files)
 
 # Define model creation in function
@@ -38,9 +38,9 @@ def create_model(n_hidden=2, n_neuron=20, regul_weight=0.01, lr=0.001):
 
 # Wrap model in scikit learn estimator
 sk_estimator = KerasRegressor(build_fn=create_model, epochs=20, batch_size=32, verbose=0)
-param_grid = {'n_hidden': [4],
-              'n_neuron': [16],
-              'epochs': [2],
+param_grid = {'n_hidden': [8, 10],
+              'n_neuron': [24, 32],
+              'epochs': [120, 150],
               # 'regul_weight': [1e-1, 1e-2, 1e-3],
               # 'lr': [1e-2, 1e-3, 1e-4],
               }
@@ -51,9 +51,8 @@ scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 n_points = len(X)
 
-#  Split to training/validation sets: 80% training, 10% test, 10% validation
+#  Split to training/validation sets: 90% training, 10% test
 X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=0.2, random_state=42)
-X_test, X_val, Y_test, Y_val = train_test_split(X_test, Y_test, test_size=0.5, random_state=42)
 
 # Set random seeds for reproducibility
 keras.backend.clear_session()
@@ -65,7 +64,7 @@ ann_grid = GridSearchCV(sk_estimator, param_grid, cv=2, scoring='r2', verbose=3)
 ann_grid.fit(X_train, Y_train)
 
 # Get metrics
-model_name = 'test'
+model_name = 'all'
 model = ann_grid.best_estimator_
 Y_pred = model.predict(X_test)
 mae = mean_absolute_error(Y_test, Y_pred)
@@ -93,10 +92,10 @@ with open('Neural_Networks/ann_results_test.csv', 'w', newline='') as csvfile:
 print(f'{model_name} complete')
 
 plt.scatter(Y_test, Y_pred)
-plt.xlabel("True values")
-plt.ylabel("Predicted values")
+plt.xlabel("True values [$cm^3/s$]")
+plt.ylabel("Predicted values [$cm^3/s$]")
 plt.title(model_name)
-r2_label = 'R2 = ' + str(round(r2, 3))
+r2_label = '$R^2$ = ' + str(round(r2, 3))
 mae_label = 'MAE = ' + str(int(round(mae, 0)))
 plt.annotate(r2_label, (0.8*max(Y_test), 0.1*max(Y_pred)))
 plt.annotate(mae_label, (0.8*max(Y_test), 0.2*max(Y_pred)))

@@ -23,10 +23,11 @@ for filename in os.listdir(feature_directory):
             # month = month.strip('0')  # Remove leading zeros from timestamp month
             # u = float(monthly_wind_speed[month])  # Average wind speed for the location in that month
             # df.at[i, 'u'] = u
-            phi = row['ppfd_in']*0.43  # Conversion factor from ppfd_in to net radiation
+            phi = row['ppfd_in']*0.43  # Conversion factor from ppfd_in to net radiation [W/m2]
             ta = row['ta']+273  # Convert deg C to K
             qa = equations.qaRh(row['rh'], ta)  # Use equation to calculate specific humidity
-            ref_ET = equations.evfPen(phi, qa, ta)  # Calculate reference ET (mm/day) using Penman-Monteith equation
+            ref_ET = equations.evfPen(phi, qa, ta)  # Calculate reference ET (um/sec) using Penman-Monteith equation
+            ref_ET = ref_ET/10000  # Unit conversion um/s to cm/s
             df.at[i, 'Reference ET'] = ref_ET
 
     df.to_csv('Penman_Monteith/pm_prediction/'+new_filename+'.csv')
