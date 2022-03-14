@@ -49,7 +49,7 @@ for data_site, variables in column_dict.items():
         site_list.append(data_site)
 column_count, column_dict = new_dicts(site_list, column_dict)
 print(column_count)
-print(f'Total number of sites with precipitation is {len(site_list)}.')
+print(f'Total number of sites is {len(site_list)}.')
 
 directory = 'data/leaf'
 count = 0

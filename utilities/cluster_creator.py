@@ -16,7 +16,7 @@ class ClusterCreator:
         self.biome_cluster_dict = {}  # dictionary of site clusters by biome
 
     def preprocess(self):
-        # Compile csv with location name, MAP, MAT, average wind speed, and plant functional type
+        # Compile csv with location name, MAP, MAT, average wind speed, functional type and average sap flux
         self.site_df = pd.read_csv('data/modeling_data/site_locations.csv')  # Use this .csv file
         site_list = self.site_df['Unnamed: 0'].values
         func_type_list = []
@@ -44,6 +44,20 @@ class ClusterCreator:
         wind_dict = dict(zip(wind_sites, wind_speeds))
         wind_speeds = [wind_dict[site] for site in site_list]
         self.site_df['Average Wind Speed'] = wind_speeds
+
+        # Add average sap flux
+        sapf_avg_list = []
+        for filename in os.listdir('data/modeling_data/targets'):
+            for site in site_list:
+                if site in filename:
+                    sapf_df = pd.read_csv('data/modeling_data/targets/'+filename)
+                    sapf_data = sapf_df.iloc[:, 2:].values  # pull values from non-timestamp columns
+                    sapf_data = sapf_data[~np.isnan(sapf_data)].tolist()  # remove na values
+                    sapf_average = np.average(sapf_data)  # take the average
+                    sapf_avg_list.append(sapf_average)
+        self.site_df['Average Sap Flux'] = sapf_avg_list
+
+        # Print new data to csv
         self.site_df.to_csv('data/modeling_data/cluster_info.csv', index=False)
 
     def k_means_clusters(self):  # Implement K-means to come up with clusters of similar climate statistics
@@ -52,7 +66,8 @@ class ClusterCreator:
         maps = self.site_df['MAP'].values
         mats = self.site_df['MAT'].values
         wind_speeds = self.site_df['Average Wind Speed'].values
-        data = np.asarray([maps, mats, wind_speeds])
+        avg_flux = self.site_df['Average Sap Flux'].values
+        data = np.asarray([maps, mats, wind_speeds, avg_flux])
         data = data.transpose()
         k = 4
         # k_list = []
@@ -60,8 +75,8 @@ class ClusterCreator:
         # for k in range(2, 15):  # use to test different numbers of clusters
         kmeans = KMeans(n_clusters=k, random_state=42, n_init=6)
         kmeans.fit(data)
-        #     k_list.append(k)
-        #     inertia_list.append(kmeans.inertia_)
+            # k_list.append(k)
+            # inertia_list.append(kmeans.inertia_)
         # plt.scatter(k_list, inertia_list)
         # plt.xlabel('Number of clusters k')
         # plt.ylabel('Inertia score')

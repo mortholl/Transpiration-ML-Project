@@ -24,7 +24,7 @@ biome_clusters = cluster_creator.biome_cluster_dict
 
 
 # Pick relevant features
-my_features = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow', 'precip']
+my_features = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow']
 
 
 # Define model creation in function

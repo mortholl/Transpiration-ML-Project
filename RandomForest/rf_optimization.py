@@ -18,9 +18,9 @@ k_clusters = cluster_creator.k_cluster_dict
 func_clusters = cluster_creator.func_cluster_dict
 biome_clusters = cluster_creator.biome_cluster_dict
 
-my_features = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow', 'precip']
+my_features = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow']
 
-param_grid = {'n_estimators': [600, 800, 1200],
+param_grid = {'n_estimators': [800, 1200],
               'max_depth': [20, 25],
               }
 
@@ -41,6 +41,8 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
             n_points = len(X)
             scaler = StandardScaler()
             X_scaled = scaler.fit_transform(X)
+            outfile = 'RandomForest/models/' + model_name + '_scaler.sav'
+            pickle.dump(scaler, open(outfile, 'wb'))
             X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=0.1, random_state=42)
 
             # Grid search to find optimal hyperparameters

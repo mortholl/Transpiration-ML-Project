@@ -20,7 +20,7 @@ func_clusters = cluster_creator.func_cluster_dict
 biome_clusters = cluster_creator.biome_cluster_dict
 
 # Select desired features and files
-my_features = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow', 'precip']
+my_features = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow']
 my_files = []  # can select using the cluster dictionaries or use [] for all
 
 param_grid = {'n_estimators': [600, 800, 1200],
