@@ -32,6 +32,13 @@ for identifier, cluster_group in zip(['k_means_', 'func_', 'biome_'], [k_cluster
             cor_list.append(cor)
         cor_all.append(cor_list)
 
+model_list.append('All')
+cor_list = []
+X, Y = data_import(my_features, [])
+for i in range(len(my_features)):
+    cor, p = spearmanr(X[:, i], Y)
+    cor_list.append(cor)
+cor_all.append(cor_list)
 cor_all = np.asarray(cor_all)
 np.transpose(cor_all)
 
