@@ -20,8 +20,8 @@ func_clusters = cluster_creator.func_cluster_dict
 biome_clusters = cluster_creator.biome_cluster_dict
 
 # Select desired features and files
-my_features = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow']
-my_files = []  # can select using the cluster dictionaries or use [] for all
+my_features = ['ta', 'vpd', 'ppfd_in', 'swc_shallow']
+my_files = biome_clusters['Woodland/Shrubland']  # can select using the cluster dictionaries or use [] for all
 
 param_grid = {'n_estimators': [600, 800, 1200],
               'max_depth': [20, 25],
@@ -39,15 +39,14 @@ rf = RandomForestRegressor(n_estimators=500, max_depth=9, random_state=42)
 rf_grid = GridSearchCV(rf, param_grid, cv=5, scoring='r2', verbose=3, n_jobs=5, return_train_score=True)
 rf_grid.fit(X_train, Y_train)
 
-feature_importances = [str(round(n, 4)) for n in rf.feature_importances_]
-print(feature_importances)
-Y_pred = rf.predict(X_test)
+# feature_importances = [str(round(n, 4)) for n in rf_grid.feature_importances_]
+# print(feature_importances)
+Y_pred = rf_grid.predict(X_test)
 mae = mean_absolute_error(Y_test, Y_pred)
 r2 = r2_score(Y_test, Y_pred)
 print(f'R2 score was {r2}')
-Y_pred_train = rf.predict(X_train)
+Y_pred_train = rf_grid.predict(X_train)
 r2_train = r2_score(Y_train, Y_pred_train)
-print(f'R2 of training set was {r2_train}')
 if r2_train > r2:
     print('Model may be overfitting')
 
@@ -58,11 +57,12 @@ plt.scatter(Y_test, Y_pred)
 plt.xlabel('True values')
 plt.ylabel('Predicted values')
 plt.savefig('RandomForest/rf_plot.png')
+plt.show()
 
 # Filing results: model, metrics, plot
-outfile = 'RandomForest/rf.sav'
-pickle.dump(rf, open(outfile, 'wb'))
-with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
-    csvfile.write(f'Data set ')
-    csvfile.write(f'R2 test, R2 train, MAE, {",".join(my_features)} \n')
-    csvfile.write(f'{r2}, {r2_train}, {mae}, {",".join(feature_importances)} \n')
+# outfile = 'RandomForest/rf.sav'
+# pickle.dump(rf, open(outfile, 'wb'))
+# with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
+#     csvfile.write(f'Data set ')
+#     csvfile.write(f'R2 test, R2 train, MAE, {",".join(my_features)} \n')
+#     csvfile.write(f'{r2}, {r2_train}, {mae}, {",".join(feature_importances)} \n')

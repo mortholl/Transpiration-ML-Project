@@ -16,10 +16,10 @@ from sklearn.inspection import permutation_importance
 cluster_creator = ClusterCreator.build_clusters()
 k_clusters = cluster_creator.k_cluster_dict
 func_clusters = cluster_creator.func_cluster_dict
-biome_clusters = cluster_creator.biome_cluster_dict
+biome_clusters = cluster_creator.biome_cluster_di ct
 
-my_features = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow']
-my_files = []  # can select using the cluster dictionaries or use [] for all
+my_features = ['ta', 'vpd', 'ppfd_in', 'swc_shallow']
+my_files = biome_clusters['Woodland/Shrubland']  # can select using the cluster dictionaries or use [] for all
 n_files = len(my_files)
 
 # Define model creation in function
@@ -64,7 +64,7 @@ ann_grid = GridSearchCV(sk_estimator, param_grid, cv=2, scoring='r2', verbose=3)
 ann_grid.fit(X_train, Y_train)
 
 # Get metrics
-model_name = 'all'
+model_name = 'test'
 model = ann_grid.best_estimator_
 Y_pred = model.predict(X_test)
 mae = mean_absolute_error(Y_test, Y_pred)

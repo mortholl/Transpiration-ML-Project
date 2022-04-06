@@ -1,2 +1,2 @@
-Data set, n locations, n data points, R2 test, R2 train, MAE, ta,rh,vpd,ppfd_in,swc_shallow,precip, Best parameters 
-all, 0, 2171741, 0.4316398376709749, 0.429341695810655, 818.4987119998735, 0.2405792482214319, 0.13749914719503348, 0.26898629691330006, 0.14452551510212944, 0.20583260471019502, 0.0025771878579102306, {'epochs': 150, 'n_hidden': 8, 'n_neuron': 32} 
+Data set, n locations, n data points, R2 test, R2 train, MAE, ta,vpd,ppfd_in,swc_shallow, Best parameters 
+test, 36, 723429, 0.6253008477055271, 0.63177401766639, 340.11047909812123, 0.22475796667812403, 0.19576945167792914, 0.1702807995164094, 0.4091917821275373, {'epochs': 120, 'n_hidden': 10, 'n_neuron': 32} 

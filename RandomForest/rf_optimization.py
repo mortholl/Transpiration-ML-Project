@@ -18,9 +18,9 @@ k_clusters = cluster_creator.k_cluster_dict
 func_clusters = cluster_creator.func_cluster_dict
 biome_clusters = cluster_creator.biome_cluster_dict
 
-my_features = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow']
+my_features = ['ta', 'vpd', 'ppfd_in', 'swc_shallow']
 
-param_grid = {'n_estimators': [800, 1200],
+param_grid = {'n_estimators': [600, 800, 1200],
               'max_depth': [20, 25],
               }
 

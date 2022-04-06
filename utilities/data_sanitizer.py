@@ -45,10 +45,11 @@ def data_import(feature_list, file_list):  # Returns two numpy arrays, x feature
 
 # begin_time = datetime.datetime.now()
 
+
 # Test code below
-# feature_names = ['ta', 'rh', 'vpd', 'ppfd_in', 'swc_shallow', 'precip']
+# feature_names = ['ta', 'vpd', 'ppfd_in', 'swc_shallow']
 # file_names = ['ARG_MAZ']
-# feature_generator(feature_names, file_names)
+# data_import(feature_names, file_names)
 
 # end_time = datetime.datetime.now()
 # print(f'The runtime was {end_time - begin_time}.')
