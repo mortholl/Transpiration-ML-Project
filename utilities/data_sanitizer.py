@@ -8,7 +8,7 @@ import csv
 # Organizes features and targets into csv files
 
 
-def data_import(feature_list, file_list):  # Returns two numpy arrays, x features and y targets
+def data_import(feature_list, file_list, verbose=True):  # Returns two numpy arrays, x features and y targets
     # The feature names list must exactly match the column names in the SAPFLUXNET database
     # Can pass an empty list to use all files in the directory
     feature_directory = 'data/modeling_data/features'
@@ -40,7 +40,8 @@ def data_import(feature_list, file_list):  # Returns two numpy arrays, x feature
     data = np.loadtxt('data/modeling_data/working_data.csv', skiprows=1, delimiter=',')
     x = data[:, 0:-1]
     y = data[:, -1]
-    print(f'The number of data points is {len(x)}.')
+    if verbose:
+        print(f'The number of data points is {len(x)}.')
     return x, y
 
 # begin_time = datetime.datetime.now()

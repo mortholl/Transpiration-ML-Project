@@ -7,20 +7,20 @@ from matplotlib.colors import ListedColormap
 cluster_info = pd.read_csv("data/modeling_data/cluster_info.csv")
 
 # Scatter plots of cluster labels with climate statistics
-fig = plt.figure()
-ax = fig.add_subplot(projection='3d')
-x = cluster_info['MAP']
-y = cluster_info['MAT']
-z = cluster_info['Average Sap Flux']
-cmap = ListedColormap(sns.color_palette("husl"))
-color = cluster_info["K-Means Label"]
-sc = ax.scatter(x, y, z, cmap=cmap, c=color)
-ax.set_xlabel('MAP')
-ax.set_ylabel('MAT')
-ax.set_zlabel('Average Sap Flux')
-plt.legend(*sc.legend_elements(), loc=2)
-plt.show()
-plt.savefig("data/modeling_data/k_clusters.png")
+# fig = plt.figure()
+# ax = fig.add_subplot(projection='3d')
+# x = cluster_info['MAP']
+# y = cluster_info['MAT']
+# z = cluster_info['Average Sap Flux']
+# cmap = ListedColormap(sns.color_palette("husl"))
+# color = cluster_info["K-Means Label"]
+# sc = ax.scatter(x, y, z, cmap=cmap, c=color)
+# ax.set_xlabel('MAP')
+# ax.set_ylabel('MAT')
+# ax.set_zlabel('Average Sap Flux')
+# plt.legend(*sc.legend_elements(), loc=2)
+# plt.show()
+# plt.savefig("data/modeling_data/k_clusters.png")
 
 # Box and whisker plot of R2 performance metric - RF
 # rf_results = pd.read_csv("RandomForest/rf_results.csv", index_col=False)
@@ -70,29 +70,27 @@ plt.savefig("data/modeling_data/k_clusters.png")
 
 # Box and whisker plot of feature importances - RF
 # ta = rf_results[' ta'].tolist()
-# rh = rf_results['rh'].tolist()
 # vpd = rf_results['vpd'].tolist()
 # ppfd_in = rf_results['ppfd_in'].tolist()
 # swc_shallow = rf_results['swc_shallow'].tolist()
 # fig = plt.figure()
 # ax = fig.add_subplot()
-# bp = ax.boxplot([ta, rh, vpd, ppfd_in, swc_shallow])
+# bp = ax.boxplot([ta, vpd, ppfd_in, swc_shallow])
 # plt.ylabel('Relative Feature Importance')
-# ax.set_xticklabels(['$T_a$', 'RH', 'VPD', '$PPFD_{in}$', 'SWC'])
+# ax.set_xticklabels(['$T_a$', 'VPD', '$PPFD_{in}$', 'SWC'])
 # plt.title('Random Forest Models: Average Feature Importances')
 # plt.savefig('RandomForest/results/rf_feat_importances.png')
 
 # Box and whisker plot of feature importances - NN
 # ta = ann_results[' ta'].tolist()
-# rh = ann_results['rh'].tolist()
 # vpd = ann_results['vpd'].tolist()
 # ppfd_in = ann_results['ppfd_in'].tolist()
 # swc_shallow = ann_results['swc_shallow'].tolist()
 # fig = plt.figure()
 # ax = fig.add_subplot()
-# bp = ax.boxplot([ta, rh, vpd, ppfd_in, swc_shallow])
+# bp = ax.boxplot([ta, vpd, ppfd_in, swc_shallow])
 # plt.ylabel('Relative Feature Importance')
-# ax.set_xticklabels(['$T_a$', 'RH', 'VPD', '$PPFD_{in}$', 'SWC'])
+# ax.set_xticklabels(['$T_a$', 'VPD', '$PPFD_{in}$', 'SWC'])
 # plt.title('Neural Network Models: Average Feature Importances')
 # plt.savefig('Neural_Networks/results/ann_feat_importances.png')
 
@@ -129,3 +127,5 @@ plt.savefig("data/modeling_data/k_clusters.png")
 #     plt.title(name)
 #     plt.savefig('Neural_Networks/results/'+name+'_feat_importances')
 #     plt.clf()
+
+

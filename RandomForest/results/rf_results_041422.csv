@@ -1,0 +1,14 @@
+Data set, n locations, n data points, R2 test, R2 train, MAE, ta,vpd,ppfd_in,swc_shallow, Best parameters ,
+k_means_0_rf,73,1831729,0.480670758,0.468724559,320.247685,0.2102,0.185,0.3328,0.272, {'max_depth': 25, 'n_estimators': 1200} 
+k_means_1_rf,5,59346,0.834986426,0.832722933,1218.131291,0.1155,0.0904,0.6141,0.18, {'max_depth': 20, 'n_estimators': 1200} 
+k_means_2_rf,15,301659,0.753511969,0.74790596,996.8362472,0.1299,0.4859,0.2256,0.1586, {'max_depth': 25, 'n_estimators': 1200} 
+k_means_3_rf,2,49875,0.965389199,0.963749808,899.4617218,0.012,0.2131,0.7593,0.0156, {'max_depth': 25, 'n_estimators': 800} 
+func_0_rf,45,456896,0.746817126,0.74211778,750.02972,0.384,0.1314,0.2271,0.2575, {'max_depth': 25, 'n_estimators': 1200} 
+func_1_rf,48,1775616,0.488124928,0.480785102,591.8233755,0.2157,0.1915,0.2592,0.3335, {'max_depth': 25, 'n_estimators': 1200} 
+biome_WoodlandShrubland_rf,36,723429,0.778578537,0.767097115,229.012259,0.253,0.1262,0.2215,0.3992, {'max_depth': 25, 'n_estimators': 1200} 
+biome_Temperate forest_rf,39,883163,0.601941707,0.591668064,972.0338244,0.1998,0.1989,0.329,0.2723, {'max_depth': 25, 'n_estimators': 1200} 
+biome_Tropical rain forest_rf,5,59346,0.834986426,0.832722933,1218.131291,0.1155,0.0904,0.6141,0.18, {'max_depth': 20, 'n_estimators': 1200} 
+biome_Tropical forest savanna_rf,5,44353,0.898926209,0.882290435,94.44960826,0.2847,0.2723,0.2366,0.2064, {'max_depth': 25, 'n_estimators': 1200} 
+biome_Subtropical desert_rf,4,39982,0.569233351,0.579975912,431.7754862,0.2348,0.2218,0.1209,0.4225, {'max_depth': 25, 'n_estimators': 1200} 
+biome_Boreal forest_rf,3,32509,0.856596125,0.843845746,263.8211298,0.5019,0.0837,0.2991,0.1153, {'max_depth': 25, 'n_estimators': 1200} 
+biome_Temperate grassland desert_rf,3,459827,0.831201576,0.818672031,70.65422666,0.0807,0.1739,0.3523,0.393, {'max_depth': 25, 'n_estimators': 1200} 

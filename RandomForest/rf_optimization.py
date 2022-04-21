@@ -32,7 +32,7 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
     csvfile.write(f'Data set, n locations, n data points, R2 test, R2 train, MAE, {",".join(my_features)}, Best parameters \n')
 
     # Loop over all clusters
-    for identifier, cluster_group in zip(['k_means_', 'func_', 'biome_'], [k_clusters, func_clusters, biome_clusters]):
+    for identifier, cluster_group in zip(['k_means_'], [k_clusters]):  # for identifier, cluster_group in zip(['k_means_', 'func_', 'biome_'], [k_clusters, func_clusters, biome_clusters]):
         for data_cluster in cluster_group:
             # Get data
             my_files = cluster_group[data_cluster]
@@ -48,7 +48,7 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
             X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=0.1, random_state=42)
 
             # Grid search to find optimal hyperparameters
-            rf_grid = GridSearchCV(rf, param_grid, cv=5, scoring='r2', verbose=3, n_jobs=5, return_train_score=True)
+            rf_grid = GridSearchCV(rf, param_grid, cv=5, scoring='r2', verbose=3, n_jobs=2, return_train_score=True)
             rf_grid.fit(X_train, Y_train)
 
             # Get metrics
