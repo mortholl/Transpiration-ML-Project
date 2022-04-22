@@ -51,18 +51,18 @@ def data_import(feature_list, file_list, verbose=True):  # Returns two numpy arr
 
 # Test code below
 
-begin_time = datetime.datetime.now()
-
-cluster_creator = ClusterCreator.build_clusters()
-biome_clusters = cluster_creator.biome_cluster_dict
-k_clusters = cluster_creator.k_cluster_dict
-
-feature_names = ['ppfd_in']
-file_names = k_clusters[1]
-X, Y = data_import(feature_names, file_names, verbose=False)
-
-end_time = datetime.datetime.now()
-print(f'The runtime was {end_time - begin_time}.')
+# begin_time = datetime.datetime.now()
+#
+# cluster_creator = ClusterCreator.build_clusters()
+# biome_clusters = cluster_creator.biome_cluster_dict
+# k_clusters = cluster_creator.k_cluster_dict
+#
+# feature_names = ['ppfd_in']
+# file_names = k_clusters[1]
+# X, Y = data_import(feature_names, file_names, verbose=False)
+#
+# end_time = datetime.datetime.now()
+# print(f'The runtime was {end_time - begin_time}.')
 
 # import matplotlib.pyplot as plt
 #
