@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 import datetime
+from utilities.cluster_creator import ClusterCreator
 import csv
 
 # Removes entries with missing data
@@ -25,8 +26,12 @@ def data_import(feature_list, file_list, verbose=True):  # Returns two numpy arr
             combined_df = pd.read_csv(feature_directory + '/' + filename, usecols=feature_list)
             target_df = pd.read_csv(target_directory + '/' + location +'_sapf_data.csv')
             target_df[target] = target_df.iloc[:, 2:].mean(axis=1)
+            if any(flux > 80000 for flux in target_df[target]):
+                print(f'Flag {location} large sap flux values')
             combined_df[target] = target_df[target]
             combined_df = combined_df.dropna()  # Removes rows with missing values
+            # Remove large sap flux values that are likely errors
+            combined_df = combined_df.drop(combined_df[combined_df[target] > 80000].index)
             for feature in feature_list:
                 x_dict[feature].extend(np.ndarray.tolist(combined_df[feature].values))
             y_dict[target].extend(np.ndarray.tolist(combined_df[target].values))
@@ -45,13 +50,25 @@ def data_import(feature_list, file_list, verbose=True):  # Returns two numpy arr
         print(f'The number of data points is {len(x)}.')
     return x, y
 
-# begin_time = datetime.datetime.now()
 
+begin_time = datetime.datetime.now()
+
+cluster_creator = ClusterCreator.build_clusters()
+biome_clusters = cluster_creator.biome_cluster_dict
+k_clusters = cluster_creator.k_cluster_dict
 
 # Test code below
-# feature_names = ['ta', 'vpd', 'ppfd_in', 'swc_shallow']
-# file_names = ['ARG_MAZ']
-# data_import(feature_names, file_names)
+feature_names = ['ppfd_in']
+file_names = k_clusters[1]
+X, Y = data_import(feature_names, file_names, verbose=False)
 
-# end_time = datetime.datetime.now()
-# print(f'The runtime was {end_time - begin_time}.')
+end_time = datetime.datetime.now()
+print(f'The runtime was {end_time - begin_time}.')
+
+import matplotlib.pyplot as plt
+
+fig = plt.figure()
+ax = fig.add_subplot()
+bp = ax.boxplot(X[:, 0], whis='range')
+plt.ylabel('PPFD')
+plt.show()
