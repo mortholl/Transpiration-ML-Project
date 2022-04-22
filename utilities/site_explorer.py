@@ -44,7 +44,7 @@ for species in species_files:
     directory = 'data/plant/' + species
     species_df = pd.read_csv(directory)
     site_name = species_df['si_code'].values[0]
-    species_name = species_df['sp_name'].values[0]
+    species_name = species_df['sp_name'].values[0]  # Need to update this to add all the species, not just first row
     species_type = species_df['sp_leaf_habit'].values[0]
     species_dict.update({site_name: (species_name, species_type)})
 
@@ -72,7 +72,7 @@ for row in species_df.iterrows():
             species_types['deciduous'] += 1
         else:
             print(f'Species {species} not an evergreen or deciduous functional type')
-            species_types['missing'] +=1
+            species_types['missing'] += 1
 print(species_types)
 type_df = pd.DataFrame.from_dict(species_types, orient='index', columns=['Count'])
 type_df.to_csv('data/species_types.csv')
