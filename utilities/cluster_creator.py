@@ -22,16 +22,18 @@ class ClusterCreator:
         func_type_list = []
 
         # Add plant functional type
-        for filename in os.listdir('data/plant'):
-            for site in site_list:
-                if site in filename and '_species_md' in filename:
-                    func_type_df = pd.read_csv('data/plant/'+filename)
-                    func_type = func_type_df['sp_leaf_habit'].values[0]
-                    if isinstance(func_type, str):
+        types = pd.read_csv("data/site_types.csv")
+        for site in site_list:
+            for row in types.iterrows():
+                if site == row[1]['Site']:
+                    func_type = row[1]['Type']
+                    if type(func_type) == str:
                         if 'deciduous' in func_type:
                             func_type = 0
                         elif 'evergreen' in func_type:
                             func_type = 1
+                        elif 'mixed' in func_type:
+                            func_type = 2
                     func_type_list.append(func_type)
         self.site_df['Functional Type'] = func_type_list
         self.site_df = self.site_df.rename(columns={"Unnamed: 0": "Site"})
@@ -100,7 +102,7 @@ class ClusterCreator:
         sites = self.site_df['Site'].values
         func_types = self.site_df['Functional Type'].values
         func_type_unique = np.unique(func_types)
-        func_type_unique = func_type_unique[np.logical_not(np.isnan(func_type_unique))]  # remove nan values
+        func_type_unique = func_type_unique[np.logical_not(func_type_unique == 'missing')]  # remove missing value
         for func_type in func_type_unique:
             self.func_cluster_dict.update({int(func_type): []})
             for i, func in enumerate(func_types):

@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import numpy as np
 
 # Examines site list to pull additional relevant data for mapping and create species types breakdowns
 
@@ -39,17 +40,22 @@ for location in loc_files:
 loc_df = pd.DataFrame.from_dict(loc_dict, orient='index', columns=['Latitude', 'Longitude', 'Biome', 'MAP', 'MAT'])
 loc_df.to_csv('data/modeling_data/site_locations.csv')
 
-species_dict = {}
+site_name_list = []
+species_name_list = []
+species_type_list = []
 for species in species_files:
     directory = 'data/plant/' + species
     species_df = pd.read_csv(directory)
-    site_name = species_df['si_code'].values[0]
-    species_name = species_df['sp_name'].values[0]  # Need to update this to add all the species, not just first row
-    species_type = species_df['sp_leaf_habit'].values[0]
-    species_dict.update({site_name: (species_name, species_type)})
+    for species_name in species_df['sp_name'].values:
+        species_name_list.append(species_name)
+        site_name_list.append(species_df['si_code'].values[0])
+    for species_type in species_df['sp_leaf_habit'].values:
+        species_type_list.append(species_type)
 
-species_df = pd.DataFrame.from_dict(species_dict, orient='index', columns=['Species Name', 'Type'])
-species_df.to_csv('data/species_info.csv')
+
+species_df = pd.DataFrame(list(zip(site_name_list, species_name_list, species_type_list)),
+                          columns=['Site', 'Species Name', 'Type'],)
+species_df.to_csv('data/species_info.csv', index=False)
 
 species_names = species_df['Species Name'].tolist()
 species_dict = {species: species_names.count(species) for species in set(species_names)}
@@ -58,21 +64,45 @@ print(f'There are {len(species_dict)} unique species in the dataset.')
 species_names_df = pd.DataFrame.from_dict(species_dict, orient='index', columns=['Count'])
 species_names_df.to_csv('data/species_dist.csv')
 
+# Assign each site a type: evergreen, deciduous, mixed, or missing
+# Count the number of each to use for a figure
 
-unique_species = []
-species_types = {'evergreen': 0, 'deciduous': 0, 'missing': 0}
-for row in species_df.iterrows():
-    species = row[1][0]
-    if species not in unique_species:
-        unique_species.append(species)
-        functional_type = str(row[1][1])
-        if 'evergreen' in functional_type:
-            species_types['evergreen'] += 1
-        elif 'deciduous' in functional_type:
-            species_types['deciduous'] += 1
+type_list = []
+sites = [site[0:-1] for site in sites]
+types_count = {'evergreen': 0, 'deciduous': 0, 'missing': 0, 'mixed': 0}
+for site in sites:
+    site_types = []
+    for row in species_df.iterrows():
+        if row[1]['Site'] == site:
+            site_types.append(row[1]['Type'])
+
+    # Write code to remove nan from site types (this is broken)
+    # for i, s_type in enumerate(site_types):
+    #     if np.isnan(s_type):
+    #         site_type = site_type.pop(i)
+
+    if site == 'CRI_TAM_TOW' or site == 'SWE_NOR_ST1_BEF':  # current workaround to avoid nan
+        site_type = 'missing'
+        types_count['missing'] += 1
+    else:
+        if all([s_type == 'evergreen' for s_type in site_types]):
+            site_type = 'evergreen'
+            types_count['evergreen'] += 1
+        elif all(['deciduous' in s_type for s_type in site_types]):
+            site_type = 'deciduous'
+            types_count['deciduous'] += 1
+        elif all('evergreen' in s_type or 'deciduous' in s_type for s_type in site_types):
+            site_type = 'mixed'
+            types_count['mixed'] += 1
         else:
-            print(f'Species {species} not an evergreen or deciduous functional type')
-            species_types['missing'] += 1
-print(species_types)
-type_df = pd.DataFrame.from_dict(species_types, orient='index', columns=['Count'])
+            site_type = 'missing'
+            types_count['missing'] += 1
+    type_list.append(site_type)
+
+
+site_type_df = pd.DataFrame(list(zip(sites, type_list)), columns=['Site', 'Type'])
+site_type_df.to_csv('data/site_types.csv')
+
+print(types_count)
+type_df = pd.DataFrame.from_dict(types_count, orient='index', columns=['Count'])
 type_df.to_csv('data/species_types.csv')

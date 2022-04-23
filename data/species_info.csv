@@ -1,16 +1,35 @@
-,Species Name,Type
+Site,Species Name,Type
 ARG_MAZ,Nothofagus pumilio,cold deciduous
 ARG_TRE,Nothofagus antarctica,cold deciduous
 AUS_RIC_EUC_ELE,Eucalyptus tereticornis,evergreen
 AUS_WOM,Eucalyptus obliqua,evergreen
+AUS_WOM,Eucalyptus rubida,evergreen
 CAN_TUR_P39_POS,Pinus strobus,evergreen
 CAN_TUR_P39_PRE,Pinus strobus,evergreen
 CAN_TUR_P74,Pinus strobus,evergreen
 CHE_DAV_SEE,Picea abies,evergreen
 CRI_TAM_TOW,Pouteria viridis,
+CRI_TAM_TOW,Inga sp.,
+CRI_TAM_TOW,Ampelocera macrocarpa,
+CRI_TAM_TOW,Brosimum alicastrum,
+CRI_TAM_TOW,Macrolobium costaricense,
+CRI_TAM_TOW,Eschweillera sp.,
+CRI_TAM_TOW,Trophis mexicana,
+CRI_TAM_TOW,Pleuranthodendron lindenii,
+CRI_TAM_TOW,Cupania macrophylla,
+CRI_TAM_TOW,Mortoniodendron anisophyllum,
+CRI_TAM_TOW,Aspidosperma desmanthum,
+CRI_TAM_TOW,Otoba novogranatensis,
+CRI_TAM_TOW,Genipa americana,
+CRI_TAM_TOW,Pouteria sp.,
+CRI_TAM_TOW,Gymnanthes riparia,
+CRI_TAM_TOW,Meliosma idiopoda,
+CRI_TAM_TOW,Carapa guianensis,
 CZE_BIK,Picea abies,evergreen
 CZE_KRT_KRT,Picea abies,evergreen
 CZE_LAN,Quercus robur,cold deciduous
+CZE_LAN,Fraxinus excelsior,cold deciduous
+CZE_LAN,Carpinus betulus,cold deciduous
 CZE_LIZ_LES,Picea abies,evergreen
 CZE_STI,Fagus sylvatica,cold deciduous
 CZE_UTE_BEE,Fagus sylvatica,cold deciduous
@@ -20,14 +39,22 @@ CZE_UTE_SPR,Picea abies,evergreen
 DEU_STE_2P3,Fagus sylvatica,cold deciduous
 DEU_STE_4P5,Fagus sylvatica,cold deciduous
 ESP_ALT_ARM,Pinus nigra,evergreen
+ESP_ALT_ARM,Quercus faginea,cold deciduous
+ESP_ALT_ARM,Quercus ilex,evergreen
 ESP_ALT_HUE,Pinus nigra,evergreen
+ESP_ALT_HUE,Quercus faginea,cold deciduous
 ESP_ALT_TRI,Pinus nigra,evergreen
+ESP_ALT_TRI,Quercus ilex,evergreen
 ESP_CAN,Quercus ilex,evergreen
+ESP_CAN,Quercus pubescens,cold deciduous
+ESP_CAN,Arbutus unedo,evergreen
+ESP_CAN,Pinus halepensis,evergreen
 ESP_SAN_A2_45I,Olea europaea,evergreen
 ESP_SAN_A_45I,Olea europaea,evergreen
 ESP_SAN_B2_100,Olea europaea,evergreen
 ESP_SAN_B_100,Olea europaea,evergreen
 ESP_TIL_MIX,Pinus sylvestris,evergreen
+ESP_TIL_MIX,Quercus ilex,evergreen
 ESP_TIL_OAK,Quercus ilex,evergreen
 ESP_TIL_PIN,Pinus sylvestris,evergreen
 ESP_VAL_SOR,Pinus sylvestris,evergreen
@@ -42,55 +69,142 @@ GBR_GUI_ST1,Pinus sylvestris,evergreen
 GBR_GUI_ST2,Pinus sylvestris,evergreen
 GBR_GUI_ST3,Pinus sylvestris,evergreen
 GUF_GUY_GUY,Sloanea sp,drought deciduous
+GUF_GUY_GUY,Vacapoua americana,evergreen
+GUF_GUY_GUY,Licania membranacea,evergreen
+GUF_GUY_GUY,Oxandra asbeckii,evergreen
+GUF_GUY_GUY,Iryanthera sagotiana,evergreen
+GUF_GUY_GUY,Goupia glabra,evergreen
 GUF_GUY_ST2,Dicorynia guianensis,evergreen
+GUF_GUY_ST2,Vantanea sp,evergreen
+GUF_GUY_ST2,Oxandra asbeckii,evergreen
+GUF_GUY_ST2,Recordoxylon speciosum,evergreen
+GUF_GUY_ST2,Sloanea sp,evergreen
+GUF_GUY_ST2,Vouacapoua americana,evergreen
+GUF_GUY_ST2,Goupia glabra,evergreen
 IDN_JAM_OIL,Elaeis guineensis,evergreen
 IDN_JAM_RUB,Hevea brasiliensis,drought deciduous
 ISR_YAT_YAT,Pinus halepensis,evergreen
 ITA_FEI_S17,Larix decidua,cold deciduous
 ITA_KAE_S20,Larix decidua,cold deciduous
 ITA_MAT_S21,Larix decidua,cold deciduous
+ITA_MAT_S21,Pinus cembra,evergreen
 ITA_MUN,Larix decidua,cold deciduous
 ITA_RUN_N20,Larix decidua,cold deciduous
+ITA_RUN_N20,Pinus cembra,evergreen
 ITA_TOR,Larix decidua,cold deciduous
 NLD_LOO,Pinus sylvestris,evergreen
 NZL_HUA_HUA,Agathis australis,evergreen
 PRT_LEZ_ARN,Quercus suber,evergreen
 RUS_POG_VAR,Larix sibirica Ledeb.,cold deciduous
+RUS_POG_VAR,Larix gmelinii,cold deciduous
+RUS_POG_VAR,Pinus sibirica,evergreen
 SEN_SOU_IRR,Acacia tortilis,drought deciduous
 SEN_SOU_POS,Acacia tortilis,drought deciduous
 SEN_SOU_PRE,Acacia tortilis,drought deciduous
 SWE_NOR_ST1_BEF,Pinus sylvestris,
+SWE_NOR_ST1_BEF,Picea abies,
 SWE_NOR_ST2,Pinus sylvestris,evergreen
+SWE_NOR_ST2,Picea abies,evergreen
 SWE_NOR_ST3,Pinus sylvestris,evergreen
+SWE_NOR_ST3,Picea abies,evergreen
 SWE_NOR_ST4_AFT,Pinus sylvestris,evergreen
+SWE_NOR_ST4_AFT,Picea abies,evergreen
+SWE_NOR_ST4_AFT,Betula pubescens,cold deciduous
 SWE_NOR_ST4_BEF,Pinus sylvestris,evergreen
+SWE_NOR_ST4_BEF,Picea abies,evergreen
 SWE_NOR_ST5_REF,Pinus sylvestris,evergreen
+SWE_NOR_ST5_REF,Picea abies,evergreen
+SWE_NOR_ST5_REF,Betula pubescens,cold deciduous
 THA_KHU,Hevea brasiliensis,drought deciduous
 USA_DUK_HAR,Liriodendron tulipifera,cold deciduous
+USA_DUK_HAR,Liquidambar styraciflua,cold deciduous
+USA_DUK_HAR,Carya tomentosa,cold deciduous
+USA_DUK_HAR,Quercus alba,cold deciduous
+USA_DUK_HAR,Quercus michauxii,cold deciduous
+USA_DUK_HAR,Quercus phellos,cold deciduous
 USA_HIL_HF1_POS,Pinus taeda,evergreen
+USA_HIL_HF1_POS,Liquidambar styraciflua,cold deciduous
+USA_HIL_HF1_POS,Acer rubrum,cold deciduous
+USA_HIL_HF1_POS,Quercus spp.,cold deciduous
+USA_HIL_HF1_POS,Liriodendron tulipifera,cold deciduous
 USA_HIL_HF1_PRE,Pinus taeda,evergreen
+USA_HIL_HF1_PRE,Liquidambar styraciflua,cold deciduous
+USA_HIL_HF1_PRE,Acer rubrum,cold deciduous
+USA_HIL_HF1_PRE,Quercus alba,cold deciduous
+USA_HIL_HF1_PRE,Liriodendron tulipifera,cold deciduous
 USA_HIL_HF2,Pinus taeda,evergreen
+USA_HIL_HF2,Liriodendron tulipifera,cold deciduous
+USA_HIL_HF2,Acer rubrum,cold deciduous
+USA_HIL_HF2,Liquidambar styraciflua,cold deciduous
+USA_HIL_HF2,Fagus grandifolia,cold deciduous
+USA_HIL_HF2,Quercus spp.,cold deciduous
+USA_HIL_HF2,Pinus virginiana,evergreen
 USA_HUY_LIN_NON,Picea glauca,evergreen
 USA_INM,Acer saccharum,cold deciduous
+USA_INM,Fraxinus americana,cold deciduous
+USA_INM,Liriodendron tulipifera,cold deciduous
+USA_INM,Quercus alba,cold deciduous
+USA_INM,Sassafras albidum,cold deciduous
+USA_INM,Ulmus americana,cold deciduous
 USA_ORN_ST1_AMB,Liquidambar styraciflua,cold deciduous
 USA_ORN_ST2_AMB,Liquidambar styraciflua,cold deciduous
 USA_ORN_ST3_ELE,Liquidambar styraciflua,cold deciduous
 USA_ORN_ST4_ELE,Liquidambar styraciflua,cold deciduous
 USA_PAR_FER,Pinus taeda,evergreen
 USA_PJS_P04_AMB,Pinus edulis,evergreen
+USA_PJS_P04_AMB,Juniperus monosperma,evergreen
 USA_PJS_P08_AMB,Pinus edulis,evergreen
+USA_PJS_P08_AMB,Juniperus monosperma,evergreen
 USA_PJS_P12_AMB,Pinus edulis,evergreen
+USA_PJS_P12_AMB,Juniperus monosperma,evergreen
 USA_SIL_OAK_1PR,Quercus montana,cold deciduous
+USA_SIL_OAK_1PR,Quercus velutina,cold deciduous
+USA_SIL_OAK_1PR,Quercus coccinea,cold deciduous
+USA_SIL_OAK_1PR,Pinus rigida,evergreen
 USA_SIL_OAK_2PR,Quercus montana,cold deciduous
+USA_SIL_OAK_2PR,Quercus velutina,cold deciduous
+USA_SIL_OAK_2PR,Quercus coccinea,cold deciduous
+USA_SIL_OAK_2PR,Pinus rigida,evergreen
 USA_SYL_HL2,Betula alleghaniensis,cold deciduous
+USA_SYL_HL2,Acer saccharum,cold deciduous
+USA_SYL_HL2,Tsuga canadensis,evergreen
+USA_SYL_HL2,Ostrya virginiana,cold deciduous
 USA_TNB,Acer rubrum,cold deciduous
+USA_TNB,Quercus velutina,cold deciduous
+USA_TNB,Quercus falcata,cold deciduous
+USA_TNB,Quercus coccinea,cold deciduous
 USA_TNO,Acer rubrum,cold deciduous
+USA_TNO,Liriodendron tulipifera,cold deciduous
+USA_TNO,Quercus alba,cold deciduous
+USA_TNO,Quercus prinus,cold deciduous
+USA_TNO,Quercus rubra,cold deciduous
 USA_TNP,Acer rubrum,cold deciduous
+USA_TNP,Cornus florida,cold deciduous
+USA_TNP,Fagus sylvatica,cold deciduous
+USA_TNP,Liriodendron tulipifera,cold deciduous
+USA_TNP,Pinus taeda,evergreen
 USA_TNY,Acer rubrum,cold deciduous
+USA_TNY,Liriodendron tulipifera,cold deciduous
+USA_TNY,Prunus serotina,cold deciduous
 USA_UMB_CON,Acer rubrum,cold deciduous
+USA_UMB_CON,Betula papyrifera,cold deciduous
+USA_UMB_CON,Populus grandidentata,cold deciduous
+USA_UMB_CON,Pinus strobus,evergreen
+USA_UMB_CON,Quercus rubra,cold deciduous
 USA_UMB_GIR,Acer rubrum,cold deciduous
+USA_UMB_GIR,Pinus strobus,evergreen
+USA_UMB_GIR,Quercus rubra,cold deciduous
+USA_UMB_GIR,Fagus grandifolia,cold deciduous
 USA_WIL_WC1,Fraxinus pennsylvanica,cold deciduous
+USA_WIL_WC1,Acer saccharum,cold deciduous
+USA_WIL_WC1,Tilia americana,cold deciduous
+USA_WIL_WC1,Ostrya virginiana,cold deciduous
+USA_WIL_WC1,Quercus rubra,cold deciduous
 USA_WVF,Acer rubrum,cold deciduous
+USA_WVF,Acer saccharum,cold deciduous
+USA_WVF,Prunus serotina,cold deciduous
+USA_WVF,Quercus alba,cold deciduous
+USA_WVF,Quercus rubra,cold deciduous
 ZAF_FRA_FRA,Populus canescens,cold deciduous
 ZAF_NOO_E3_IRR,Malus domestica,cold deciduous
 ZAF_SOU_SOU,Malus domestica,cold deciduous
