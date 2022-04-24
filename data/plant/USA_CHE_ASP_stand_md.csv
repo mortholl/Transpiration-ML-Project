@@ -1,2 +1,0 @@
-st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code,st_USDA_soil_texture
-25,N,14.1,12,3936,"Naturally regenerated, managed",10,4.5,Aspen,"There is a very high degree of heterogeneity in this stand, because it capture a fairly strong gradient. There are many small stems in the wetland portion that drive stem density up and basal area down.",74,14,1000,LOAM,Gentle slope (<2 %),NA,USA_CHE_ASP,sandy loam

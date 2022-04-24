@@ -1,9 +1,0 @@
-pl_age,pl_azimut_int,pl_bark_thick,pl_code,pl_dbh,pl_height,pl_leaf_area,pl_name,pl_radial_int,pl_remarks,pl_sap_units,pl_sapw_area,pl_sapw_depth,pl_sens_calib,pl_sens_cor_grad,pl_sens_cor_zero,pl_sens_hgt,pl_sens_length,pl_sens_man,pl_sens_meth,pl_sens_timestep,pl_social,pl_species,pl_treatment,si_code,pl_sap_units_orig
-114,sensor_integrated,3,CZE_STI_Fsy_Jt_1,37.9,NA,NA,57,Sensor-integrated,NA,cm3 h-1,NA,NA,FALSE,No correction,Long time-window zero flow,1.3,80,Ems Brno,TSHB,10,suppressed,Fagus sylvatica,NA,CZE_STI,kg h-1
-114,sensor_integrated,3,CZE_STI_Fsy_Jt_2,55.4,NA,NA,75,Sensor-integrated,NA,cm3 h-1,NA,NA,FALSE,No correction,Long time-window zero flow,1.3,80,Ems Brno,TSHB,10,dominant,Fagus sylvatica,NA,CZE_STI,kg h-1
-114,sensor_integrated,4,CZE_STI_Fsy_Jt_3,41.9,NA,NA,74,Sensor-integrated,NA,cm3 h-1,NA,NA,FALSE,No correction,Long time-window zero flow,1.3,80,Ems Brno,TSHB,10,codominant,Fagus sylvatica,NA,CZE_STI,kg h-1
-114,sensor_integrated,5,CZE_STI_Fsy_Jt_4,46.2,NA,NA,86,Sensor-integrated,NA,cm3 h-1,NA,NA,FALSE,No correction,Long time-window zero flow,1.3,80,Ems Brno,TSHB,10,codominant,Fagus sylvatica,NA,CZE_STI,kg h-1
-114,sensor_integrated,5,CZE_STI_Fsy_Jt_5,37.6,NA,NA,96,Sensor-integrated,NA,cm3 h-1,NA,NA,FALSE,No correction,Long time-window zero flow,1.3,80,Ems Brno,TSHB,10,suppressed,Fagus sylvatica,NA,CZE_STI,kg h-1
-114,sensor_integrated,3,CZE_STI_Fsy_Jt_6,38.2,NA,NA,83,Sensor-integrated,NA,cm3 h-1,NA,NA,FALSE,No correction,Long time-window zero flow,1.3,80,Ems Brno,TSHB,10,suppressed,Fagus sylvatica,NA,CZE_STI,kg h-1
-114,sensor_integrated,5,CZE_STI_Fsy_Jt_7,50.6,NA,NA,49,Sensor-integrated,NA,cm3 h-1,NA,NA,FALSE,No correction,Long time-window zero flow,1.3,80,Ems Brno,TSHB,10,codominant,Fagus sylvatica,NA,CZE_STI,kg h-1
-114,sensor_integrated,4,CZE_STI_Fsy_Jt_8,52.5,NA,NA,55,Sensor-integrated,NA,cm3 h-1,NA,NA,FALSE,No correction,Long time-window zero flow,1.3,80,Ems Brno,TSHB,10,dominant,Fagus sylvatica,NA,CZE_STI,kg h-1

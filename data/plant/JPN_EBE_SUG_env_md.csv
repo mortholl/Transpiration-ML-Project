@@ -1,4 +1,0 @@
-env_leafarea_seasonal,env_netrad,env_plant_watpot,env_ppfd_in,env_precip,env_remarks,env_rh,env_swc_deep_depth,env_swc_shallow_depth,env_sw_in,env_ta,env_time_daylight,env_timestep,env_time_zone,env_vpd,env_ws,si_code
-NULL,Not provided,NA,Not provided,Off-site,"The data of temperature, precipitation and wind speed were obtained from weather station (AMeDAS) 3.2 km away from study site. The humidity data were from anthoer weather station 16.0 km away.
-3.2km station: Ebetsu, 43.11N 141.60E 8 m asl.
-16.0km station: Sapporo, 43.06N 141.33E 17 m asl.",Off-site,NA,NA,Not provided,Off-site,FALSE,60,"32UTC+09:00, I",Not provided,Off-site,JPN_EBE_SUG

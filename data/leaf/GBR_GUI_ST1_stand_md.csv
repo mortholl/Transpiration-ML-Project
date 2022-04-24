@@ -1,2 +1,0 @@
-st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code,st_USDA_soil_texture
-86,Flat,20,NA,316,"Naturally regenerated, unmanaged",11,0.92,ST1,NA,NA,NA,NA,CLAY,Undulated/Variable,NA,GBR_GUI_ST1,clay

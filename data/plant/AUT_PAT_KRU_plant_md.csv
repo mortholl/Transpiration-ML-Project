@@ -1,4 +1,0 @@
-pl_age,pl_azimut_int,pl_bark_thick,pl_code,pl_dbh,pl_height,pl_leaf_area,pl_name,pl_radial_int,pl_remarks,pl_sap_units,pl_sapw_area,pl_sapw_depth,pl_sens_calib,pl_sens_cor_grad,pl_sens_cor_zero,pl_sens_hgt,pl_sens_length,pl_sens_man,pl_sens_meth,pl_sens_timestep,pl_social,pl_species,pl_treatment,si_code,pl_sap_units_orig
-16,No azimuthal correction,NA,AUT_PAT_KRU_Pce_Js_1,7,1,20,PC 1,No radial correction,NA,cm3 h-1,31,2,FALSE,No correction,Previous night zero flow,0.15,2,Lab made,HD,30,dominant,Pinus cembra,NA,AUT_PAT_KRU,g m-2 s-1
-16,No azimuthal correction,NA,AUT_PAT_KRU_Pce_Js_2,6,0.75,18.5,PC 2,No radial correction,NA,cm3 h-1,28,2,FALSE,No correction,Previous night zero flow,0.15,2,Lab made,HD,30,dominant,Pinus cembra,NA,AUT_PAT_KRU,g m-2 s-1
-16,No azimuthal correction,NA,AUT_PAT_KRU_Pce_Js_3,5,0.5,17,PC 3,Sensor-integrated,NA,cm3 h-1,25,2,FALSE,No correction,Previous night zero flow,0.15,2,Lab made,HD,30,dominant,Pinus cembra,NA,AUT_PAT_KRU,g m-2 s-1

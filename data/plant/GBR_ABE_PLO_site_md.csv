@@ -1,2 +1,0 @@
-si_addcontr_email,si_addcontr_firstname,si_addcontr_institution,si_addcontr_lastname,si_code,si_contact_email,si_contact_firstname,si_contact_institution,si_contact_lastname,si_country,si_dendro_network,si_dist_mgmt,si_elev,si_flux_network,si_igbp,si_lat,si_long,si_name,si_paper,si_remarks,is_inside_country,si_mat,si_map,si_biome
-NA,Paul,University of Edinburgh,Jarvis,GBR_ABE_PLO,lisa.wingate@inra.fr,Lisa,INRA,Wingate,GBR,FALSE,NA,340,TRUE,ENF,56.616,-3.8,Aberfeldy,doi: 10.1111/j.1365-3040.2007.01647.x.,NA,TRUE,7.317755012148953,971.2289645770106,Temperate forest

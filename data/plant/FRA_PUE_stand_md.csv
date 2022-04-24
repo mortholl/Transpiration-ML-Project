@@ -1,2 +1,0 @@
-st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code,st_USDA_soil_texture
-58,Flat,28.1,39,7149,"Naturally regenerated, unmanaged",5,2.4,NA,"Root depth down to 450 cm beolow the surface, with 75% of volumetric stone fraction in the first 50 cm and 90% of volumetric stoe fraction below, hence a stone free soil depth of 52.5 cm",26,35,52.5,CLAY,Flat,NA,FRA_PUE,clay loam

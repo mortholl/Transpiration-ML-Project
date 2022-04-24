@@ -1,6 +1,0 @@
-pl_age,pl_azimut_int,pl_bark_thick,pl_code,pl_dbh,pl_height,pl_leaf_area,pl_name,pl_radial_int,pl_remarks,pl_sap_units,pl_sapw_area,pl_sapw_depth,pl_sens_calib,pl_sens_cor_grad,pl_sens_cor_zero,pl_sens_hgt,pl_sens_length,pl_sens_man,pl_sens_meth,pl_sens_timestep,pl_social,pl_species,pl_treatment,si_code,pl_sap_units_orig
-60,No azimuthal correction,4,CZE_UTE_SPR_Pab_Jt_1,22,22,NA,705,Sensor-integrated,NA,cm3 h-1,NA,NA,FALSE,No correction,Long time-window zero flow,1.3,NA,Ems Brno,TSHB,10,codominant,Picea abies,NA,CZE_UTE_SPR,kg h-1
-60,No azimuthal correction,4,CZE_UTE_SPR_Pab_Jt_2,18,21,NA,577,Sensor-integrated,NA,cm3 h-1,NA,NA,NA,No correction,Long time-window zero flow,1.3,NA,Ems Brno,TSHB,10,suppressed,Picea abies,NA,CZE_UTE_SPR,kg h-1
-60,No azimuthal correction,4,CZE_UTE_SPR_Pab_Jt_3,29,25,NA,910,Sensor-integrated,NA,cm3 h-1,NA,NA,NA,No correction,Long time-window zero flow,1.3,NA,Ems Brno,TSHB,10,dominant,Picea abies,NA,CZE_UTE_SPR,kg h-1
-60,No azimuthal correction,4,CZE_UTE_SPR_Pab_Jt_4,29,26,NA,918,Sensor-integrated,NA,cm3 h-1,NA,NA,NA,No correction,Long time-window zero flow,1.3,NA,Ems Brno,TSHB,10,dominant,Picea abies,NA,CZE_UTE_SPR,kg h-1
-60,No azimuthal correction,4,CZE_UTE_SPR_Pab_Jt_5,27,24,NA,875,Sensor-integrated,NA,cm3 h-1,NA,NA,NA,No correction,Long time-window zero flow,1.3,NA,Ems Brno,TSHB,10,codominant,Picea abies,NA,CZE_UTE_SPR,kg h-1

@@ -1,2 +1,0 @@
-st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code,st_USDA_soil_texture
-10,Flat,NA,18,3700,"Plantation, managed",8,NA,NA,"soils: deep alluvial deposits, heterogenic soil conditions across the 2,5ha site with silt loam and sandy loam being the dominant texture classes",23,59,300,LOAM,Flat,"distructive sampling, understory management",UZB_YAN_DIS,silty loam

@@ -1,2 +1,0 @@
-env_leafarea_seasonal,env_netrad,env_plant_watpot,env_ppfd_in,env_precip,env_remarks,env_rh,env_swc_deep_depth,env_swc_shallow_depth,env_sw_in,env_ta,env_time_daylight,env_timestep,env_time_zone,env_vpd,env_ws,si_code
-stand level,Above canopy,leaf: predawn and midday,Above canopy,Above canopy,Soil moisture was vertical TDR 0-20 cm depth. Measured manually every week or two from 6 locations per ring,Above canopy,NA,10,Above canopy,Above canopy,FALSE,30,"9UTC-05:00, R",Not provided,Above canopy,USA_ORN_ST2_AMB

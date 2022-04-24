@@ -1,2 +1,0 @@
-st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code,st_USDA_soil_texture
-150,S,21.8,2,600,"Naturally regenerated, unmanaged",4.5,0.55,NA,NA,54,44,10,LOAM,Strong Slope (>10%),NA,AUT_TSC,sandy loam

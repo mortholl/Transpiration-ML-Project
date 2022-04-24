@@ -32,7 +32,7 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
     csvfile.write(f'Data set, n locations, n data points, R2 test, R2 train, MAE, {",".join(my_features)}, Best parameters \n')
 
     # Loop over all clusters
-    for identifier, cluster_group in zip(['k_means_'], [k_clusters]):  # for identifier, cluster_group in zip(['k_means_', 'func_', 'biome_'], [k_clusters, func_clusters, biome_clusters]):
+    for identifier, cluster_group in zip(['func_'], [func_clusters]):  # for identifier, cluster_group in zip(['k_means_', 'func_', 'biome_'], [k_clusters, func_clusters, biome_clusters]):
         for data_cluster in cluster_group:
             # Get data
             my_files = cluster_group[data_cluster]

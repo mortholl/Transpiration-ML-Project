@@ -1,2 +1,0 @@
-si_addcontr_email,si_addcontr_firstname,si_addcontr_institution,si_addcontr_lastname,si_code,si_contact_email,si_contact_firstname,si_contact_institution,si_contact_lastname,si_country,si_dendro_network,si_dist_mgmt,si_elev,si_flux_network,si_igbp,si_lat,si_long,si_name,si_paper,si_remarks,is_inside_country,si_mat,si_map,si_biome
-NA,NA,NA,NA,GUF_GUY_GUY,bonal.damien@inra.fr,Damien,INRA,BONAL,GUF,TRUE,NULL,40,TRUE,EBF,5.278772,-52.924863,Guyaflux,10.1111/j.1365-2486.2008.01610.x,NA,TRUE,26.145252504001824,2706.4339257839342,Tropical rain forest

@@ -1,2 +1,0 @@
-env_leafarea_seasonal,env_netrad,env_plant_watpot,env_ppfd_in,env_precip,env_remarks,env_rh,env_swc_deep_depth,env_swc_shallow_depth,env_sw_in,env_ta,env_time_daylight,env_timestep,env_time_zone,env_vpd,env_ws,si_code
-species level,Not provided,leaf: predawn and midday,Not provided,Above canopy,Meteorological data comes from a met tower installed near ESP_TIL_MIX and ESP_TIL_OAK at ~ a distance of ~ 800 m.,Above canopy,NA,15,Above canopy,Above canopy,FALSE,15,"16UTC±00:00, Z",Above canopy,Above canopy,ESP_TIL_PIN

@@ -1,2 +1,0 @@
-st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code,st_USDA_soil_texture
-80,S,55.7,8.27,450,"Naturally regenerated, managed",28,5.66,Les,"More details about experimental site and sapflow measurement are available in journal papers (e.g., http://dx.doi.org/10.2136/vzj2012.0154 and http://dx.doi.org/10.1002/eco.148)",60.75,30.98,70,LOAM,Strong Slope (>10%),NA,CZE_LIZ_LES,sandy loam

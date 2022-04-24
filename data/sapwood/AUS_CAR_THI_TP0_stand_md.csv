@@ -1,2 +1,0 @@
-st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code,st_USDA_soil_texture
-5.8,S,12,NA,314,"Plantation, managed",16.25,2.78,ThinningXpruningXfertiliser experiment,Leaf area index is calculated using treatment and site specific allometric equations that were developed by sampling trees in the same experiment.,NA,NA,200,LOAM,"Medium Slope (>2 %, <5%)","TP0 - Thinned, pruned, unfertilised",AUS_CAR_THI_TP0,loam

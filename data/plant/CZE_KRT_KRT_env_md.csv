@@ -1,2 +1,0 @@
-env_leafarea_seasonal,env_netrad,env_plant_watpot,env_ppfd_in,env_precip,env_remarks,env_rh,env_swc_deep_depth,env_swc_shallow_depth,env_sw_in,env_ta,env_time_daylight,env_timestep,env_time_zone,env_vpd,env_ws,si_code
-NA,Not provided,NA,Not provided,Off-site,NA,Off-site,NA,10,Off-site,Off-site,FALSE,10,"17UTC+01:00, A",Not provided,Off-site,CZE_KRT_KRT

@@ -1,2 +1,0 @@
-st_age,st_aspect,st_basal_area,st_clay_perc,st_density,st_growth_condition,st_height,st_lai,st_name,st_remarks,st_sand_perc,st_silt_perc,st_soil_depth,st_soil_texture,st_terrain,st_treatment,si_code,st_USDA_soil_texture
-30,N,4.62,15,1975,"Naturally regenerated, unmanaged",7.4,3.4,NA,"Although on average the soil depth is around 100 cm, at some points we measured soil depths around 200 cm",9,76,100,SILT,Strong Slope (>10%),NA,ESP_RIN,silty loam

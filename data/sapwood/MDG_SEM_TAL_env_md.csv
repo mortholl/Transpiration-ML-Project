@@ -1,2 +1,0 @@
-env_leafarea_seasonal,env_netrad,env_plant_watpot,env_ppfd_in,env_precip,env_remarks,env_rh,env_swc_deep_depth,env_swc_shallow_depth,env_sw_in,env_ta,env_time_daylight,env_timestep,env_time_zone,env_vpd,env_ws,si_code
-NA,Not provided,NA,Not provided,Not provided,NA,Above canopy,NA,NA,Above canopy,Above canopy,FALSE,30,"19UTC+03:00, C",Not provided,Not provided,MDG_SEM_TAL

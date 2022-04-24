@@ -1,2 +1,0 @@
-env_leafarea_seasonal,env_netrad,env_plant_watpot,env_ppfd_in,env_precip,env_remarks,env_rh,env_swc_deep_depth,env_swc_shallow_depth,env_sw_in,env_ta,env_time_daylight,env_timestep,env_time_zone,env_vpd,env_ws,si_code
-species level,Above canopy,leaf: predawn and midday,Not provided,Clearing,Point measurements of soil moisture at deeper layers (30-60 cm) with TDR probes (~weekly or biweekly intervals). Precipitation data disaggregated uniformly from hourly values.,Above canopy,NA,15,Clearing,Above canopy,FALSE,15,"16UTC±00:00, Z",Not provided,Above canopy,ESP_VAL_SOR
