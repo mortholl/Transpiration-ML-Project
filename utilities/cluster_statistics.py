@@ -34,6 +34,8 @@ for func, func_cluster in func_clusters.items():
         func = "deciduous"
     if func == 1:
         func = "evergreen"
+    if func == 2:
+        func = "mixed"
     avg_dict.update({func: [feat_avg, sf_avg]})
     var_dict.update({func: [feat_var, sf_var]})
 

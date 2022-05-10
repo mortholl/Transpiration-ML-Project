@@ -16,10 +16,10 @@ from sklearn.inspection import permutation_importance
 cluster_creator = ClusterCreator.build_clusters()
 k_clusters = cluster_creator.k_cluster_dict
 func_clusters = cluster_creator.func_cluster_dict
-biome_clusters = cluster_creator.biome_cluster_di ct
+biome_clusters = cluster_creator.biome_cluster_dict
 
 my_features = ['ta', 'vpd', 'ppfd_in', 'swc_shallow']
-my_files = biome_clusters['Woodland/Shrubland']  # can select using the cluster dictionaries or use [] for all
+my_files = biome_clusters['Temperate forest']  # can select using the cluster dictionaries or use [] for all
 n_files = len(my_files)
 
 # Define model creation in function
@@ -64,7 +64,7 @@ ann_grid = GridSearchCV(sk_estimator, param_grid, cv=2, scoring='r2', verbose=3)
 ann_grid.fit(X_train, Y_train)
 
 # Get metrics
-model_name = 'test'
+model_name = 'biome_temperate_forest'
 model = ann_grid.best_estimator_
 Y_pred = model.predict(X_test)
 mae = mean_absolute_error(Y_test, Y_pred)
@@ -86,7 +86,7 @@ plt.savefig('Neural_Networks/plots/'+model_name+'.png')
 plt.clf()
 outfile = 'Neural_Networks/models/'+model_name+'.h5'
 model.model.save(outfile)
-with open('Neural_Networks/ann_results_test.csv', 'w', newline='') as csvfile:
+with open('Neural_Networks/ann_results_'+model_name+'.csv', 'w', newline='') as csvfile:
     csvfile.write(f'Data set, n locations, n data points, R2 test, R2 train, MAE, {",".join(my_features)}, Best parameters \n')
     csvfile.write(f'{model_name}, {n_files}, {n_points}, {r2}, {r2_train}, {mae}, {feature_importances}, {ann_grid.best_params_} \n')
 print(f'{model_name} complete')

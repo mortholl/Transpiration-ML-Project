@@ -21,7 +21,8 @@ biome_clusters = cluster_creator.biome_cluster_dict
 
 # Select desired features and files
 my_features = ['ta', 'vpd', 'ppfd_in', 'swc_shallow']
-my_files = biome_clusters['Woodland/Shrubland']  # can select using the cluster dictionaries or use [] for all
+my_files = biome_clusters['Temperate forest']  # can select using the cluster dictionaries or use [] for all
+model_name = 'biome_temperate_forest'
 
 param_grid = {'n_estimators': [600, 800, 1200],
               'max_depth': [20, 25],
@@ -36,12 +37,12 @@ X_scaled = scaler.fit_transform(X)
 X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=0.2, random_state=42)
 
 rf = RandomForestRegressor(n_estimators=500, max_depth=9, random_state=42)
-rf_grid = GridSearchCV(rf, param_grid, cv=5, scoring='r2', verbose=3, n_jobs=5, return_train_score=True)
+rf_grid = GridSearchCV(rf, param_grid, cv=5, scoring='r2', verbose=3, n_jobs=1, return_train_score=True)
 rf_grid.fit(X_train, Y_train)
 
-# feature_importances = [str(round(n, 4)) for n in rf_grid.feature_importances_]
-# print(feature_importances)
-Y_pred = rf_grid.predict(X_test)
+model = rf_grid.best_estimator_
+feature_importances = [str(round(n, 4)) for n in model.feature_importances_]
+Y_pred = model.predict(X_test)
 mae = mean_absolute_error(Y_test, Y_pred)
 r2 = r2_score(Y_test, Y_pred)
 print(f'R2 score was {r2}')
@@ -60,9 +61,9 @@ plt.savefig('RandomForest/rf_plot.png')
 plt.show()
 
 # Filing results: model, metrics, plot
-# outfile = 'RandomForest/rf.sav'
-# pickle.dump(rf, open(outfile, 'wb'))
-# with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
-#     csvfile.write(f'Data set ')
-#     csvfile.write(f'R2 test, R2 train, MAE, {",".join(my_features)} \n')
-#     csvfile.write(f'{r2}, {r2_train}, {mae}, {",".join(feature_importances)} \n')
+outfile = 'RandomForest/rf_'+model_name+'.sav'
+pickle.dump(rf, open(outfile, 'wb'))
+with open('RandomForest/rf_results_'+model_name+'.csv', 'w', newline='') as csvfile:
+    csvfile.write(f'Data set ')
+    csvfile.write(f'R2 test, R2 train, MAE, {",".join(my_features)} \n')
+    csvfile.write(f'{r2}, {r2_train}, {mae}, {",".join(feature_importances)} \n')
