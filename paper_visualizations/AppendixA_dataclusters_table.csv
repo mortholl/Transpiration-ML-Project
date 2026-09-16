@@ -1,0 +1,96 @@
+Site,Latitude (deg),Longitude,Biome,Functional Type,Species ,MAP (mm/yr),MAT (C) ,Average Wind Speed (m/s),Average Sap Flux
+ARG_MAZ,-51.58,-72.29,Woodland/Shrubland,Deciduous,Nothofagus pumilio,471.58,4.03,7.26,2191
+ARG_TRE,-51.32,-72.19,Woodland/Shrubland,Deciduous,Nothofagus antarctica,442.34,4.75,6.58,441
+AUS_RIC_EUC_ELE,-33.62,150.74,Woodland/Shrubland,Evergreen,Eucalyptus tereticornis,898.62,17.6,2.56,1373
+AUS_WOM,-37.42,144.09,Temperate forest,Evergreen,Mixed,1023.83,10.92,4.68,6870
+CAN_TUR_P39_POS,42.71,-80.36,Temperate forest,Evergreen,Pinus strobus,1000.34,9,3.73,1276
+CAN_TUR_P39_PRE,42.71,-80.36,Temperate forest,Evergreen,Pinus strobus,1000.34,9,3.73,746
+CAN_TUR_P74,42.71,-80.35,Temperate forest,Evergreen,Pinus strobus,1002.62,9,3.73,162
+CHE_DAV_SEE,46.82,9.86,Temperate forest,Evergreen,Picea abies,840.05,3.84,2.59,202
+CRI_TAM_TOW,10.39,-84.63,Tropical rain forest,-,Mixed,3625.91,22.97,2.9,3033
+CZE_BIK,49.49,18.53,Temperate forest,Evergreen,Picea abies,1144.4,6.18,3.76,547
+CZE_KRT_KRT,49.32,16.75,Woodland/Shrubland,Evergreen,Picea abies,623.45,7.96,3.89,258
+CZE_LAN,48.68,16.95,Woodland/Shrubland,Deciduous,Mixed,538.08,10.4,3.21,3488
+CZE_LIZ_LES,49.07,13.68,Temperate forest,Evergreen,Picea abies,837.05,6.03,3.55,719
+CZE_STI,49.04,17.97,Temperate forest,Deciduous,Fagus sylvatica,823.69,7.64,3.84,3899
+CZE_UTE_BEE,49.28,16.65,Woodland/Shrubland,Deciduous,Fagus sylvatica,538.78,8.5,3.59,2158
+CZE_UTE_BNA,49.28,16.65,Woodland/Shrubland,Deciduous,Fagus sylvatica,554.92,8.6,3.59,670
+CZE_UTE_BPO,49.28,16.65,Woodland/Shrubland,Deciduous,Fagus sylvatica,558.36,8.61,3.59,1061
+CZE_UTE_SPR,49.28,16.65,Woodland/Shrubland,Evergreen,Picea abies,566.33,8.65,3.59,469
+DEU_STE_2P3,53.1,13,Woodland/Shrubland,Deciduous,Fagus sylvatica,594.6,8.9,3.79,2313
+DEU_STE_4P5,53.1,13,Woodland/Shrubland,Deciduous,Fagus sylvatica,594.6,8.9,3.79,3095
+ESP_ALT_ARM,40.78,-2.33,Woodland/Shrubland,Mixed,Mixed ,647.86,11.54,2.71,738
+ESP_ALT_HUE,40.79,-2.29,Woodland/Shrubland,Mixed,Mixed ,520.64,12.25,2.73,1016
+ESP_ALT_TRI,40.8,-2.23,Woodland/Shrubland,Evergreen,Mixed ,566.96,11.74,2.75,890
+ESP_CAN,41.43,2.07,Woodland/Shrubland,Mixed,Mixed ,763.38,15.38,2.99,499
+ESP_SAN_A2_45I,37.25,-5.8,Tropical forest savanna,Evergreen,Olea europaea,598.13,18.5,2.89,165
+ESP_SAN_A_45I,37.25,-5.8,Tropical forest savanna,Evergreen,Olea europaea,598.13,18.5,2.89,115
+ESP_SAN_B2_100,37.25,-5.8,Tropical forest savanna,Evergreen,Olea europaea,598.13,18.5,2.89,225
+ESP_SAN_B_100,37.25,-5.8,Tropical forest savanna,Evergreen,Olea europaea,598.13,18.5,2.89,133
+ESP_TIL_MIX,41.33,1.01,Woodland/Shrubland,Evergreen,Mixed,651.27,10.48,3.6,241
+ESP_TIL_OAK,41.33,1.01,Woodland/Shrubland,Evergreen,Quercus ilex,651.3,10.5,3.6,101
+ESP_TIL_PIN,41.33,1.01,Woodland/Shrubland,Evergreen,Pinus sylvestris,674.24,10.09,3.6,354
+ESP_VAL_SOR,42.2,1.81,Woodland/Shrubland,Evergreen,Pinus sylvestris,622.9,8.5,4.65,405
+FIN_PET,69.49,27.23,Woodland/Shrubland,Deciduous,Betula pubescens subsp. czerepanovii,415.5,-0.21,2.46,31
+FRA_HES_HE1_NON,48.67,7.06,Temperate forest,Deciduous,Fagus sylvatica,1003.48,9.97,3.27,409
+FRA_HES_HE2_NON,48.67,7.06,Temperate forest,Deciduous,Fagus sylvatica,1003.48,9.97,3.27,660
+FRA_PUE,43.74,3.6,Woodland/Shrubland,Evergreen,Quercus ilex,1022.97,13.8,4.37,92
+GBR_ABE_PLO,56.62,-3.8,Temperate forest,Evergreen,Picea sitchensis,971.23,7.32,4.36,154
+GBR_DEV_CON,56.03,-3.72,Woodland/Shrubland,Evergreen,Pinus sylvestris,814.97,9.4,4.59,696
+GBR_DEV_DRO,56.03,-3.72,Woodland/Shrubland,Evergreen,Pinus sylvestris,814.97,9.4,4.59,439
+GBR_GUI_ST1,57.27,-4.82,Temperate forest,Evergreen,Pinus sylvestris,1472.95,6.95,4.23,676
+GBR_GUI_ST2,57.27,-4.82,Temperate forest,Evergreen,Pinus sylvestris,1472.95,6.95,4.23,2319
+GBR_GUI_ST3,57.27,-4.82,Temperate forest,Evergreen,Pinus sylvestris,1472.95,6.95,4.23,1467
+GUF_GUY_GUY,5.28,-52.92,Tropical rain forest,Mixed,Mixed,2706.43,26.15,2.14,4658
+GUF_GUY_ST2,5.28,-52.91,Tropical rain forest,Evergreen,Mixed,2815.74,26.1,2.21,3917
+IDN_JAM_OIL,-2.07,102.79,Tropical rain forest,Evergreen,Elaeis guineensis,2825.82,26.2,1.3,3346
+IDN_JAM_RUB,-2.1,102.78,Tropical rain forest,Deciduous,Hevea brasiliensis,2930.83,26.2,1.29,1319
+ISR_YAT_YAT,31.34,35.05,Subtropical desert,Evergreen,Pinus halepensis,378.89,17.44,2.9,944
+ITA_FEI_S17,46.69,10.61,Temperate forest,Deciduous,Larix decidua,672.04,3.58,2.27,861
+ITA_KAE_S20,46.7,10.61,Boreal forest,Deciduous,Larix decidua,772.77,1.9,2.27,1085
+ITA_MAT_S21,46.74,10.69,Boreal forest,Mixed,Mixed,677.6,0.83,3.36,1121
+ITA_MUN,46.68,10.58,Woodland/Shrubland,Deciduous,Larix decidua,583.9,6.54,1.83,590
+ITA_RUN_N20,46.7,10.64,Boreal forest,Mixed,Mixed,781.66,1.83,3.19,560
+ITA_TOR,45.82,7.56,Temperate forest,Deciduous,Larix decidua,754.65,2.13,2.79,323
+NLD_LOO,52.17,5.74,Woodland/Shrubland,Evergreen,Pinus sylvestris,869.6,9.91,4.02,493
+NZL_HUA_HUA,-36.8,174.49,Temperate forest,Evergreen,Agathis australis,1371.23,14.97,4.87,3016
+PRT_LEZ_ARN,38.83,-8.82,Woodland/Shrubland,Evergreen,Quercus suber,713.17,17,3.38,10043
+RUS_POG_VAR,56.36,92.95,Woodland/Shrubland,Mixed,Mixed,410.42,1.09,2.52,451
+SEN_SOU_IRR,16.34,-15.43,Subtropical desert,Deciduous,Acacia tortilis,248,28.9,2.92,1458
+SEN_SOU_POS,16.34,-15.43,Subtropical desert,Deciduous,Acacia tortilis,248,28.9,2.92,1157
+SEN_SOU_PRE,16.34,-15.43,Subtropical desert,Deciduous,Acacia tortilis,248,28.9,2.92,1020
+SWE_NOR_ST1_BEF,60.09,17.48,Woodland/Shrubland,-,Mixed ,564.15,6.1,2.88,576
+SWE_NOR_ST2,60.09,17.48,Woodland/Shrubland,Evergreen,Mixed ,564.15,6.1,2.88,392
+SWE_NOR_ST3,60.09,17.48,Woodland/Shrubland,Evergreen,Mixed ,564.15,6.1,2.88,484
+SWE_NOR_ST4_AFT,60.08,17.48,Woodland/Shrubland,Mixed,Mixed ,564.14,6.1,2.88,730
+SWE_NOR_ST4_BEF,60.08,17.48,Woodland/Shrubland,Evergreen,Mixed ,564.14,6.1,2.88,476
+SWE_NOR_ST5_REF,60.08,17.48,Woodland/Shrubland,Mixed,Mixed ,564.14,6.1,2.88,598
+THA_KHU,15.27,103.08,Tropical forest savanna,Deciduous,Hevea brasiliensis,1178.01,27.21,1.47,634
+USA_DUK_HAR,36.98,-79.09,Temperate forest,Deciduous,Mixed,1189.05,14.59,2.41,2005
+USA_HIL_HF1_POS,36.22,-78.86,Temperate forest,Mixed,Mixed,1218.79,15.14,2.44,1290
+USA_HIL_HF1_PRE,36.22,-78.86,Temperate forest,Mixed,Mixed,1218.79,15.14,2.44,955
+USA_HIL_HF2,36.22,-78.86,Temperate forest,Mixed,Mixed,1219.29,15.14,2.44,2566
+USA_HUY_LIN_NON,42.53,-74.16,Temperate forest,Evergreen,Picea glauca,859.6,7.86,3.6,1238
+USA_INM,39.32,-86.41,Temperate forest,Deciduous,Mixed,1157.88,12.03,3.67,2827
+USA_ORN_ST1_AMB,35.9,-84.33,Temperate forest,Deciduous,Liquidambar styraciflua,1217,15.1,1.97,436
+USA_ORN_ST2_AMB,35.9,-84.33,Temperate forest,Deciduous,Liquidambar styraciflua,1217,15.1,1.97,501
+USA_ORN_ST3_ELE,35.9,-84.33,Temperate forest,Deciduous,Liquidambar styraciflua,1217,15.1,1.97,464
+USA_ORN_ST4_ELE,35.9,-84.33,Temperate forest,Deciduous,Liquidambar styraciflua,1217,15.1,1.97,397
+USA_PAR_FER,35.8,-76.67,Temperate forest,Evergreen,Pinus taeda,1284.44,16.6,2.88,1213
+USA_PJS_P04_AMB,34.39,-106.53,Temperate grassland desert,Evergreen,Mixed,311.43,12.67,3.93,179
+USA_PJS_P08_AMB,34.39,-106.53,Temperate grassland desert,Evergreen,Mixed,311.43,12.67,3.93,287
+USA_PJS_P12_AMB,34.39,-106.53,Temperate grassland desert,Evergreen,Mixed,311.43,12.67,3.93,241
+USA_SIL_OAK_1PR,39.92,-74.6,Temperate forest,Mixed,Mixed,1180.34,12.9,3.49,859
+USA_SIL_OAK_2PR,39.92,-74.6,Temperate forest,Mixed,Mixed,1180.34,12.9,3.49,13
+USA_SYL_HL2,46.24,-89.35,Temperate forest,Mixed,Mixed,878.58,4.3,3.58,427
+USA_TNB,36.47,-84.7,Temperate forest,Deciduous,Mixed,1409.43,13.51,2.36,1964
+USA_TNO,35.97,-84.28,Temperate forest,Deciduous,Mixed,1497.08,14.61,1.98,1871
+USA_TNP,35.96,-84.29,Temperate forest,Mixed,Mixed,1488.66,14.63,1.98,1012
+USA_TNY,35.69,-83.5,Temperate forest,Deciduous,Mixed,1285.13,12.76,2.39,2919
+USA_UMB_CON,45.56,-84.71,Temperate forest,Mixed,Mixed,821.47,6.1,3.64,1056
+USA_UMB_GIR,45.56,-84.7,Temperate forest,Mixed,Mixed,793.83,6.1,3.62,968
+USA_WIL_WC1,45.81,-90.09,Temperate forest,Deciduous,Mixed,872.01,5,3.21,3675
+USA_WVF,39.06,-79.69,Temperate forest,Deciduous,Mixed,1408.36,9.4,3.29,680
+ZAF_FRA_FRA,-33.88,19.06,Woodland/Shrubland,Deciduous,Populus canescens,973.82,16.7,3.79,409
+ZAF_NOO_E3_IRR,-33.2,19.34,Woodland/Shrubland,Deciduous,Malus domestica,637.89,12.67,3.19,356
+ZAF_SOU_SOU,-34.09,19.09,Woodland/Shrubland,Deciduous,Malus domestica,929.33,15.28,4.06,682

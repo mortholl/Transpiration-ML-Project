@@ -62,7 +62,7 @@ plt.show()
 
 # Filing results: model, metrics, plot
 outfile = 'RandomForest/rf_'+model_name+'.sav'
-pickle.dump(rf, open(outfile, 'wb'))
+pickle.dump(model, open(outfile, 'wb'))  # the fitted best estimator, not the unfitted rf given to the grid search
 with open('RandomForest/rf_results_'+model_name+'.csv', 'w', newline='') as csvfile:
     csvfile.write(f'Data set ')
     csvfile.write(f'R2 test, R2 train, MAE, {",".join(my_features)} \n')

@@ -9,8 +9,8 @@ begin_time = datetime.datetime.now()
 
 # Radiation [W/m2], Air Temperature [K], Specific Humidity [kg/kg]
 # Reference Evapotranspiration [um/sec]
-feature_directory = 'data/modeling_data/features'
-features = ['TIMESTAMP', 'ppfd_in', 'ta', 'rh']
+feature_directory = 'data/modeling_data/resampled/features'
+features = ['TIMESTAMP', 'ppfd_in', 'ta', 'rh']  # selected by name, the resampled files have no solar timestamp
 # wind_speed_df = pd.read_csv('data/modeling_data/avg_wind_speed.csv')
 for filename in os.listdir(feature_directory):
     df = pd.read_csv(feature_directory + '/' + filename, header=0, sep=',', usecols=features)
@@ -26,7 +26,7 @@ for filename in os.listdir(feature_directory):
             phi = row['ppfd_in']*0.43  # Conversion factor from ppfd_in to net radiation [W/m2]
             ta = row['ta']+273  # Convert deg C to K
             qa = equations.qaRh(row['rh'], ta)  # Use equation to calculate specific humidity
-            ref_ET = equations.evfPen(phi, qa, ta)  # Calculate reference ET (um/sec) using Penman-Monteith equation
+            ref_ET = equations.evfPen(phi, ta, qa)  # Calculate reference ET (um/sec) using Penman-Monteith equation
             ref_ET = ref_ET/10000  # Unit conversion um/s to cm/s
             df.at[i, 'Reference ET'] = ref_ET
 

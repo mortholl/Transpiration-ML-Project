@@ -69,7 +69,7 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
             plt.savefig('RandomForest/plots/'+model_name+'.png')
             plt.clf()
             outfile = 'RandomForest/models/'+model_name+'.sav'
-            pickle.dump(rf, open(outfile, 'wb'))
+            pickle.dump(model, open(outfile, 'wb'))  # the fitted best estimator, not the unfitted rf given to the grid search
             csvfile.write(f'{model_name}, {n_files}, {n_points}, {r2}, {r2_train}, {mae}, {",".join(feature_importances)}, {rf_grid.best_params_} \n')
             print(f'{model_name} complete')
 
