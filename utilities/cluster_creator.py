@@ -1,11 +1,14 @@
-import os
 import pandas as pd
 import numpy as np
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
+from utilities.site_merger import merge_groups
 
-# This file creates clusters of locations sorted into sets related by climate or plant functional type
+# This file creates clusters of sites sorted into sets related by climate or plant functional type
+
+# Columns used as the k-means inputs, edit this list to try a different set
+cluster_features = ['MAP', 'MAT', 'Average Wind Speed']
 
 
 class ClusterCreator:
@@ -17,9 +20,9 @@ class ClusterCreator:
         self.biome_cluster_dict = {}  # dictionary of site clusters by biome
 
     def preprocess(self):
-        # Compile csv with location name, MAP, MAT, average wind speed, functional type and average sap flux
+        # Compile csv with site name, MAP, MAT, average wind speed, functional type
         self.site_df = pd.read_csv('data/modeling_data/site_locations.csv')  # Use this .csv file
-        site_list = self.site_df['Unnamed: 0'].values
+        site_list = self.site_df['Site'].values
         func_type_list = []
 
         # Add plant functional type
@@ -37,7 +40,6 @@ class ClusterCreator:
                             func_type = 2
                     func_type_list.append(func_type)
         self.site_df['Functional Type'] = func_type_list
-        self.site_df = self.site_df.rename(columns={"Unnamed: 0": "Site"})
 
         # Add average wind speed
         wind_df = pd.read_csv('data/modeling_data/avg_wind_speed.csv')
@@ -45,32 +47,19 @@ class ClusterCreator:
         wind_sites = wind_df['Site Name'].values
         wind_speeds = wind_df['Average Wind Speed'].values
         wind_dict = dict(zip(wind_sites, wind_speeds))
+        for merged, sources in merge_groups.items():  # a merged site takes the wind of its sources, which
+            present = [wind_dict[s] for s in sources if s in wind_dict]  # sit in one grid cell and so
+            if present:                                                  # carry the same value
+                wind_dict[merged] = sum(present) / len(present)
         wind_speeds = [wind_dict[site] for site in site_list]
         self.site_df['Average Wind Speed'] = wind_speeds
-
-        # Add average sap flux
-        sapf_dict = {}
-        for filename in os.listdir('data/modeling_data/resampled/targets'):
-            site = filename.split('_sapf')[0]
-            sapf_df = pd.read_csv('data/modeling_data/resampled/targets/'+filename, index_col='TIMESTAMP')
-            sensor_columns = [name for name in sapf_df.columns if name != 'interpolated']  # one column per tree
-            sapf_data = sapf_df[sensor_columns].values
-            sapf_data = sapf_data[~np.isnan(sapf_data)].tolist()  # remove na values
-            sapf_dict.update({site: np.average(sapf_data)})  # take the average
-        self.site_df['Average Sap Flux'] = [sapf_dict.get(site) for site in site_list]
-        self.site_df = self.site_df.dropna(subset=['Average Sap Flux'])  # drops the sites with no sapwood data
 
         # Print new data to csv
         self.site_df.to_csv('data/modeling_data/cluster_info.csv', index=False)
 
     def cluster_data(self):  # Returns the scaled k-means inputs
         self.site_df = pd.read_csv('data/modeling_data/cluster_info.csv')
-        maps = self.site_df['MAP'].values
-        mats = self.site_df['MAT'].values
-        wind_speeds = self.site_df['Average Wind Speed'].values
-        avg_flux = self.site_df['Average Sap Flux'].values
-        data = np.asarray([maps, mats, wind_speeds, avg_flux])
-        data = data.transpose()
+        data = self.site_df[cluster_features].values
         return StandardScaler().fit_transform(data)
 
     def elbow_plot(self):  # Run on its own to choose k
@@ -78,7 +67,7 @@ class ClusterCreator:
         k_list = []
         inertia_list = []
         for k in range(2, 15):  # use to test different numbers of clusters
-            kmeans = KMeans(n_clusters=k, random_state=42, n_init=6)
+            kmeans = KMeans(n_clusters=k, n_init=6)
             kmeans.fit(data)
             k_list.append(k)
             inertia_list.append(kmeans.inertia_)
@@ -93,8 +82,8 @@ class ClusterCreator:
     def k_means_clusters(self):  # Implement K-means to come up with clusters of similar climate statistics
         data = self.cluster_data()
         sites = self.site_df['Site'].values
-        k = 3
-        kmeans = KMeans(n_clusters=k, random_state=42, n_init=6)
+        k = 7
+        kmeans = KMeans(n_clusters=k, n_init=6)
         kmeans.fit(data)
         labels = kmeans.labels_
         self.site_df['K-Means Label'] = labels

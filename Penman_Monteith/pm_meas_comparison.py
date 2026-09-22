@@ -20,19 +20,19 @@ class PMsfCompare:
         self.RH = []  # list of relative humidity values, %
         self.VPD = []  # list of vapor pressure deficit values
         self.PPFD = []  # list of solar radiation values
-        self.relevant_locations = []
+        self.relevant_sites = []
         self.lai_df = pd.read_csv('data/lai.csv')
-        self.lai_df = self.lai_df.set_index(['Location'])
+        self.lai_df = self.lai_df.set_index(['Site'])
 
     def preprocess(self):  # method for pre-processing data, storing in .csv files
         for filename in os.listdir('Penman_Monteith/sap_flux_um-sec'):
-            location = filename.split('_um')[0]
-            if location in list(self.lai_df.index.values):
-                lai = float(self.lai_df.loc[location, :])
+            site = filename.split('_um')[0]
+            if site in list(self.lai_df.index.values):
+                lai = float(self.lai_df.loc[site, :])
                 # Load desired dataframes
-                sap_flux_df = pd.read_csv('Penman_Monteith/sap_flux_um-sec/'+location+'_um-sec.csv')
-                pm_df = pd.read_csv('Penman_Monteith/pm_prediction/'+location+'_pm_transpiration.csv')
-                env_df = pd.read_csv('data/leaf/'+location+'_env_data.csv')
+                sap_flux_df = pd.read_csv('Penman_Monteith/sap_flux_um-sec/'+site+'_um-sec.csv')
+                pm_df = pd.read_csv('Penman_Monteith/pm_prediction/'+site+'_pm_transpiration.csv')
+                env_df = pd.read_csv('data/leaf/'+site+'_env_data.csv')
                 # Create desired series
                 pm_series = pd.Series(pm_df['Reference ET'])
                 sf_series = pd.Series(sap_flux_df['Average Sap Flux']*lai)
@@ -57,8 +57,8 @@ class PMsfCompare:
                             # if sf > 0.1:  # causes R^2 to increase by selecting data subset
                             self.PM.append(pm)
                             self.SF.append(sf)
-                            if location not in self.relevant_locations:
-                                self.relevant_locations.append(location)
+                            if site not in self.relevant_sites:
+                                self.relevant_sites.append(site)
                         env_nancheck = [isnan(env) for env in [pm, ta, rh, vpd, ppfd]]
                         if not any(env_nancheck):
                             self.TA.append(ta)
@@ -67,7 +67,7 @@ class PMsfCompare:
                             self.PPFD.append(ppfd)
                             self.PM_env.append(pm)
                             self.SF_env.append(sf)
-            print(f'{location} done')
+            print(f'{site} done')
 
         # Save .csv file with PM and SF
         sf_pm_df = pd.DataFrame({'PM': self.PM, 'SF': self.SF})
@@ -79,7 +79,7 @@ class PMsfCompare:
         env_df.to_csv('Penman_Monteith/env_data.csv')
 
         print(f'Number of data points is {len(self.PM)}.')
-        print(f'Relevant locations were {self.relevant_locations}.')
+        print(f'Relevant sites were {self.relevant_sites}.')
 
     def correlation(self):  # method for creating linear regression models
         # Linear regression

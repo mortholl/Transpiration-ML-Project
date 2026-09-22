@@ -25,26 +25,9 @@ CRI_TAM_TOW,Pouteria sp.,
 CRI_TAM_TOW,Gymnanthes riparia,
 CRI_TAM_TOW,Meliosma idiopoda,
 CRI_TAM_TOW,Carapa guianensis,
-CZE_BIK,Picea abies,evergreen
-CZE_KRT_KRT,Picea abies,evergreen
-CZE_LAN,Quercus robur,cold deciduous
-CZE_LAN,Fraxinus excelsior,cold deciduous
-CZE_LAN,Carpinus betulus,cold deciduous
 CZE_LIZ_LES,Picea abies,evergreen
-CZE_STI,Fagus sylvatica,cold deciduous
-CZE_UTE_BEE,Fagus sylvatica,cold deciduous
-CZE_UTE_BNA,Fagus sylvatica,cold deciduous
-CZE_UTE_BPO,Fagus sylvatica,cold deciduous
-CZE_UTE_SPR,Picea abies,evergreen
 DEU_STE_2P3,Fagus sylvatica,cold deciduous
 DEU_STE_4P5,Fagus sylvatica,cold deciduous
-ESP_ALT_ARM,Pinus nigra,evergreen
-ESP_ALT_ARM,Quercus faginea,cold deciduous
-ESP_ALT_ARM,Quercus ilex,evergreen
-ESP_ALT_HUE,Pinus nigra,evergreen
-ESP_ALT_HUE,Quercus faginea,cold deciduous
-ESP_ALT_TRI,Pinus nigra,evergreen
-ESP_ALT_TRI,Quercus ilex,evergreen
 ESP_CAN,Quercus ilex,evergreen
 ESP_CAN,Quercus pubescens,cold deciduous
 ESP_CAN,Arbutus unedo,evergreen
@@ -83,24 +66,10 @@ GUF_GUY_ST2,Vouacapoua americana,evergreen
 GUF_GUY_ST2,Goupia glabra,evergreen
 IDN_JAM_OIL,Elaeis guineensis,evergreen
 IDN_JAM_RUB,Hevea brasiliensis,drought deciduous
-ISR_YAT_YAT,Pinus halepensis,evergreen
-ITA_FEI_S17,Larix decidua,cold deciduous
-ITA_KAE_S20,Larix decidua,cold deciduous
-ITA_MAT_S21,Larix decidua,cold deciduous
-ITA_MAT_S21,Pinus cembra,evergreen
-ITA_MUN,Larix decidua,cold deciduous
-ITA_RUN_N20,Larix decidua,cold deciduous
-ITA_RUN_N20,Pinus cembra,evergreen
 ITA_TOR,Larix decidua,cold deciduous
 NLD_LOO,Pinus sylvestris,evergreen
 NZL_HUA_HUA,Agathis australis,evergreen
 PRT_LEZ_ARN,Quercus suber,evergreen
-RUS_POG_VAR,Larix sibirica Ledeb.,cold deciduous
-RUS_POG_VAR,Larix gmelinii,cold deciduous
-RUS_POG_VAR,Pinus sibirica,evergreen
-SEN_SOU_IRR,Acacia tortilis,drought deciduous
-SEN_SOU_POS,Acacia tortilis,drought deciduous
-SEN_SOU_PRE,Acacia tortilis,drought deciduous
 SWE_NOR_ST1_BEF,Pinus sylvestris,
 SWE_NOR_ST1_BEF,Picea abies,
 SWE_NOR_ST2,Pinus sylvestris,evergreen
@@ -146,10 +115,6 @@ USA_INM,Liriodendron tulipifera,cold deciduous
 USA_INM,Quercus alba,cold deciduous
 USA_INM,Sassafras albidum,cold deciduous
 USA_INM,Ulmus americana,cold deciduous
-USA_ORN_ST1_AMB,Liquidambar styraciflua,cold deciduous
-USA_ORN_ST2_AMB,Liquidambar styraciflua,cold deciduous
-USA_ORN_ST3_ELE,Liquidambar styraciflua,cold deciduous
-USA_ORN_ST4_ELE,Liquidambar styraciflua,cold deciduous
 USA_PAR_FER,Pinus taeda,evergreen
 USA_PJS_P04_AMB,Pinus edulis,evergreen
 USA_PJS_P04_AMB,Juniperus monosperma,evergreen

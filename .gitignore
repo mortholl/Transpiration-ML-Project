@@ -1,0 +1,5 @@
+RandomForest/test_sets/
+Neural_Networks/test_sets/
+SVM/test_sets/
+__pycache__/
+to_delete/

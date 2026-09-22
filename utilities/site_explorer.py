@@ -3,48 +3,72 @@ import os
 import numpy as np
 
 # Examines site list to pull additional relevant data for mapping and create species types breakdowns
+# Writes site_locations.csv, which every later stage uses as the list of sites in the study
+# Run before file_mover.py, re-running it after site_merger.py puts the merged sites back as separate rows
+
+source_directory = r'C:\Users\thorn\Downloads\0.1.5\0.1.5\csv\sapwood'
+
+
+# Group sites that sit within 1 km of each other
+def group_locations(lat, lon, km=1.0):
+    lat, lon = np.radians(lat), np.radians(lon)
+    n = len(lat); parent = list(range(n))
+    def root(a):
+        while parent[a] != a:
+            parent[a] = parent[parent[a]]; a = parent[a]
+        return a
+    for i in range(n):
+        for j in range(i + 1, n):
+            h = np.sin((lat[j]-lat[i])/2)**2 + np.cos(lat[i])*np.cos(lat[j])*np.sin((lon[j]-lon[i])/2)**2
+            if 6371 * 2 * np.arcsin(np.sqrt(h)) < km:
+                parent[root(i)] = root(j)
+    return [root(i) for i in range(n)]
+
+
+def name_location(sites):  # the alphabetically first site, then what distinguishes the others
+    sites = sorted(sites)
+    if len(sites) == 1:
+        return sites[0]
+    parts = [s.split('_') for s in sites]
+    shared = 0
+    while all(len(p) > shared and p[shared] == parts[0][shared] for p in parts):
+        shared += 1
+    return '_'.join([sites[0]] + ['_'.join(p[shared:]) for p in parts[1:]])
+
+# Dropped due to insufficient data records
+excluded_sites = ['SEN_SOU_POS', 'SEN_SOU_IRR', 'SEN_SOU_PRE']
 
 site_list = pd.read_csv('data/site_list.csv')
-sites = site_list['Unnamed: 0'].tolist()
-print(f'There are {len(sites)} sites.')
-new_sites = [site.split('env')[0] for site in sites]
-sites = new_sites
-loc_files = []
-species_files = []
-for filename in os.listdir('data/plant'):
-    if 'site_md' in filename:
-        for site in sites:
-            if site in filename:
-                loc_files.append(filename)
-    if 'species_md' in filename:
-        for site in sites:
-            if site in filename:
-                species_files.append(filename)
-print(f'Species files: \n {species_files}')
-print(f'There are {len(species_files)} species files.')
-print(f'Location files: \n {loc_files}')
-print(f'There are {len(loc_files)} location files.')
+sites = [name.split('_env')[0] for name in site_list['Unnamed: 0']]  # the sites the original study used
+sites = [site for site in sites if os.path.exists(f'{source_directory}/{site}_sapf_data.csv')]  # sapwood only
+sites = [site for site in sites if site not in excluded_sites]
+print(f'There are {len(sites)} sites with sapwood data.')
+site_files = [f'{site}_site_md.csv' for site in sites]  # named directly, matching on substrings would pick
+species_files = [f'{site}_species_md.csv' for site in sites]  # up other sites whose codes start the same
 
-loc_dict = {}
-for location in loc_files:
-    directory = 'data/plant/' + location
-    loc_df = pd.read_csv(directory)
-    name = loc_df['si_code'].values[0]
-    latitude = loc_df['si_lat'].values[0]
-    longitude = loc_df['si_long'].values[0]
-    biome = loc_df['si_biome'].values[0]
-    map = loc_df['si_map'].values[0]
-    mat = loc_df['si_mat'].values[0]
-    loc_dict.update({name: (latitude, longitude, biome, map, mat)})
+site_dict = {}
+for site_file in site_files:
+    directory = source_directory + '/' + site_file
+    md_df = pd.read_csv(directory)
+    name = md_df['si_code'].values[0]
+    latitude = md_df['si_lat'].values[0]
+    longitude = md_df['si_long'].values[0]
+    biome = md_df['si_biome'].values[0]
+    map = md_df['si_map'].values[0]
+    mat = md_df['si_mat'].values[0]
+    site_dict.update({name: (latitude, longitude, biome, map, mat)})
 
-loc_df = pd.DataFrame.from_dict(loc_dict, orient='index', columns=['Latitude', 'Longitude', 'Biome', 'MAP', 'MAT'])
-loc_df.to_csv('data/modeling_data/site_locations.csv')
+site_df = pd.DataFrame.from_dict(site_dict, orient='index', columns=['Latitude', 'Longitude', 'Biome', 'MAP', 'MAT'])
+groups = group_locations(site_df['Latitude'].values, site_df['Longitude'].values)
+names = {g: name_location([s for s, h in zip(site_df.index, groups) if h == g]) for g in set(groups)}
+site_df['Location'] = [names[g] for g in groups]  # co-located sites share one location name
+site_df.to_csv('data/modeling_data/site_locations.csv', index_label='Site')
 
 site_name_list = []
 species_name_list = []
 species_type_list = []
 for species in species_files:
-    directory = 'data/plant/' + species
+    directory = source_directory + '/' + species
     species_df = pd.read_csv(directory)
     for species_name in species_df['sp_name'].values:
         species_name_list.append(species_name)
@@ -68,7 +92,6 @@ species_names_df.to_csv('data/species_dist.csv')
 # Count the number of each to use for a figure
 
 type_list = []
-sites = [site[0:-1] for site in sites]
 types_count = {'evergreen': 0, 'deciduous': 0, 'missing': 0, 'mixed': 0}
 for site in sites:
     site_types = []

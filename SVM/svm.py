@@ -27,11 +27,13 @@ param_grid = {'C': [0.1, 1, 100],
 
 def svm_search(x, y, params):
     # Grid search on different parameters to find the best support vector machine
-    scaler = StandardScaler()
-    x_scaled = scaler.fit_transform(x)
     #  Split to training/validation sets
-    x_train, x_test, y_train, y_test = train_test_split(x_scaled, y, test_size=0.2, random_state=42)
-    x_test, x_val, y_test, y_val = train_test_split(x_test, y_test, test_size=0.5, random_state=42)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=51)
+    x_test, x_val, y_test, y_val = train_test_split(x_test, y_test, test_size=0.5, random_state=51)
+    scaler = StandardScaler()  # fit on the training set only, so the held out sets do not inform the scaling
+    x_train = scaler.fit_transform(x_train)
+    x_test = scaler.transform(x_test)  # transform, never fit, on held out data
+    x_val = scaler.transform(x_val)
     svr = SVR()
     svr_cv = GridSearchCV(svr, params, verbose=1, scoring='r2')
     svr_cv.fit(x_train, y_train)
@@ -49,7 +51,7 @@ def svm_search(x, y, params):
     mse_test = mean_squared_error(y_test, y_pred)
     print(f'MSE of test set is {mse_test}')
 
-    res = permutation_importance(svr_cv, x_train, y_train, scoring='r2', n_repeats=5, random_state=42)
+    res = permutation_importance(svr_cv, x_train, y_train, scoring='r2', n_repeats=5, random_state=51)
     p_importances = res['importances_mean']/res['importances_mean'].sum()
     print(f"The permutation-based feature importance is {p_importances}")
     return svr_cv

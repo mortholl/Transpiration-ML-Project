@@ -8,6 +8,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import datetime
 from sklearn.model_selection import GridSearchCV
+import numpy as np
+import pandas as pd
 import pickle
 
 
@@ -26,26 +28,30 @@ param_grid = {'n_estimators': [600, 800, 1200],
               'max_depth': [20, 25],
               }
 
-rf = RandomForestRegressor(n_estimators=500, max_depth=9, random_state=42)
+rf = RandomForestRegressor(n_estimators=500, max_depth=9, random_state=51)
 
 with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
-    csvfile.write(f'Data set, n locations, n data points, R2 test, R2 train, MAE, {",".join(my_features)}, Best parameters \n')
+    csvfile.write(f'Data set, n sites, n locations, n data points, R2 test, R2 train, MAE, {",".join(my_features)}, Best parameters \n')
 
     # Loop over all clusters
-    for identifier, cluster_group in zip(['func_'], [func_clusters]):  # for identifier, cluster_group in zip(['k_means_', 'func_', 'biome_'], [k_clusters, func_clusters, biome_clusters]):
+    for identifier, cluster_group in zip(['func_', 'biome_'], [func_clusters, biome_clusters]):  # add 'k_means_' and k_clusters to include the k-means groups
         for data_cluster in cluster_group:
             # Get data
             my_files = cluster_group[data_cluster]
             n_files = len(my_files)
             model_name = f'{identifier}{data_cluster}_rf'
             model_name = model_name.replace('/', '')
-            X, Y = data_import(my_features, my_files)
+            X, Y, info = data_import(my_features, my_files, return_info=True)
             n_points = len(X)
+            n_locations = info['Location'].nunique()
+            rows = np.arange(n_points)  # carried through the split so test rows trace back to a site
+            X_train, X_test, Y_train, Y_test, _, test_rows = train_test_split(X, Y, rows, test_size=0.1,
+                                                                              random_state=51)
             scaler = StandardScaler()
-            X_scaled = scaler.fit_transform(X)
+            X_train = scaler.fit_transform(X_train)
+            X_test = scaler.transform(X_test)  # transform, never fit, on held out data
             outfile = 'RandomForest/models/' + model_name + '_scaler.sav'
             pickle.dump(scaler, open(outfile, 'wb'))
-            X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=0.1, random_state=42)
 
             # Grid search to find optimal hyperparameters
             rf_grid = GridSearchCV(rf, param_grid, cv=5, scoring='r2', verbose=3, n_jobs=2, return_train_score=True)
@@ -69,8 +75,15 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
             plt.savefig('RandomForest/plots/'+model_name+'.png')
             plt.clf()
             outfile = 'RandomForest/models/'+model_name+'.sav'
-            pickle.dump(model, open(outfile, 'wb'))  # the fitted best estimator, not the unfitted rf given to the grid search
-            csvfile.write(f'{model_name}, {n_files}, {n_points}, {r2}, {r2_train}, {mae}, {",".join(feature_importances)}, {rf_grid.best_params_} \n')
+            pickle.dump(model, open(outfile, 'wb'))
+            test_set = info.iloc[test_rows].copy()  # kept for inspection, a rerun regenerates it
+            test_set['observed'] = Y_test
+            test_set['predicted'] = Y_pred
+            test_set.to_csv('RandomForest/test_sets/' + model_name + '_test.csv', index=False)
+            site_r2 = test_set.groupby('Site').apply(
+                lambda group: pd.Series({'n': len(group), 'r2': r2_score(group['observed'], group['predicted'])}))
+            site_r2.to_csv('RandomForest/test_sets/' + model_name + '_site_r2.csv')
+            csvfile.write(f'{model_name}, {n_files}, {n_locations}, {n_points}, {r2}, {r2_train}, {mae}, {",".join(feature_importances)}, {rf_grid.best_params_} \n')
             print(f'{model_name} complete')
 
 end_time = datetime.datetime.now()

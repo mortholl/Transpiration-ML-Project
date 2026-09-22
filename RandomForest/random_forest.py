@@ -30,13 +30,14 @@ param_grid = {'n_estimators': [600, 800, 1200],
 
 # Import data and scale X inputs
 X, Y = data_import(my_features, my_files)
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
 
-#  Split to training/validation sets: 90% training, 10% test
-X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=0.2, random_state=42)
+#  Split to training/validation sets: 80% training, 20% test
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=51)
+scaler = StandardScaler()  # fit on the training set only, so the test set does not inform the scaling
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)  # transform, never fit, on held out data
 
-rf = RandomForestRegressor(n_estimators=500, max_depth=9, random_state=42)
+rf = RandomForestRegressor(n_estimators=500, max_depth=9, random_state=51)
 rf_grid = GridSearchCV(rf, param_grid, cv=5, scoring='r2', verbose=3, n_jobs=1, return_train_score=True)
 rf_grid.fit(X_train, Y_train)
 

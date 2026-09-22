@@ -1,0 +1,217 @@
+scheme,cluster,level,name,location,rows,pct_of_cluster
+biome,Temperate forest,site,CAN_TUR_P39,CAN_TUR,111712,14.13
+biome,Temperate forest,site,CAN_TUR_P74,CAN_TUR,84216,10.65
+biome,Temperate forest,site,USA_HIL,USA_HIL,61246,7.74
+biome,Temperate forest,site,NZL_HUA_HUA,NZL_HUA_HUA,60143,7.61
+biome,Temperate forest,site,USA_PAR_FER,USA_PAR_FER,56805,7.18
+biome,Temperate forest,site,USA_DUK_HAR,USA_DUK_HAR,52488,6.64
+biome,Temperate forest,site,AUS_WOM,AUS_WOM,49660,6.28
+biome,Temperate forest,site,CZE_LIZ_LES,CZE_LIZ_LES,33410,4.22
+biome,Temperate forest,site,USA_TNP,USA_TNO_TNP,30838,3.9
+biome,Temperate forest,site,USA_UMB_GIR,USA_UMB_GIR,28730,3.63
+biome,Temperate forest,site,USA_UMB_CON,USA_UMB_CON,25040,3.17
+biome,Temperate forest,site,USA_SIL_OAK,USA_SIL_OAK,23140,2.93
+biome,Temperate forest,site,USA_SYL_HL2,USA_SYL_HL2,22646,2.86
+biome,Temperate forest,site,USA_TNB,USA_TNB,21224,2.68
+biome,Temperate forest,site,ITA_TOR,ITA_TOR,21040,2.66
+biome,Temperate forest,site,USA_TNO,USA_TNO_TNP,19671,2.49
+biome,Temperate forest,site,USA_WVF,USA_WVF,17128,2.17
+biome,Temperate forest,site,CHE_DAV_SEE,CHE_DAV_SEE,16047,2.03
+biome,Temperate forest,site,USA_INM,USA_INM,14729,1.86
+biome,Temperate forest,site,USA_TNY,USA_TNY,13829,1.75
+biome,Temperate forest,site,GBR_GUI_ST1,GBR_GUI,7108,0.9
+biome,Temperate forest,site,USA_WIL_WC1,USA_WIL_WC1,6743,0.85
+biome,Temperate forest,site,GBR_GUI_ST2,GBR_GUI,5079,0.64
+biome,Temperate forest,site,GBR_ABE_PLO,GBR_ABE_PLO,4295,0.54
+biome,Temperate forest,site,GBR_GUI_ST3,GBR_GUI,3819,0.48
+biome,Temperate forest,location,CAN_TUR,2 site(s),195928,24.78
+biome,Temperate forest,location,USA_HIL,1 site(s),61246,7.74
+biome,Temperate forest,location,NZL_HUA_HUA,1 site(s),60143,7.61
+biome,Temperate forest,location,USA_PAR_FER,1 site(s),56805,7.18
+biome,Temperate forest,location,USA_DUK_HAR,1 site(s),52488,6.64
+biome,Temperate forest,location,USA_TNO_TNP,2 site(s),50509,6.39
+biome,Temperate forest,location,AUS_WOM,1 site(s),49660,6.28
+biome,Temperate forest,location,CZE_LIZ_LES,1 site(s),33410,4.22
+biome,Temperate forest,location,USA_UMB_GIR,1 site(s),28730,3.63
+biome,Temperate forest,location,USA_UMB_CON,1 site(s),25040,3.17
+biome,Temperate forest,location,USA_SIL_OAK,1 site(s),23140,2.93
+biome,Temperate forest,location,USA_SYL_HL2,1 site(s),22646,2.86
+biome,Temperate forest,location,USA_TNB,1 site(s),21224,2.68
+biome,Temperate forest,location,ITA_TOR,1 site(s),21040,2.66
+biome,Temperate forest,location,USA_WVF,1 site(s),17128,2.17
+biome,Temperate forest,location,CHE_DAV_SEE,1 site(s),16047,2.03
+biome,Temperate forest,location,GBR_GUI,3 site(s),16006,2.02
+biome,Temperate forest,location,USA_INM,1 site(s),14729,1.86
+biome,Temperate forest,location,USA_TNY,1 site(s),13829,1.75
+biome,Temperate forest,location,USA_WIL_WC1,1 site(s),6743,0.85
+biome,Temperate forest,location,GBR_ABE_PLO,1 site(s),4295,0.54
+biome,Temperate grassland desert,site,USA_PJS_P04_AMB,USA_PJS,82802,33.85
+biome,Temperate grassland desert,site,USA_PJS_P08_AMB,USA_PJS,81704,33.41
+biome,Temperate grassland desert,site,USA_PJS_P12_AMB,USA_PJS,80076,32.74
+biome,Temperate grassland desert,location,USA_PJS,3 site(s),244582,100.0
+biome,Tropical forest savanna,site,THA_KHU,THA_KHU,16391,36.08
+biome,Tropical forest savanna,site,ESP_SAN_B_100,ESP_SAN,8950,19.7
+biome,Tropical forest savanna,site,ESP_SAN_A_45I,ESP_SAN,7537,16.59
+biome,Tropical forest savanna,site,ESP_SAN_A2_45I,ESP_SAN,6274,13.81
+biome,Tropical forest savanna,site,ESP_SAN_B2_100,ESP_SAN,6272,13.81
+biome,Tropical forest savanna,location,ESP_SAN,4 site(s),29033,63.92
+biome,Tropical forest savanna,location,THA_KHU,1 site(s),16391,36.08
+biome,Tropical rain forest,site,GUF_GUY_GUY,GUF_GUY_GUY,36946,51.23
+biome,Tropical rain forest,site,CRI_TAM_TOW,CRI_TAM_TOW,13919,19.3
+biome,Tropical rain forest,site,GUF_GUY_ST2,GUF_GUY_ST2,9686,13.43
+biome,Tropical rain forest,site,IDN_JAM_RUB,IDN_JAM_RUB,7384,10.24
+biome,Tropical rain forest,site,IDN_JAM_OIL,IDN_JAM_OIL,4176,5.79
+biome,Tropical rain forest,location,GUF_GUY_GUY,1 site(s),36946,51.23
+biome,Tropical rain forest,location,CRI_TAM_TOW,1 site(s),13919,19.3
+biome,Tropical rain forest,location,GUF_GUY_ST2,1 site(s),9686,13.43
+biome,Tropical rain forest,location,IDN_JAM_RUB,1 site(s),7384,10.24
+biome,Tropical rain forest,location,IDN_JAM_OIL,1 site(s),4176,5.79
+biome,Woodland/Shrubland,site,FRA_PUE,FRA_PUE,171204,28.09
+biome,Woodland/Shrubland,site,NLD_LOO,NLD_LOO,56048,9.2
+biome,Woodland/Shrubland,site,ESP_TIL_MIX,ESP_TIL,53762,8.82
+biome,Woodland/Shrubland,site,ZAF_NOO_E3_IRR,ZAF_NOO_E3_IRR,38449,6.31
+biome,Woodland/Shrubland,site,AUS_RIC_EUC_ELE,AUS_RIC_EUC_ELE,33937,5.57
+biome,Woodland/Shrubland,site,ESP_CAN,ESP_CAN,31023,5.09
+biome,Woodland/Shrubland,site,SWE_NOR_ST1_ST3,SWE_NOR,23551,3.86
+biome,Woodland/Shrubland,site,SWE_NOR_ST5_REF,SWE_NOR,22237,3.65
+biome,Woodland/Shrubland,site,PRT_LEZ_ARN,PRT_LEZ_ARN,20680,3.39
+biome,Woodland/Shrubland,site,ESP_TIL_OAK,ESP_TIL,18541,3.04
+biome,Woodland/Shrubland,site,DEU_STE_4P5,DEU_STE,18198,2.99
+biome,Woodland/Shrubland,site,DEU_STE_2P3,DEU_STE,17899,2.94
+biome,Woodland/Shrubland,site,SWE_NOR_ST4_AFT,SWE_NOR,15573,2.56
+biome,Woodland/Shrubland,site,ESP_VAL_SOR,ESP_VAL_SOR,15020,2.46
+biome,Woodland/Shrubland,site,ESP_TIL_PIN,ESP_TIL,14878,2.44
+biome,Woodland/Shrubland,site,ZAF_FRA_FRA,ZAF_FRA_FRA,13404,2.2
+biome,Woodland/Shrubland,site,ZAF_SOU_SOU,ZAF_SOU_SOU,13133,2.15
+biome,Woodland/Shrubland,site,GBR_DEV_DRO,GBR_DEV,9353,1.53
+biome,Woodland/Shrubland,site,GBR_DEV_CON,GBR_DEV,9339,1.53
+biome,Woodland/Shrubland,site,SWE_NOR_ST4_BEF,SWE_NOR,7140,1.17
+biome,Woodland/Shrubland,site,FIN_PET,FIN_PET,3240,0.53
+biome,Woodland/Shrubland,site,SWE_NOR_ST2,SWE_NOR,1685,0.28
+biome,Woodland/Shrubland,site,ARG_TRE,ARG_TRE,623,0.1
+biome,Woodland/Shrubland,site,ARG_MAZ,ARG_MAZ,575,0.09
+biome,Woodland/Shrubland,location,FRA_PUE,1 site(s),171204,28.09
+biome,Woodland/Shrubland,location,ESP_TIL,3 site(s),87181,14.3
+biome,Woodland/Shrubland,location,SWE_NOR,5 site(s),70186,11.52
+biome,Woodland/Shrubland,location,NLD_LOO,1 site(s),56048,9.2
+biome,Woodland/Shrubland,location,ZAF_NOO_E3_IRR,1 site(s),38449,6.31
+biome,Woodland/Shrubland,location,DEU_STE,2 site(s),36097,5.92
+biome,Woodland/Shrubland,location,AUS_RIC_EUC_ELE,1 site(s),33937,5.57
+biome,Woodland/Shrubland,location,ESP_CAN,1 site(s),31023,5.09
+biome,Woodland/Shrubland,location,PRT_LEZ_ARN,1 site(s),20680,3.39
+biome,Woodland/Shrubland,location,GBR_DEV,2 site(s),18692,3.07
+biome,Woodland/Shrubland,location,ESP_VAL_SOR,1 site(s),15020,2.46
+biome,Woodland/Shrubland,location,ZAF_FRA_FRA,1 site(s),13404,2.2
+biome,Woodland/Shrubland,location,ZAF_SOU_SOU,1 site(s),13133,2.15
+biome,Woodland/Shrubland,location,FIN_PET,1 site(s),3240,0.53
+biome,Woodland/Shrubland,location,ARG_TRE,1 site(s),623,0.1
+biome,Woodland/Shrubland,location,ARG_MAZ,1 site(s),575,0.09
+pft,deciduous,site,USA_DUK_HAR,USA_DUK_HAR,52488,17.72
+pft,deciduous,site,ZAF_NOO_E3_IRR,ZAF_NOO_E3_IRR,38449,12.98
+pft,deciduous,site,USA_TNB,USA_TNB,21224,7.17
+pft,deciduous,site,ITA_TOR,ITA_TOR,21040,7.1
+pft,deciduous,site,USA_TNO,USA_TNO_TNP,19671,6.64
+pft,deciduous,site,DEU_STE_4P5,DEU_STE,18198,6.14
+pft,deciduous,site,DEU_STE_2P3,DEU_STE,17899,6.04
+pft,deciduous,site,USA_WVF,USA_WVF,17128,5.78
+pft,deciduous,site,THA_KHU,THA_KHU,16391,5.53
+pft,deciduous,site,USA_INM,USA_INM,14729,4.97
+pft,deciduous,site,USA_TNY,USA_TNY,13829,4.67
+pft,deciduous,site,ZAF_FRA_FRA,ZAF_FRA_FRA,13404,4.53
+pft,deciduous,site,ZAF_SOU_SOU,ZAF_SOU_SOU,13133,4.43
+pft,deciduous,site,IDN_JAM_RUB,IDN_JAM_RUB,7384,2.49
+pft,deciduous,site,USA_WIL_WC1,USA_WIL_WC1,6743,2.28
+pft,deciduous,site,FIN_PET,FIN_PET,3240,1.09
+pft,deciduous,site,ARG_TRE,ARG_TRE,623,0.21
+pft,deciduous,site,ARG_MAZ,ARG_MAZ,575,0.19
+pft,deciduous,location,USA_DUK_HAR,1 site(s),52488,17.72
+pft,deciduous,location,ZAF_NOO_E3_IRR,1 site(s),38449,12.98
+pft,deciduous,location,DEU_STE,2 site(s),36097,12.19
+pft,deciduous,location,USA_TNB,1 site(s),21224,7.17
+pft,deciduous,location,ITA_TOR,1 site(s),21040,7.1
+pft,deciduous,location,USA_TNO_TNP,1 site(s),19671,6.64
+pft,deciduous,location,USA_WVF,1 site(s),17128,5.78
+pft,deciduous,location,THA_KHU,1 site(s),16391,5.53
+pft,deciduous,location,USA_INM,1 site(s),14729,4.97
+pft,deciduous,location,USA_TNY,1 site(s),13829,4.67
+pft,deciduous,location,ZAF_FRA_FRA,1 site(s),13404,4.53
+pft,deciduous,location,ZAF_SOU_SOU,1 site(s),13133,4.43
+pft,deciduous,location,IDN_JAM_RUB,1 site(s),7384,2.49
+pft,deciduous,location,USA_WIL_WC1,1 site(s),6743,2.28
+pft,deciduous,location,FIN_PET,1 site(s),3240,1.09
+pft,deciduous,location,ARG_TRE,1 site(s),623,0.21
+pft,deciduous,location,ARG_MAZ,1 site(s),575,0.19
+pft,evergreen,site,FRA_PUE,FRA_PUE,171204,14.82
+pft,evergreen,site,CAN_TUR_P39,CAN_TUR,111712,9.67
+pft,evergreen,site,CAN_TUR_P74,CAN_TUR,84216,7.29
+pft,evergreen,site,USA_PJS_P04_AMB,USA_PJS,82802,7.17
+pft,evergreen,site,USA_PJS_P08_AMB,USA_PJS,81704,7.07
+pft,evergreen,site,USA_PJS_P12_AMB,USA_PJS,80076,6.93
+pft,evergreen,site,NZL_HUA_HUA,NZL_HUA_HUA,60143,5.21
+pft,evergreen,site,USA_PAR_FER,USA_PAR_FER,56805,4.92
+pft,evergreen,site,NLD_LOO,NLD_LOO,56048,4.85
+pft,evergreen,site,ESP_TIL_MIX,ESP_TIL,53762,4.66
+pft,evergreen,site,AUS_WOM,AUS_WOM,49660,4.3
+pft,evergreen,site,AUS_RIC_EUC_ELE,AUS_RIC_EUC_ELE,33937,2.94
+pft,evergreen,site,CZE_LIZ_LES,CZE_LIZ_LES,33410,2.89
+pft,evergreen,site,SWE_NOR_ST1_ST3,SWE_NOR,23551,2.04
+pft,evergreen,site,PRT_LEZ_ARN,PRT_LEZ_ARN,20680,1.79
+pft,evergreen,site,ESP_TIL_OAK,ESP_TIL,18541,1.61
+pft,evergreen,site,CHE_DAV_SEE,CHE_DAV_SEE,16047,1.39
+pft,evergreen,site,ESP_VAL_SOR,ESP_VAL_SOR,15020,1.3
+pft,evergreen,site,ESP_TIL_PIN,ESP_TIL,14878,1.29
+pft,evergreen,site,GUF_GUY_ST2,GUF_GUY_ST2,9686,0.84
+pft,evergreen,site,GBR_DEV_DRO,GBR_DEV,9353,0.81
+pft,evergreen,site,GBR_DEV_CON,GBR_DEV,9339,0.81
+pft,evergreen,site,ESP_SAN_B_100,ESP_SAN,8950,0.77
+pft,evergreen,site,ESP_SAN_A_45I,ESP_SAN,7537,0.65
+pft,evergreen,site,SWE_NOR_ST4_BEF,SWE_NOR,7140,0.62
+pft,evergreen,site,GBR_GUI_ST1,GBR_GUI,7108,0.62
+pft,evergreen,site,ESP_SAN_A2_45I,ESP_SAN,6274,0.54
+pft,evergreen,site,ESP_SAN_B2_100,ESP_SAN,6272,0.54
+pft,evergreen,site,GBR_GUI_ST2,GBR_GUI,5079,0.44
+pft,evergreen,site,GBR_ABE_PLO,GBR_ABE_PLO,4295,0.37
+pft,evergreen,site,IDN_JAM_OIL,IDN_JAM_OIL,4176,0.36
+pft,evergreen,site,GBR_GUI_ST3,GBR_GUI,3819,0.33
+pft,evergreen,site,SWE_NOR_ST2,SWE_NOR,1685,0.15
+pft,evergreen,location,USA_PJS,3 site(s),244582,21.18
+pft,evergreen,location,CAN_TUR,2 site(s),195928,16.96
+pft,evergreen,location,FRA_PUE,1 site(s),171204,14.82
+pft,evergreen,location,ESP_TIL,3 site(s),87181,7.55
+pft,evergreen,location,NZL_HUA_HUA,1 site(s),60143,5.21
+pft,evergreen,location,USA_PAR_FER,1 site(s),56805,4.92
+pft,evergreen,location,NLD_LOO,1 site(s),56048,4.85
+pft,evergreen,location,AUS_WOM,1 site(s),49660,4.3
+pft,evergreen,location,AUS_RIC_EUC_ELE,1 site(s),33937,2.94
+pft,evergreen,location,CZE_LIZ_LES,1 site(s),33410,2.89
+pft,evergreen,location,SWE_NOR,3 site(s),32376,2.8
+pft,evergreen,location,ESP_SAN,4 site(s),29033,2.51
+pft,evergreen,location,PRT_LEZ_ARN,1 site(s),20680,1.79
+pft,evergreen,location,GBR_DEV,2 site(s),18692,1.62
+pft,evergreen,location,CHE_DAV_SEE,1 site(s),16047,1.39
+pft,evergreen,location,GBR_GUI,3 site(s),16006,1.39
+pft,evergreen,location,ESP_VAL_SOR,1 site(s),15020,1.3
+pft,evergreen,location,GUF_GUY_ST2,1 site(s),9686,0.84
+pft,evergreen,location,GBR_ABE_PLO,1 site(s),4295,0.37
+pft,evergreen,location,IDN_JAM_OIL,1 site(s),4176,0.36
+pft,missing,site,CRI_TAM_TOW,CRI_TAM_TOW,13919,100.0
+pft,missing,location,CRI_TAM_TOW,1 site(s),13919,100.0
+pft,mixed,site,USA_HIL,USA_HIL,61246,20.59
+pft,mixed,site,GUF_GUY_GUY,GUF_GUY_GUY,36946,12.42
+pft,mixed,site,ESP_CAN,ESP_CAN,31023,10.43
+pft,mixed,site,USA_TNP,USA_TNO_TNP,30838,10.37
+pft,mixed,site,USA_UMB_GIR,USA_UMB_GIR,28730,9.66
+pft,mixed,site,USA_UMB_CON,USA_UMB_CON,25040,8.42
+pft,mixed,site,USA_SIL_OAK,USA_SIL_OAK,23140,7.78
+pft,mixed,site,USA_SYL_HL2,USA_SYL_HL2,22646,7.61
+pft,mixed,site,SWE_NOR_ST5_REF,SWE_NOR,22237,7.48
+pft,mixed,site,SWE_NOR_ST4_AFT,SWE_NOR,15573,5.24
+pft,mixed,location,USA_HIL,1 site(s),61246,20.59
+pft,mixed,location,SWE_NOR,2 site(s),37810,12.71
+pft,mixed,location,GUF_GUY_GUY,1 site(s),36946,12.42
+pft,mixed,location,ESP_CAN,1 site(s),31023,10.43
+pft,mixed,location,USA_TNO_TNP,1 site(s),30838,10.37
+pft,mixed,location,USA_UMB_GIR,1 site(s),28730,9.66
+pft,mixed,location,USA_UMB_CON,1 site(s),25040,8.42
+pft,mixed,location,USA_SIL_OAK,1 site(s),23140,7.78
+pft,mixed,location,USA_SYL_HL2,1 site(s),22646,7.61

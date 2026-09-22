@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cluster Contributions</title>
+<style>
+  :root {
+    color-scheme: light;
+    --plane: #f9f9f7; --surface-1: #fcfcfb;
+    --text-primary: #0b0b0b; --text-secondary: #52514e; --muted: #898781;
+    --grid: #e1e0d9; --axis: #c3c2b7;
+    --s1: #104281; --s2: #1c5cab; --s3: #2a78d6; --s4: #5598e7; --s5: #86b6ef;
+    --other: #898781;
+    --s1-ink: #fcfcfb; --s2-ink: #fcfcfb; --s3-ink: #0b0b0b;
+    --s4-ink: #0b0b0b; --s5-ink: #0b0b0b; --other-ink: #0b0b0b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --plane: #0d0d0d; --surface-1: #1a1a19;
+      --text-primary: #ffffff; --text-secondary: #c3c2b7; --muted: #898781;
+      --grid: #2c2c2a; --axis: #383835;
+      --s1: #cde2fb; --s2: #9ec5f4; --s3: #6da7ec; --s4: #3987e5; --s5: #184f95;
+      --other: #898781;
+      --s1-ink: #0b0b0b; --s2-ink: #0b0b0b; --s3-ink: #0b0b0b;
+      --s4-ink: #0b0b0b; --s5-ink: #fcfcfb; --other-ink: #0b0b0b;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --plane: #0d0d0d; --surface-1: #1a1a19;
+    --text-primary: #ffffff; --text-secondary: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835;
+    --s1: #cde2fb; --s2: #9ec5f4; --s3: #6da7ec; --s4: #3987e5; --s5: #184f95;
+    --other: #898781;
+    --s1-ink: #0b0b0b; --s2-ink: #0b0b0b; --s3-ink: #0b0b0b;
+    --s4-ink: #0b0b0b; --s5-ink: #fcfcfb; --other-ink: #0b0b0b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--plane); color: var(--text-primary);
+    font: 14px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    padding: 32px 16px 64px;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; }
+  h1 { font-size: 22px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .sub { color: var(--text-secondary); margin: 0 0 24px; max-width: 70ch; }
+  .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 22px; }
+  .seg { display: inline-flex; border: 1px solid var(--axis); border-radius: 8px; overflow: hidden; }
+  .seg button {
+    font: inherit; padding: 7px 14px; border: 0; background: var(--surface-1);
+    color: var(--text-secondary); cursor: pointer;
+  }
+  .seg button[aria-pressed="true"] { background: var(--text-primary); color: var(--surface-1); }
+  .seg button + button { border-left: 1px solid var(--axis); }
+  .card { background: var(--surface-1); border: 1px solid var(--grid); border-radius: 12px; padding: 20px 22px; margin-bottom: 18px; }
+  h2 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em;
+       color: var(--muted); margin: 0 0 18px; }
+  .row { margin-bottom: 20px; }
+  .row:last-child { margin-bottom: 4px; }
+  .rowhead { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+  .rowname { font-weight: 600; }
+  .rowmeta { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .bar { display: flex; width: 100%; height: 34px; gap: 2px; }
+  .segpiece { position: relative; height: 100%; display: flex; align-items: center;
+              justify-content: center; overflow: hidden; cursor: default; }
+  .bar .segpiece:first-child { border-radius: 4px 0 0 4px; }
+  .bar .segpiece:last-child { border-radius: 0 4px 4px 0; }
+  .segpiece .lab { font-size: 11px; font-variant-numeric: tabular-nums; white-space: nowrap;
+                   padding: 0 6px; pointer-events: none; }
+  .legend { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; margin-top: 4px;
+            color: var(--text-secondary); font-size: 12px; }
+  .ramp { display: flex; gap: 2px; align-items: center; }
+  .ramp i { width: 18px; height: 11px; border-radius: 2px; display: block; }
+  .lgitem { display: flex; gap: 7px; align-items: center; }
+  .lgitem i { width: 14px; height: 11px; border-radius: 2px; display: block; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--grid); }
+  th { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tbody tr:hover { background: var(--plane); }
+  #tip {
+    position: fixed; pointer-events: none; opacity: 0; transition: opacity .1s;
+    background: var(--text-primary); color: var(--surface-1); padding: 8px 11px;
+    border-radius: 7px; font-size: 12px; max-width: 280px; z-index: 50; line-height: 1.45;
+  }
+  #tip b { font-weight: 600; }
+  #tip .mem { color: var(--axis); font-size: 11px; display: block; margin-top: 4px; }
+  @media (max-width: 640px) {
+    .rowhead { flex-direction: column; gap: 2px; }
+    .segpiece .lab { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Where each cluster's data comes from</h1>
+  <p class="sub">Share of each training cluster's half-hourly observations contributed by its
+  individual sites, or by location once co-located sites are pooled. Bars are ordered
+  largest to smallest; shading tracks share, so identity is carried by the labels and
+  hover rather than by colour.</p>
+
+  <div class="controls">
+    <div class="seg" role="group" aria-label="Contribution level">
+      <button id="bySite" aria-pressed="true">By site</button>
+      <button id="byLoc" aria-pressed="false">By location</button>
+    </div>
+    <div class="seg" role="group" aria-label="View">
+      <button id="vChart" aria-pressed="true">Chart</button>
+      <button id="vFloor" aria-pressed="false">Balancing floor</button>
+      <button id="vTable" aria-pressed="false">Table</button>
+    </div>
+  </div>
+
+  <div id="charts">
+    <div class="card">
+      <h2>Biome clusters</h2>
+      <div id="biome"></div>
+      <div class="legend">
+        <span class="ramp" aria-hidden="true">
+          <i style="background:var(--s1)"></i><i style="background:var(--s2)"></i>
+          <i style="background:var(--s3)"></i><i style="background:var(--s4)"></i>
+          <i style="background:var(--s5)"></i>
+        </span>
+        <span>largest &rarr; 5th largest contributor</span>
+        <span class="lgitem"><i style="background:var(--other)"></i> Other (all remaining, pooled)</span>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Plant functional type clusters</h2>
+      <div id="pft"></div>
+    </div>
+  </div>
+
+  <div id="floorview" class="card" hidden>
+    <h2>Balancing floor</h2>
+    <p class="sub" style="margin-bottom:18px">If every contributor were capped at the smallest one's
+    record, this is what each cluster would be left with. The smallest contributor sets the ceiling
+    on any equal-allocation scheme.</p>
+    <table><thead><tr>
+      <th>Grouping</th><th>Cluster</th><th class="num">Contributors</th>
+      <th id="thFloorName">Smallest</th><th class="num">Its rows</th><th class="num">% of cluster</th>
+      <th class="num">Equal budget</th><th class="num">Retained</th>
+    </tr></thead><tbody id="floorbody"></tbody></table>
+  </div>
+
+  <div id="tableview" class="card" hidden>
+    <h2>Full contributions</h2>
+    <table><thead><tr>
+      <th>Grouping</th><th>Cluster</th><th id="thName">Site</th>
+      <th class="num">Rows</th><th class="num">% of cluster</th>
+    </tr></thead><tbody id="tbody"></tbody></table>
+  </div>
+</div>
+<div id="tip" role="tooltip"></div>
+
+<script>
+const DATA = {"biome":[{"cluster":"Temperate forest","rows":790786,"sites":25,"locations":21,"site":[{"name":"CAN_TUR_P39","rows":111712,"pct":14.13,"n":1},{"name":"CAN_TUR_P74","rows":84216,"pct":10.65,"n":1},{"name":"USA_HIL","rows":61246,"pct":7.74,"n":1},{"name":"NZL_HUA_HUA","rows":60143,"pct":7.61,"n":1},{"name":"USA_PAR_FER","rows":56805,"pct":7.18,"n":1},{"name":"Other","rows":416664,"pct":52.69,"n":20,"other":true,"members":[{"name":"USA_DUK_HAR","rows":52488,"pct":6.64},{"name":"AUS_WOM","rows":49660,"pct":6.28},{"name":"CZE_LIZ_LES","rows":33410,"pct":4.22},{"name":"USA_TNP","rows":30838,"pct":3.9},{"name":"USA_UMB_GIR","rows":28730,"pct":3.63},{"name":"USA_UMB_CON","rows":25040,"pct":3.17},{"name":"USA_SIL_OAK","rows":23140,"pct":2.93},{"name":"USA_SYL_HL2","rows":22646,"pct":2.86},{"name":"USA_TNB","rows":21224,"pct":2.68},{"name":"ITA_TOR","rows":21040,"pct":2.66},{"name":"USA_TNO","rows":19671,"pct":2.49},{"name":"USA_WVF","rows":17128,"pct":2.17},{"name":"CHE_DAV_SEE","rows":16047,"pct":2.03},{"name":"USA_INM","rows":14729,"pct":1.86},{"name":"USA_TNY","rows":13829,"pct":1.75},{"name":"GBR_GUI_ST1","rows":7108,"pct":0.9},{"name":"USA_WIL_WC1","rows":6743,"pct":0.85},{"name":"GBR_GUI_ST2","rows":5079,"pct":0.64},{"name":"GBR_ABE_PLO","rows":4295,"pct":0.54},{"name":"GBR_GUI_ST3","rows":3819,"pct":0.48}]}],"location":[{"name":"CAN_TUR","rows":195928,"pct":24.78,"n":2},{"name":"USA_HIL","rows":61246,"pct":7.74,"n":1},{"name":"NZL_HUA_HUA","rows":60143,"pct":7.61,"n":1},{"name":"USA_PAR_FER","rows":56805,"pct":7.18,"n":1},{"name":"USA_DUK_HAR","rows":52488,"pct":6.64,"n":1},{"name":"Other","rows":364176,"pct":46.05,"n":16,"other":true,"members":[{"name":"USA_TNO_TNP","rows":50509,"pct":6.39},{"name":"AUS_WOM","rows":49660,"pct":6.28},{"name":"CZE_LIZ_LES","rows":33410,"pct":4.22},{"name":"USA_UMB_GIR","rows":28730,"pct":3.63},{"name":"USA_UMB_CON","rows":25040,"pct":3.17},{"name":"USA_SIL_OAK","rows":23140,"pct":2.93},{"name":"USA_SYL_HL2","rows":22646,"pct":2.86},{"name":"USA_TNB","rows":21224,"pct":2.68},{"name":"ITA_TOR","rows":21040,"pct":2.66},{"name":"USA_WVF","rows":17128,"pct":2.17},{"name":"CHE_DAV_SEE","rows":16047,"pct":2.03},{"name":"GBR_GUI","rows":16006,"pct":2.02},{"name":"USA_INM","rows":14729,"pct":1.86},{"name":"USA_TNY","rows":13829,"pct":1.75},{"name":"USA_WIL_WC1","rows":6743,"pct":0.85},{"name":"GBR_ABE_PLO","rows":4295,"pct":0.54}]}]},{"cluster":"Woodland/Shrubland","rows":609492,"sites":24,"locations":16,"site":[{"name":"FRA_PUE","rows":171204,"pct":28.09,"n":1},{"name":"NLD_LOO","rows":56048,"pct":9.2,"n":1},{"name":"ESP_TIL_MIX","rows":53762,"pct":8.82,"n":1},{"name":"ZAF_NOO_E3_IRR","rows":38449,"pct":6.31,"n":1},{"name":"AUS_RIC_EUC_ELE","rows":33937,"pct":5.57,"n":1},{"name":"Other","rows":256092,"pct":42.02,"n":19,"other":true,"members":[{"name":"ESP_CAN","rows":31023,"pct":5.09},{"name":"SWE_NOR_ST1_ST3","rows":23551,"pct":3.86},{"name":"SWE_NOR_ST5_REF","rows":22237,"pct":3.65},{"name":"PRT_LEZ_ARN","rows":20680,"pct":3.39},{"name":"ESP_TIL_OAK","rows":18541,"pct":3.04},{"name":"DEU_STE_4P5","rows":18198,"pct":2.99},{"name":"DEU_STE_2P3","rows":17899,"pct":2.94},{"name":"SWE_NOR_ST4_AFT","rows":15573,"pct":2.56},{"name":"ESP_VAL_SOR","rows":15020,"pct":2.46},{"name":"ESP_TIL_PIN","rows":14878,"pct":2.44},{"name":"ZAF_FRA_FRA","rows":13404,"pct":2.2},{"name":"ZAF_SOU_SOU","rows":13133,"pct":2.15},{"name":"GBR_DEV_DRO","rows":9353,"pct":1.53},{"name":"GBR_DEV_CON","rows":9339,"pct":1.53},{"name":"SWE_NOR_ST4_BEF","rows":7140,"pct":1.17},{"name":"FIN_PET","rows":3240,"pct":0.53},{"name":"SWE_NOR_ST2","rows":1685,"pct":0.28},{"name":"ARG_TRE","rows":623,"pct":0.1},{"name":"ARG_MAZ","rows":575,"pct":0.09}]}],"location":[{"name":"FRA_PUE","rows":171204,"pct":28.09,"n":1},{"name":"ESP_TIL","rows":87181,"pct":14.3,"n":3},{"name":"SWE_NOR","rows":70186,"pct":11.52,"n":5},{"name":"NLD_LOO","rows":56048,"pct":9.2,"n":1},{"name":"ZAF_NOO_E3_IRR","rows":38449,"pct":6.31,"n":1},{"name":"Other","rows":186424,"pct":30.59,"n":11,"other":true,"members":[{"name":"DEU_STE","rows":36097,"pct":5.92},{"name":"AUS_RIC_EUC_ELE","rows":33937,"pct":5.57},{"name":"ESP_CAN","rows":31023,"pct":5.09},{"name":"PRT_LEZ_ARN","rows":20680,"pct":3.39},{"name":"GBR_DEV","rows":18692,"pct":3.07},{"name":"ESP_VAL_SOR","rows":15020,"pct":2.46},{"name":"ZAF_FRA_FRA","rows":13404,"pct":2.2},{"name":"ZAF_SOU_SOU","rows":13133,"pct":2.15},{"name":"FIN_PET","rows":3240,"pct":0.53},{"name":"ARG_TRE","rows":623,"pct":0.1},{"name":"ARG_MAZ","rows":575,"pct":0.09}]}]},{"cluster":"Temperate grassland desert","rows":244582,"sites":3,"locations":1,"site":[{"name":"USA_PJS_P04_AMB","rows":82802,"pct":33.85,"n":1},{"name":"USA_PJS_P08_AMB","rows":81704,"pct":33.41,"n":1},{"name":"USA_PJS_P12_AMB","rows":80076,"pct":32.74,"n":1}],"location":[{"name":"USA_PJS","rows":244582,"pct":100.0,"n":3}]},{"cluster":"Tropical rain forest","rows":72111,"sites":5,"locations":5,"site":[{"name":"GUF_GUY_GUY","rows":36946,"pct":51.23,"n":1},{"name":"CRI_TAM_TOW","rows":13919,"pct":19.3,"n":1},{"name":"GUF_GUY_ST2","rows":9686,"pct":13.43,"n":1},{"name":"IDN_JAM_RUB","rows":7384,"pct":10.24,"n":1},{"name":"IDN_JAM_OIL","rows":4176,"pct":5.79,"n":1}],"location":[{"name":"GUF_GUY_GUY","rows":36946,"pct":51.23,"n":1},{"name":"CRI_TAM_TOW","rows":13919,"pct":19.3,"n":1},{"name":"GUF_GUY_ST2","rows":9686,"pct":13.43,"n":1},{"name":"IDN_JAM_RUB","rows":7384,"pct":10.24,"n":1},{"name":"IDN_JAM_OIL","rows":4176,"pct":5.79,"n":1}]},{"cluster":"Tropical forest savanna","rows":45424,"sites":5,"locations":2,"site":[{"name":"THA_KHU","rows":16391,"pct":36.08,"n":1},{"name":"ESP_SAN_B_100","rows":8950,"pct":19.7,"n":1},{"name":"ESP_SAN_A_45I","rows":7537,"pct":16.59,"n":1},{"name":"ESP_SAN_A2_45I","rows":6274,"pct":13.81,"n":1},{"name":"ESP_SAN_B2_100","rows":6272,"pct":13.81,"n":1}],"location":[{"name":"ESP_SAN","rows":29033,"pct":63.92,"n":4},{"name":"THA_KHU","rows":16391,"pct":36.08,"n":1}]}],"pft":[{"cluster":"evergreen","rows":1154909,"sites":33,"locations":20,"site":[{"name":"FRA_PUE","rows":171204,"pct":14.82,"n":1},{"name":"CAN_TUR_P39","rows":111712,"pct":9.67,"n":1},{"name":"CAN_TUR_P74","rows":84216,"pct":7.29,"n":1},{"name":"USA_PJS_P04_AMB","rows":82802,"pct":7.17,"n":1},{"name":"USA_PJS_P08_AMB","rows":81704,"pct":7.07,"n":1},{"name":"Other","rows":623271,"pct":53.97,"n":28,"other":true,"members":[{"name":"USA_PJS_P12_AMB","rows":80076,"pct":6.93},{"name":"NZL_HUA_HUA","rows":60143,"pct":5.21},{"name":"USA_PAR_FER","rows":56805,"pct":4.92},{"name":"NLD_LOO","rows":56048,"pct":4.85},{"name":"ESP_TIL_MIX","rows":53762,"pct":4.66},{"name":"AUS_WOM","rows":49660,"pct":4.3},{"name":"AUS_RIC_EUC_ELE","rows":33937,"pct":2.94},{"name":"CZE_LIZ_LES","rows":33410,"pct":2.89},{"name":"SWE_NOR_ST1_ST3","rows":23551,"pct":2.04},{"name":"PRT_LEZ_ARN","rows":20680,"pct":1.79},{"name":"ESP_TIL_OAK","rows":18541,"pct":1.61},{"name":"CHE_DAV_SEE","rows":16047,"pct":1.39},{"name":"ESP_VAL_SOR","rows":15020,"pct":1.3},{"name":"ESP_TIL_PIN","rows":14878,"pct":1.29},{"name":"GUF_GUY_ST2","rows":9686,"pct":0.84},{"name":"GBR_DEV_DRO","rows":9353,"pct":0.81},{"name":"GBR_DEV_CON","rows":9339,"pct":0.81},{"name":"ESP_SAN_B_100","rows":8950,"pct":0.77},{"name":"ESP_SAN_A_45I","rows":7537,"pct":0.65},{"name":"SWE_NOR_ST4_BEF","rows":7140,"pct":0.62},{"name":"GBR_GUI_ST1","rows":7108,"pct":0.62},{"name":"ESP_SAN_A2_45I","rows":6274,"pct":0.54},{"name":"ESP_SAN_B2_100","rows":6272,"pct":0.54},{"name":"GBR_GUI_ST2","rows":5079,"pct":0.44},{"name":"GBR_ABE_PLO","rows":4295,"pct":0.37},{"name":"IDN_JAM_OIL","rows":4176,"pct":0.36},{"name":"GBR_GUI_ST3","rows":3819,"pct":0.33},{"name":"SWE_NOR_ST2","rows":1685,"pct":0.15}]}],"location":[{"name":"USA_PJS","rows":244582,"pct":21.18,"n":3},{"name":"CAN_TUR","rows":195928,"pct":16.96,"n":2},{"name":"FRA_PUE","rows":171204,"pct":14.82,"n":1},{"name":"ESP_TIL","rows":87181,"pct":7.55,"n":3},{"name":"NZL_HUA_HUA","rows":60143,"pct":5.21,"n":1},{"name":"Other","rows":395871,"pct":34.28,"n":15,"other":true,"members":[{"name":"USA_PAR_FER","rows":56805,"pct":4.92},{"name":"NLD_LOO","rows":56048,"pct":4.85},{"name":"AUS_WOM","rows":49660,"pct":4.3},{"name":"AUS_RIC_EUC_ELE","rows":33937,"pct":2.94},{"name":"CZE_LIZ_LES","rows":33410,"pct":2.89},{"name":"SWE_NOR","rows":32376,"pct":2.8},{"name":"ESP_SAN","rows":29033,"pct":2.51},{"name":"PRT_LEZ_ARN","rows":20680,"pct":1.79},{"name":"GBR_DEV","rows":18692,"pct":1.62},{"name":"CHE_DAV_SEE","rows":16047,"pct":1.39},{"name":"GBR_GUI","rows":16006,"pct":1.39},{"name":"ESP_VAL_SOR","rows":15020,"pct":1.3},{"name":"GUF_GUY_ST2","rows":9686,"pct":0.84},{"name":"GBR_ABE_PLO","rows":4295,"pct":0.37},{"name":"IDN_JAM_OIL","rows":4176,"pct":0.36}]}]},{"cluster":"mixed","rows":297419,"sites":10,"locations":9,"site":[{"name":"USA_HIL","rows":61246,"pct":20.59,"n":1},{"name":"GUF_GUY_GUY","rows":36946,"pct":12.42,"n":1},{"name":"ESP_CAN","rows":31023,"pct":10.43,"n":1},{"name":"USA_TNP","rows":30838,"pct":10.37,"n":1},{"name":"USA_UMB_GIR","rows":28730,"pct":9.66,"n":1},{"name":"Other","rows":108636,"pct":36.53,"n":5,"other":true,"members":[{"name":"USA_UMB_CON","rows":25040,"pct":8.42},{"name":"USA_SIL_OAK","rows":23140,"pct":7.78},{"name":"USA_SYL_HL2","rows":22646,"pct":7.61},{"name":"SWE_NOR_ST5_REF","rows":22237,"pct":7.48},{"name":"SWE_NOR_ST4_AFT","rows":15573,"pct":5.24}]}],"location":[{"name":"USA_HIL","rows":61246,"pct":20.59,"n":1},{"name":"SWE_NOR","rows":37810,"pct":12.71,"n":2},{"name":"GUF_GUY_GUY","rows":36946,"pct":12.42,"n":1},{"name":"ESP_CAN","rows":31023,"pct":10.43,"n":1},{"name":"USA_TNO_TNP","rows":30838,"pct":10.37,"n":1},{"name":"Other","rows":99556,"pct":33.47,"n":4,"other":true,"members":[{"name":"USA_UMB_GIR","rows":28730,"pct":9.66},{"name":"USA_UMB_CON","rows":25040,"pct":8.42},{"name":"USA_SIL_OAK","rows":23140,"pct":7.78},{"name":"USA_SYL_HL2","rows":22646,"pct":7.61}]}]},{"cluster":"deciduous","rows":296148,"sites":18,"locations":17,"site":[{"name":"USA_DUK_HAR","rows":52488,"pct":17.72,"n":1},{"name":"ZAF_NOO_E3_IRR","rows":38449,"pct":12.98,"n":1},{"name":"USA_TNB","rows":21224,"pct":7.17,"n":1},{"name":"ITA_TOR","rows":21040,"pct":7.1,"n":1},{"name":"USA_TNO","rows":19671,"pct":6.64,"n":1},{"name":"Other","rows":143276,"pct":48.38,"n":13,"other":true,"members":[{"name":"DEU_STE_4P5","rows":18198,"pct":6.14},{"name":"DEU_STE_2P3","rows":17899,"pct":6.04},{"name":"USA_WVF","rows":17128,"pct":5.78},{"name":"THA_KHU","rows":16391,"pct":5.53},{"name":"USA_INM","rows":14729,"pct":4.97},{"name":"USA_TNY","rows":13829,"pct":4.67},{"name":"ZAF_FRA_FRA","rows":13404,"pct":4.53},{"name":"ZAF_SOU_SOU","rows":13133,"pct":4.43},{"name":"IDN_JAM_RUB","rows":7384,"pct":2.49},{"name":"USA_WIL_WC1","rows":6743,"pct":2.28},{"name":"FIN_PET","rows":3240,"pct":1.09},{"name":"ARG_TRE","rows":623,"pct":0.21},{"name":"ARG_MAZ","rows":575,"pct":0.19}]}],"location":[{"name":"USA_DUK_HAR","rows":52488,"pct":17.72,"n":1},{"name":"ZAF_NOO_E3_IRR","rows":38449,"pct":12.98,"n":1},{"name":"DEU_STE","rows":36097,"pct":12.19,"n":2},{"name":"USA_TNB","rows":21224,"pct":7.17,"n":1},{"name":"ITA_TOR","rows":21040,"pct":7.1,"n":1},{"name":"Other","rows":126850,"pct":42.83,"n":12,"other":true,"members":[{"name":"USA_TNO_TNP","rows":19671,"pct":6.64},{"name":"USA_WVF","rows":17128,"pct":5.78},{"name":"THA_KHU","rows":16391,"pct":5.53},{"name":"USA_INM","rows":14729,"pct":4.97},{"name":"USA_TNY","rows":13829,"pct":4.67},{"name":"ZAF_FRA_FRA","rows":13404,"pct":4.53},{"name":"ZAF_SOU_SOU","rows":13133,"pct":4.43},{"name":"IDN_JAM_RUB","rows":7384,"pct":2.49},{"name":"USA_WIL_WC1","rows":6743,"pct":2.28},{"name":"FIN_PET","rows":3240,"pct":1.09},{"name":"ARG_TRE","rows":623,"pct":0.21},{"name":"ARG_MAZ","rows":575,"pct":0.19}]}]},{"cluster":"missing","rows":13919,"sites":1,"locations":1,"site":[{"name":"CRI_TAM_TOW","rows":13919,"pct":100.0,"n":1}],"location":[{"name":"CRI_TAM_TOW","rows":13919,"pct":100.0,"n":1}]}],"total_rows":1762395,"total_sites":62,"total_locations":45};
+const RAMP = ['var(--s1)','var(--s2)','var(--s3)','var(--s4)','var(--s5)'];
+const INK  = ['var(--s1-ink)','var(--s2-ink)','var(--s3-ink)','var(--s4-ink)','var(--s5-ink)'];
+const plural = (n, w) => n + ' ' + w + (n === 1 ? '' : 's');
+function allSegs(c, lv) {
+  const out = [];
+  c[lv].forEach(s => s.other ? out.push(...s.members)
+                             : out.push({ name: s.name, rows: s.rows, pct: s.pct }));
+  return out.sort((a, b) => b.rows - a.rows);
+}
+let level = 'site', view = 'chart';
+const fmt = n => n.toLocaleString('en-US');
+const tip = document.getElementById('tip');
+
+function renderScheme(id, clusters) {
+  const host = document.getElementById(id);
+  host.innerHTML = '';
+  clusters.forEach(c => {
+    const segs = c[level];
+    const row = document.createElement('div'); row.className = 'row';
+    const head = document.createElement('div'); head.className = 'rowhead';
+    const unit = level === 'site' ? 'site' : 'location';
+    const count = level === 'site' ? c.sites : c.locations;
+    const all = allSegs(c, level), small = all[all.length - 1];
+    head.innerHTML = '<span class="rowname">' + c.cluster + '</span>' +
+      '<span class="rowmeta">' + plural(count, unit) + ' &middot; ' + fmt(c.rows) + ' rows' +
+      (all.length > 1 ? ' &middot; smallest ' + small.name + ' ' + fmt(small.rows) : '') + '</span>';
+    row.appendChild(head);
+    const bar = document.createElement('div'); bar.className = 'bar';
+    segs.forEach((s, i) => {
+      const d = document.createElement('div');
+      d.className = 'segpiece';
+      d.style.width = s.pct + '%';
+      const slot = Math.min(i, RAMP.length - 1);
+      d.style.background = s.other ? 'var(--other)' : RAMP[slot];
+      d.style.color = s.other ? 'var(--other-ink)' : INK[slot];
+      if (s.pct >= 11) {
+        const lab = document.createElement('span'); lab.className = 'lab';
+        lab.textContent = s.other ? 'Other (' + s.n + ')' : s.name;
+        d.appendChild(lab);
+      }
+      let html = '<b>' + (s.other ? 'Other &mdash; ' + plural(s.n, unit) : s.name) + '</b><br>' +
+                 fmt(s.rows) + ' rows &middot; ' + s.pct.toFixed(1) + '% of ' + c.cluster;
+      if (!s.other && level === 'location' && s.n > 1) html += '<br>' + s.n + ' sites pooled';
+      if (s.other) html += '';
+      if (s.other) {
+        const m = s.members, f = x => x.name + ' ' + fmt(x.rows) + ' (' + x.pct.toFixed(2) + '%)';
+        let lines;
+        if (m.length <= 6) lines = m.map(f);
+        else lines = m.slice(0, 3).map(f)
+               .concat(['&hellip; ' + (m.length - 5) + ' more &hellip;'])
+               .concat(m.slice(-2).map(f));
+        html += '<span class="mem">' + lines.join('<br>') + '</span>';
+      }
+      d.addEventListener('mouseenter', e => { tip.innerHTML = html; tip.style.opacity = 1; move(e); });
+      d.addEventListener('mousemove', move);
+      d.addEventListener('mouseleave', () => { tip.style.opacity = 0; });
+      bar.appendChild(d);
+    });
+    row.appendChild(bar);
+    host.appendChild(row);
+  });
+}
+function move(e) {
+  const pad = 14, w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = e.clientX + pad, y = e.clientY + pad;
+  if (x + w > innerWidth - 8) x = e.clientX - w - pad;
+  if (y + h > innerHeight - 8) y = e.clientY - h - pad;
+  tip.style.left = x + 'px'; tip.style.top = y + 'px';
+}
+function renderTable() {
+  const tb = document.getElementById('tbody');
+  document.getElementById('thName').textContent = level === 'site' ? 'Site' : 'Location';
+  const rows = [];
+  [['Biome', DATA.biome], ['Functional type', DATA.pft]].forEach(([label, cls]) => {
+    cls.forEach(c => c[level].forEach(s => {
+      if (s.other) {
+        s.members.forEach(m => rows.push([label, c.cluster, m.name, m.rows, m.pct]));
+      } else {
+        rows.push([label, c.cluster, s.name + (level === 'location' && s.n > 1 ? ' (' + s.n + ' sites)' : ''), s.rows, s.pct]);
+      }
+    }));
+  });
+  tb.innerHTML = rows.map(r =>
+    '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] +
+    '</td><td class="num">' + fmt(r[3]) + '</td><td class="num">' + r[4].toFixed(2) + '</td></tr>'
+  ).join('');
+}
+function renderFloors() {
+  const tb = document.getElementById('floorbody');
+  document.getElementById('thFloorName').textContent =
+    level === 'site' ? 'Smallest site' : 'Smallest location';
+  const rows = [];
+  [['Biome', DATA.biome], ['Functional type', DATA.pft]].forEach(([label, cls]) => {
+    cls.forEach(c => {
+      const all = allSegs(c, level), small = all[all.length - 1];
+      const budget = all.length * small.rows;
+      rows.push('<tr><td>' + label + '</td><td>' + c.cluster + '</td>' +
+        '<td class="num">' + all.length + '</td><td>' + small.name + '</td>' +
+        '<td class="num">' + fmt(small.rows) + '</td>' +
+        '<td class="num">' + small.pct.toFixed(2) + '</td>' +
+        '<td class="num">' + fmt(budget) + '</td>' +
+        '<td class="num">' + (100 * budget / c.rows).toFixed(1) + '%</td></tr>');
+    });
+  });
+  tb.innerHTML = rows.join('');
+}
+function draw() {
+  renderScheme('biome', DATA.biome);
+  renderScheme('pft', DATA.pft);
+  renderTable();
+  renderFloors();
+  document.getElementById('charts').hidden = view !== 'chart';
+  document.getElementById('floorview').hidden = view !== 'floor';
+  document.getElementById('tableview').hidden = view !== 'table';
+}
+function group(ids, fns) {
+  const els = ids.map(i => document.getElementById(i));
+  els.forEach((el, k) => el.onclick = () => {
+    els.forEach((e, j) => e.setAttribute('aria-pressed', j === k ? 'true' : 'false'));
+    fns[k](); draw();
+  });
+}
+group(['bySite','byLoc'], [() => level='site', () => level='location']);
+group(['vChart','vFloor','vTable'], [() => view='chart', () => view='floor', () => view='table']);
+draw();
+</script>
+</body>
+</html>

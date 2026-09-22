@@ -47,17 +47,18 @@ param_grid = {'n_hidden': [8, 10],
 
 # Import data and scale X inputs
 X, Y = data_import(my_features, my_files)
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
 n_points = len(X)
 
-#  Split to training/validation sets: 90% training, 10% test
-X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=0.2, random_state=42)
+#  Split to training/validation sets: 80% training, 20% test
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=51)
+scaler = StandardScaler()  # fit on the training set only, so the test set does not inform the scaling
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)  # transform, never fit, on held out data
 
 # Set random seeds for reproducibility
 keras.backend.clear_session()
-np.random.seed(42)
-tf.random.set_seed(42)
+np.random.seed(51)
+tf.random.set_seed(51)
 
 # Run GridSearchCV to find best model
 ann_grid = GridSearchCV(sk_estimator, param_grid, cv=2, scoring='r2', verbose=3)
@@ -87,7 +88,7 @@ plt.clf()
 outfile = 'Neural_Networks/models/'+model_name+'.h5'
 model.model.save(outfile)
 with open('Neural_Networks/ann_results_'+model_name+'.csv', 'w', newline='') as csvfile:
-    csvfile.write(f'Data set, n locations, n data points, R2 test, R2 train, MAE, {",".join(my_features)}, Best parameters \n')
+    csvfile.write(f'Data set, n sites, n data points, R2 test, R2 train, MAE, {",".join(my_features)}, Best parameters \n')
     csvfile.write(f'{model_name}, {n_files}, {n_points}, {r2}, {r2_train}, {mae}, {feature_importances}, {ann_grid.best_params_} \n')
 print(f'{model_name} complete')
 

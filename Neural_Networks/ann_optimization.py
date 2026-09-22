@@ -12,6 +12,7 @@ from sklearn.metrics import mean_absolute_error
 from tensorflow.keras.wrappers.scikit_learn import KerasRegressor
 from sklearn.model_selection import GridSearchCV
 from sklearn.inspection import permutation_importance
+import pandas as pd
 import pickle
 
 begin_time = datetime.datetime.now()
@@ -52,28 +53,32 @@ param_grid = {'n_hidden': [8, 10],
 
 
 with open('Neural_Networks/ann_results.csv', 'w', newline='') as csvfile:
-    csvfile.write(f'Data set, n locations, n data points, R2 test, R2 train, MAE, {",".join(my_features)}, Best parameters \n')
+    csvfile.write(f'Data set, n sites, n locations, n data points, R2 test, R2 train, MAE, {",".join(my_features)}, Best parameters \n')
 
     # Loop over all clusters
-    for identifier, cluster_group in zip(['func_'], [func_clusters]):  # zip(['k_means_', 'func_', 'biome_'], [k_clusters, func_clusters, biome_clusters]):
+    for identifier, cluster_group in zip(['func_', 'biome_'], [func_clusters, biome_clusters]):  # add 'k_means_' and k_clusters to include the k-means groups
         for data_cluster in cluster_group:
             # Get data
             my_files = cluster_group[data_cluster]
             n_files = len(my_files)
             model_name = f'{identifier}{data_cluster}_ann'
             model_name = model_name.replace('/', '')
-            X, Y = data_import(my_features, my_files)
+            X, Y, info = data_import(my_features, my_files, return_info=True)
             n_points = len(X)
+            n_locations = info['Location'].nunique()
+            rows = np.arange(n_points)  # carried through the split so test rows trace back to a site
+            X_train, X_test, Y_train, Y_test, _, test_rows = train_test_split(X, Y, rows, test_size=0.1,
+                                                                              random_state=51)
             scaler = StandardScaler()
+            X_train = scaler.fit_transform(X_train)
+            X_test = scaler.transform(X_test)  # transform, never fit, on held out data
             outfile = 'Neural_Networks/models/'+model_name+'_scaler.sav'
             pickle.dump(scaler, open(outfile, 'wb'))
-            X_scaled = scaler.fit_transform(X)
-            X_train, X_test, Y_train, Y_test = train_test_split(X_scaled, Y, test_size=0.1, random_state=42)
 
             # Set random seeds for reproducibility
             keras.backend.clear_session()
-            np.random.seed(42)
-            tf.random.set_seed(42)
+            np.random.seed(51)
+            tf.random.set_seed(51)
 
             ann_grid = GridSearchCV(sk_estimator, param_grid, cv=5, scoring='r2', verbose=3, n_jobs=1, return_train_score=True)
             ann_grid.fit(X_train, Y_train)
@@ -100,7 +105,14 @@ with open('Neural_Networks/ann_results.csv', 'w', newline='') as csvfile:
             plt.clf()
             outfile = 'Neural_Networks/models/'+model_name+'.h5'
             model.model.save(outfile)
-            csvfile.write(f'{model_name}, {n_files}, {n_points}, {r2}, {r2_train}, {mae}, {feature_importances}, {ann_grid.best_params_} \n')
+            test_set = info.iloc[test_rows].copy()  # kept for inspection, a rerun regenerates it
+            test_set['observed'] = Y_test
+            test_set['predicted'] = Y_pred
+            test_set.to_csv('Neural_Networks/test_sets/' + model_name + '_test.csv', index=False)
+            site_r2 = test_set.groupby('Site').apply(
+                lambda group: pd.Series({'n': len(group), 'r2': r2_score(group['observed'], group['predicted'])}))
+            site_r2.to_csv('Neural_Networks/test_sets/' + model_name + '_site_r2.csv')
+            csvfile.write(f'{model_name}, {n_files}, {n_locations}, {n_points}, {r2}, {r2_train}, {mae}, {feature_importances}, {ann_grid.best_params_} \n')
             print(f'{model_name} complete')
 
 end_time = datetime.datetime.now()

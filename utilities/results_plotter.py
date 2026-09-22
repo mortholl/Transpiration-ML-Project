@@ -1,98 +1,102 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
-from matplotlib.colors import ListedColormap
 
 
 cluster_info = pd.read_csv("data/modeling_data/cluster_info.csv")
 
 # Scatter plots of cluster labels with climate statistics
-# fig = plt.figure()
-# ax = fig.add_subplot(projection='3d')
-# x = cluster_info['MAP']
-# y = cluster_info['MAT']
-# z = cluster_info['Average Sap Flux']
-# cmap = ListedColormap(sns.color_palette("husl"))
-# color = cluster_info["K-Means Label"]
-# sc = ax.scatter(x, y, z, cmap=cmap, c=color)
-# ax.set_xlabel('MAP')
-# ax.set_ylabel('MAT')
-# ax.set_zlabel('Average Sap Flux')
-# plt.legend(*sc.legend_elements(), loc=2)
-# plt.show()
-# plt.savefig("data/modeling_data/k_clusters.png")
+# Each cluster gets its own colour and its own marker, past about four clusters colour alone
+# cannot be told apart reliably, so the marker shape carries the identity as well
+labels = sorted(cluster_info['K-Means Label'].unique())
+colors = sns.color_palette('colorblind', len(labels))  # ask for one colour per cluster
+markers = ['o', '^', 's', 'D', 'v', 'P', 'X', '*', '<', '>']
+
+fig = plt.figure(figsize=(8, 7))
+ax = fig.add_subplot(projection='3d')
+for i, label in enumerate(labels):
+    group = cluster_info[cluster_info['K-Means Label'] == label]
+    ax.scatter(group['MAP'], group['MAT'], group['Average Wind Speed'],
+               color=colors[i], marker=markers[i], s=55, depthshade=True,
+               edgecolors='white', linewidths=0.5, label=f'Cluster {label} (n={len(group)})')
+ax.set_xlabel('MAP (mm/yr)')
+ax.set_ylabel('MAT (C)')
+ax.set_zlabel('Average Wind Speed (m/s)')
+ax.legend(loc='upper left', fontsize=8)
+plt.savefig("data/modeling_data/k_clusters.png", dpi=200, bbox_inches='tight')  # save first, show clears the figure
+plt.show()
 
 # Box and whisker plot of R2 performance metric - RF
-rf_results = pd.read_csv("RandomForest/rf_results.csv", index_col=False)
-k_r2_box = []
-biome_r2_box = []
-func_r2_box = []
-for index, row in rf_results.iterrows():
-    if 'k_means' in row['Data set']:
-        k_r2_box.append(row[' R2 test'])
-    elif 'biome' in row['Data set']:
-        biome_r2_box.append(row[' R2 test'])
-    elif 'func' in row['Data set']:
-        func_r2_box.append(row[' R2 test'])
+# rf_results = pd.read_csv("RandomForest/rf_results.csv", index_col=False)
+# k_r2_box = []
+# biome_r2_box = []
+# func_r2_box = []
+# for index, row in rf_results.iterrows():
+#     if 'k_means' in row['Data set']:
+#         k_r2_box.append(row[' R2 test'])
+#     elif 'biome' in row['Data set']:
+#         biome_r2_box.append(row[' R2 test'])
+#     elif 'func' in row['Data set']:
+#         func_r2_box.append(row[' R2 test'])
 
-fig = plt.figure()
-ax = fig.add_subplot()
-bp = ax.boxplot([k_r2_box, biome_r2_box, func_r2_box])
-plt.ylabel('$R^2$ of test set')
-ax.set_xticklabels(['K-Means',
-                    'Biome', 'Functional Type'])
-plt.title('Random Forest Test Set $R^2$')
-plt.savefig("RandomForest/results/rf_box_whisker.png")
-plt.clf()
+# fig = plt.figure()
+# ax = fig.add_subplot()
+# bp = ax.boxplot([k_r2_box, biome_r2_box, func_r2_box])
+# plt.ylabel('$R^2$ of test set')
+# ax.set_xticklabels(['K-Means',
+#                     'Biome', 'Functional Type'])
+# plt.title('Random Forest Test Set $R^2$')
+# plt.savefig("RandomForest/results/rf_box_whisker.png")
+# plt.clf()
 
 # Box and whisker plot of R2 performance metric - NN
-ann_results = pd.read_csv("Neural_Networks/ann_results.csv", index_col=False)
-k_r2_box = []
-biome_r2_box = []
-func_r2_box = []
-for index, row in ann_results.iterrows():
-    if 'k_means' in row['Data set']:
-        k_r2_box.append(row[' R2 test'])
-    elif 'biome' in row['Data set']:
-        biome_r2_box.append(row[' R2 test'])
-    elif 'func' in row['Data set']:
-        func_r2_box.append(row[' R2 test'])
+# ann_results = pd.read_csv("Neural_Networks/ann_results.csv", index_col=False)
+# k_r2_box = []
+# biome_r2_box = []
+# func_r2_box = []
+# for index, row in ann_results.iterrows():
+#     if 'k_means' in row['Data set']:
+#         k_r2_box.append(row[' R2 test'])
+#     elif 'biome' in row['Data set']:
+#         biome_r2_box.append(row[' R2 test'])
+#     elif 'func' in row['Data set']:
+#         func_r2_box.append(row[' R2 test'])
 
-fig = plt.figure()
-ax = fig.add_subplot()
-bp = ax.boxplot([k_r2_box, biome_r2_box, func_r2_box])
-plt.ylabel('$R^2$ of test set')
-ax.set_xticklabels(['K-Means',
-                    'Biome', 'Functional Type'])
-plt.title('Neural Network Test Set $R^2$')
-plt.savefig("Neural_Networks/results/ann_box_whisker.png")
-plt.clf()
+# fig = plt.figure()
+# ax = fig.add_subplot()
+# bp = ax.boxplot([k_r2_box, biome_r2_box, func_r2_box])
+# plt.ylabel('$R^2$ of test set')
+# ax.set_xticklabels(['K-Means',
+#                     'Biome', 'Functional Type'])
+# plt.title('Neural Network Test Set $R^2$')
+# plt.savefig("Neural_Networks/results/ann_box_whisker.png")
+# plt.clf()
 
 # Box and whisker plot of feature importances - RF
-ta = rf_results[' ta'].tolist()
-vpd = rf_results['vpd'].tolist()
-ppfd_in = rf_results['ppfd_in'].tolist()
-swc_shallow = rf_results['swc_shallow'].tolist()
-fig = plt.figure()
-ax = fig.add_subplot()
-bp = ax.boxplot([ta, vpd, ppfd_in, swc_shallow])
-plt.ylabel('Relative Feature Importance')
-ax.set_xticklabels(['$T_a$', 'VPD', '$PPFD_{in}$', 'SWC'])
-plt.title('Random Forest Models: Average Feature Importances')
-plt.savefig('RandomForest/results/rf_feat_importances.png')
+# ta = rf_results[' ta'].tolist()
+# vpd = rf_results['vpd'].tolist()
+# ppfd_in = rf_results['ppfd_in'].tolist()
+# swc_shallow = rf_results['swc_shallow'].tolist()
+# fig = plt.figure()
+# ax = fig.add_subplot()
+# bp = ax.boxplot([ta, vpd, ppfd_in, swc_shallow])
+# plt.ylabel('Relative Feature Importance')
+# ax.set_xticklabels(['$T_a$', 'VPD', '$PPFD_{in}$', 'SWC'])
+# plt.title('Random Forest Models: Average Feature Importances')
+# plt.savefig('RandomForest/results/rf_feat_importances.png')
 
-# Box and whisker plot of feature importances - NN
-ta = ann_results[' ta'].tolist()
-vpd = ann_results['vpd'].tolist()
-ppfd_in = ann_results['ppfd_in'].tolist()
-swc_shallow = ann_results['swc_shallow'].tolist()
-fig = plt.figure()
-ax = fig.add_subplot()
-bp = ax.boxplot([ta, vpd, ppfd_in, swc_shallow])
-plt.ylabel('Relative Feature Importance')
-ax.set_xticklabels(['$T_a$', 'VPD', '$PPFD_{in}$', 'SWC'])
-plt.title('Neural Network Models: Average Feature Importances')
-plt.savefig('Neural_Networks/results/ann_feat_importances.png')
+# # Box and whisker plot of feature importances - NN
+# ta = ann_results[' ta'].tolist()
+# vpd = ann_results['vpd'].tolist()
+# ppfd_in = ann_results['ppfd_in'].tolist()
+# swc_shallow = ann_results['swc_shallow'].tolist()
+# fig = plt.figure()
+# ax = fig.add_subplot()
+# bp = ax.boxplot([ta, vpd, ppfd_in, swc_shallow])
+# plt.ylabel('Relative Feature Importance')
+# ax.set_xticklabels(['$T_a$', 'VPD', '$PPFD_{in}$', 'SWC'])
+# plt.title('Neural Network Models: Average Feature Importances')
+# plt.savefig('Neural_Networks/results/ann_feat_importances.png')
 
 # Pie charts of feature importances for every model
 # rf_results = pd.read_csv("RandomForest/rf_results.csv", index_col=False)
