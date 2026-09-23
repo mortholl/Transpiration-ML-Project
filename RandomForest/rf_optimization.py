@@ -10,7 +10,7 @@ import datetime
 from sklearn.model_selection import GridSearchCV
 import numpy as np
 import pandas as pd
-import pickle
+import joblib
 
 
 begin_time = datetime.datetime.now()
@@ -34,13 +34,12 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
     csvfile.write(f'Data set, n sites, n locations, n data points, R2 test, R2 train, MAE, {",".join(my_features)}, Best parameters \n')
 
     # Loop over all clusters
-    for identifier, cluster_group in zip(['func_', 'biome_'], [func_clusters, biome_clusters]):  # add 'k_means_' and k_clusters to include the k-means groups
+    for identifier, cluster_group in zip(['pft_', 'biome_'], [func_clusters, biome_clusters]):  # add 'k_means_' and k_clusters to include the k-means groups
         for data_cluster in cluster_group:
             # Get data
             my_files = cluster_group[data_cluster]
             n_files = len(my_files)
-            model_name = f'{identifier}{data_cluster}_rf'
-            model_name = model_name.replace('/', '')
+            model_name = cluster_key(identifier, data_cluster) + '_rf'
             X, Y, info = data_import(my_features, my_files, return_info=True)
             n_points = len(X)
             n_locations = info['Location'].nunique()
@@ -52,8 +51,7 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
             scaler = StandardScaler()
             X_train = scaler.fit_transform(X_train)
             X_test = scaler.transform(X_test)  # transform, never fit, on held out data
-            outfile = 'RandomForest/models/' + model_name + '_scaler.sav'
-            pickle.dump(scaler, open(outfile, 'wb'))
+            joblib.dump(scaler, 'RandomForest/models/' + model_name + '_scaler.joblib', compress=3)
 
             # Grid search to find optimal hyperparameters
             rf_grid = GridSearchCV(rf, param_grid, cv=5, scoring='r2', verbose=3, n_jobs=2, return_train_score=True)
@@ -76,8 +74,8 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
             plt.annotate(mae_label, (0.8*max(Y_test), 0.2*max(Y_pred)))
             plt.savefig('RandomForest/plots/'+model_name+'.png')
             plt.clf()
-            outfile = 'RandomForest/models/'+model_name+'.sav'
-            pickle.dump(model, open(outfile, 'wb'))
+            joblib.dump(model, 'RandomForest/models/' + model_name + '.joblib', compress=3)  # a forest
+            # is mostly repeated node arrays, which compress well, and joblib closes the file itself
             test_set = info[is_test].copy()  # kept for inspection, a rerun regenerates it
             test_set['observed'] = Y_test
             test_set['predicted'] = Y_pred

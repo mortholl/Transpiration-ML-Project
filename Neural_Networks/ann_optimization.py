@@ -13,7 +13,7 @@ from scikeras.wrappers import KerasRegressor
 from sklearn.model_selection import GridSearchCV
 from sklearn.inspection import permutation_importance
 import pandas as pd
-import pickle
+import joblib
 
 begin_time = datetime.datetime.now()
 
@@ -56,13 +56,12 @@ with open('Neural_Networks/ann_results.csv', 'w', newline='') as csvfile:
     csvfile.write(f'Data set, n sites, n locations, n data points, R2 test, R2 train, MAE, {",".join(my_features)}, Best parameters \n')
 
     # Loop over all clusters
-    for identifier, cluster_group in zip(['func_', 'biome_'], [func_clusters, biome_clusters]):  # add 'k_means_' and k_clusters to include the k-means groups
+    for identifier, cluster_group in zip(['pft_', 'biome_'], [func_clusters, biome_clusters]):  # add 'k_means_' and k_clusters to include the k-means groups
         for data_cluster in cluster_group:
             # Get data
             my_files = cluster_group[data_cluster]
             n_files = len(my_files)
-            model_name = f'{identifier}{data_cluster}_ann'
-            model_name = model_name.replace('/', '')
+            model_name = cluster_key(identifier, data_cluster) + '_ann'
             X, Y, info = data_import(my_features, my_files, return_info=True)
             n_points = len(X)
             n_locations = info['Location'].nunique()
@@ -74,8 +73,7 @@ with open('Neural_Networks/ann_results.csv', 'w', newline='') as csvfile:
             scaler = StandardScaler()
             X_train = scaler.fit_transform(X_train)
             X_test = scaler.transform(X_test)  # transform, never fit, on held out data
-            outfile = 'Neural_Networks/models/'+model_name+'_scaler.sav'
-            pickle.dump(scaler, open(outfile, 'wb'))
+            joblib.dump(scaler, 'Neural_Networks/models/' + model_name + '_scaler.joblib', compress=3)
 
             # Set random seeds for reproducibility
             keras.backend.clear_session()

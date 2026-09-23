@@ -5,6 +5,7 @@
 pandas>=2.2
 numpy>=1.26
 scikit-learn>=1.4
+joblib>=1.3          # ships with scikit-learn, imported directly to save models
 matplotlib>=3.8
 
 scipy>=1.11           # utilities/correlation_finder.py only

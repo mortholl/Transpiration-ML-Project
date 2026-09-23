@@ -1,2 +1,2 @@
-Data set, n locations, n data points, R2 test, R2 train, MAE, ta,vpd,ppfd_in,swc_shallow, Best parameters 
-func_0_rf, 23, 296287, 0.7643415065622549, 0.7609206399689455, 1.4465820877192939, 0.2131,0.1188,0.5157,0.1524, {'max_depth': 25, 'n_estimators': 1200} 
+Data set, n sites, n locations, n data points, R2 test, R2 train, MAE, ta,vpd,ppfd_in,swc_shallow, Best parameters 
+func_0_rf, 20, 17, 232050, 0.7677124618331436, 0.7624466500287487, 1.4620790257141871, 0.2229,0.1179,0.4881,0.1712, {'max_depth': 25, 'n_estimators': 1200} 

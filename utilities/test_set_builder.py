@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 from sklearn.model_selection import train_test_split
-from utilities.cluster_creator import ClusterCreator
+from utilities.cluster_creator import ClusterCreator, func_type_names
 from utilities.data_sanitizer import data_import
 
 # Draws the held out test rows once per cluster and writes them where the model scripts read them
@@ -17,7 +17,9 @@ seed = 51
 my_features = ['ta', 'vpd', 'ppfd_in', 'swc_shallow']
 
 
-def cluster_key(identifier, cluster):  # the name the optimization scripts build their model names from
+def cluster_key(identifier, cluster):  # the name the split files and the model files share
+    if isinstance(cluster, (int, np.integer)):  # the functional type clusters are keyed by their code
+        cluster = func_type_names[int(cluster)]
     return f'{identifier}{cluster}'.replace('/', '')
 
 
@@ -72,7 +74,7 @@ def summarise(key, info):  # Returns one row describing the cluster and one row 
 
 def build_all(verbose=True):  # Writes a split for every cluster the optimization scripts loop over
     cluster_creator = ClusterCreator.build_clusters()
-    groups = zip(['func_', 'biome_'], [cluster_creator.func_cluster_dict, cluster_creator.biome_cluster_dict])
+    groups = zip(['pft_', 'biome_'], [cluster_creator.func_cluster_dict, cluster_creator.biome_cluster_dict])
     overall_rows, site_rows = [], []
     for identifier, cluster_group in groups:  # k_clusters is left out, KMeans has no seed so its labels
         for cluster in cluster_group:         # move between runs and a stored split would not survive one

@@ -8,9 +8,9 @@ How the SAPFLUXNET sites used to train the models were chosen.
 | Sapwood-level sap flux available | 73 | |
 | Excluded site list | 70 | |
 | Co-located records merged | 65 | 1,770,042 |
-| **Contributing to training** | **62** | **1,762,395** |
+| **Contributing to training** | **60** | **1,761,197** |
 
-The final dataset is 62 sites at 45 distinct locations, 985 instrumented trees, and 1,762,395
+The final dataset is 60 sites at 43 distinct locations, 976 instrumented trees, and 1,761,197
 half-hourly observations spanning 1995-04-20 to 2017-01-01.
 
 
@@ -45,13 +45,14 @@ average is taken over all trees present at each timestamp. Distinct locations ar
 removes double-counting of meteorology, not sites. Implemented in `site_merger.py`, with source files
 archived to `resampled/merged_sources/`.
 
-**5. Load-time criteria (65 listed → 62 contributing).** Applied in `data_import()` on every run, since
+**5. Load-time criteria (65 listed → 60 contributing).** Applied in `data_import()` on every run, since
 both depend on the active feature set.
 
-*Minimum one week of usable observations, 336 half hours.* Excludes FRA_HES_HE1_NON (55 rows, 1.1 days)
-and FRA_HES_HE2_NON (43 rows, 0.9 days), both limited by soil water content rather than sap flux. The
-next smallest contributing site is ARG_MAZ at 575 rows, 12.0 days, so any threshold between 56 and 575
-rows selects the same sites.
+*Minimum 30 days of usable observations, 1,440 half hours.* Excludes FRA_HES_HE1_NON (55 rows, 1.1
+days) and FRA_HES_HE2_NON (43 rows, 0.9 days), both limited by soil water content rather than sap flux,
+and ARG_MAZ (575 rows, 12.0 days) and ARG_TRE (623 rows, 13.0 days), whose records run for under two
+weeks in November 2009. The next smallest contributing site is SWE_NOR_ST2 at 1,685 rows, 35.1 days, so
+any threshold between 624 and 1,685 rows selects the same sites.
 
 *No more than 50% negative values.* SAPFLUXNET flags negative sap flux with `RANGE_WARN` but retains
 the values, leaving treatment to the data user. Small negative values are kept throughout; a record
@@ -65,7 +66,7 @@ next highest proportion at any site is 3.7%.
 | Biome | Sites | Locations | Rows |
 |---|---|---|---|
 | Temperate forest | 25 | 21 | 790,786 |
-| Woodland/Shrubland | 24 | 16 | 609,492 |
+| Woodland/Shrubland | 22 | 14 | 608,294 |
 | Temperate grassland desert | 3 | 1 | 244,582 |
 | Tropical rain forest | 5 | 5 | 72,111 |
 | Tropical forest savanna | 5 | 2 | 45,424 |
@@ -74,7 +75,7 @@ next highest proportion at any site is 3.7%.
 |---|---|---|---|
 | evergreen | 33 | 20 | 1,154,909 |
 | mixed | 10 | 9 | 297,419 |
-| deciduous | 18 | 17 | 296,148 |
+| deciduous | 16 | 15 | 294,950 |
 | missing | 1 | 1 | 13,919 |
 
 CRI_TAM_TOW has no functional type and is excluded from those clusters, but appears in the biome

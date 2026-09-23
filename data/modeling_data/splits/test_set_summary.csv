@@ -1,8 +1,8 @@
 Data set,n sites,n locations,n rows,n train,n test,smallest site test rows,median site test rows,sites under 100 test rows
-func_0,18,17,232050,208845,23205,58,1374,2
-func_1,33,20,684066,615659,68407,154,1510,0
-func_2,10,9,272255,245029,27226,1568,2661,0
-biome_WoodlandShrubland,24,16,396265,356638,39627,53,1336,2
+pft_deciduous,16,15,231220,208098,23122,319,1418,0
+pft_evergreen,33,20,684066,615659,68407,154,1510,0
+pft_mixed,10,9,272255,245029,27226,1568,2661,0
+biome_WoodlandShrubland,22,14,430267,387240,43027,112,1576,0
 biome_Temperate forest,25,21,616721,555048,61673,390,2122,0
 biome_Tropical rain forest,5,5,49084,44175,4909,428,948,0
 biome_Tropical forest savanna,5,2,42263,38036,4227,515,677,0

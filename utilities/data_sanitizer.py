@@ -51,7 +51,7 @@ def data_import(feature_list, file_list, verbose=True, cap_quantile=0.75, seed=5
             feature_df = feature_df.rename(columns={'interpolated': 'drivers_interpolated'})
             combined_df = feature_df.join(target_frame, how='inner')  # joined on timestamp rather than row position
             combined_df = combined_df.dropna(subset=feature_list + [target])  # Removes rows with missing values
-            if len(combined_df) < 336:  # drops sites with less than a week of valid data
+            if len(combined_df) < 1440:  # drops sites with less than 30 days of valid data
                 continue
             if (combined_df[target] < 0).mean() > 0.5:  # a record more than half below zero is not net
                 continue  # water transport, it is a zero flow baseline set too high

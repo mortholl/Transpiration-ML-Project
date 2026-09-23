@@ -7,6 +7,9 @@ from utilities.site_merger import merge_groups
 
 # This file creates clusters of sites sorted into sets related by climate or plant functional type
 
+# Functional type codes as preprocess() assigns them, named for the model and split files
+func_type_names = {0: 'deciduous', 1: 'evergreen', 2: 'mixed'}
+
 # Columns used as the k-means inputs. Edit this list to try a different set.
 cluster_features = ['MAP', 'MAT', 'Average Wind Speed']
 
