@@ -1,0 +1,15 @@
+# Python 3.12
+# Lower bounds only. Install into a clean environment, confirm the pipeline runs, then record what
+# actually resolved with:  pip freeze > requirements-lock.txt
+
+pandas>=2.2
+numpy>=1.26
+scikit-learn>=1.4
+matplotlib>=3.8
+
+scipy>=1.11           # utilities/correlation_finder.py only
+seaborn>=0.13         # utilities/results_plotter.py only
+
+# Neural_Networks/ann_optimization.py only, the rest of the pipeline runs without these
+tensorflow>=2.16      # CPU only on native Windows, GPU needs WSL2
+scikeras>=0.13        # replaces the removed tensorflow.keras.wrappers.scikit_learn

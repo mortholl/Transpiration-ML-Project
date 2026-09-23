@@ -5,7 +5,7 @@ from sklearn.metrics import mean_absolute_error
 from utilities.cluster_creator import ClusterCreator
 from utilities.data_sanitizer import data_import
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
+from utilities.test_set_builder import cluster_key, load_test_mask
 import datetime
 from sklearn.model_selection import GridSearchCV
 import numpy as np
@@ -44,9 +44,11 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
             X, Y, info = data_import(my_features, my_files, return_info=True)
             n_points = len(X)
             n_locations = info['Location'].nunique()
-            rows = np.arange(n_points)  # carried through the split so test rows trace back to a site
-            X_train, X_test, Y_train, Y_test, _, test_rows = train_test_split(X, Y, rows, test_size=0.1,
-                                                                              random_state=51)
+            is_test = load_test_mask(cluster_key(identifier, data_cluster), info)  # drawn once by
+            X_train, X_test = X[~is_test], X[is_test]        # test_set_builder.py, so this model and the
+            Y_train, Y_test = Y[~is_test], Y[is_test]        # other one are scored on the same rows
+            order = np.random.default_rng(51).permutation(len(X_train))  # GridSearchCV folds by position,
+            X_train, Y_train = X_train[order], Y_train[order]            # so the training rows are shuffled
             scaler = StandardScaler()
             X_train = scaler.fit_transform(X_train)
             X_test = scaler.transform(X_test)  # transform, never fit, on held out data
@@ -76,12 +78,13 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
             plt.clf()
             outfile = 'RandomForest/models/'+model_name+'.sav'
             pickle.dump(model, open(outfile, 'wb'))
-            test_set = info.iloc[test_rows].copy()  # kept for inspection, a rerun regenerates it
+            test_set = info[is_test].copy()  # kept for inspection, a rerun regenerates it
             test_set['observed'] = Y_test
             test_set['predicted'] = Y_pred
             test_set.to_csv('RandomForest/test_sets/' + model_name + '_test.csv', index=False)
-            site_r2 = test_set.groupby('Site').apply(
-                lambda group: pd.Series({'n': len(group), 'r2': r2_score(group['observed'], group['predicted'])}))
+            site_r2 = test_set.groupby('Site')[['observed', 'predicted']].apply(  # columns named so the
+                lambda group: pd.Series({'n': len(group),  # grouping column is not passed to the lambda
+                                         'r2': r2_score(group['observed'], group['predicted'])}))
             site_r2.to_csv('RandomForest/test_sets/' + model_name + '_site_r2.csv')
             csvfile.write(f'{model_name}, {n_files}, {n_locations}, {n_points}, {r2}, {r2_train}, {mae}, {",".join(feature_importances)}, {rf_grid.best_params_} \n')
             print(f'{model_name} complete')

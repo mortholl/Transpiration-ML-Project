@@ -48,9 +48,10 @@ archived to `resampled/merged_sources/`.
 **5. Load-time criteria (65 listed → 62 contributing).** Applied in `data_import()` on every run, since
 both depend on the active feature set.
 
-*Minimum 100 usable observations.* Excludes FRA_HES_HE1_NON (55 rows) and FRA_HES_HE2_NON (43 rows),
-both limited by soil water content rather than sap flux. The next smallest contributing site is ARG_MAZ
-at 575 rows.
+*Minimum one week of usable observations, 336 half hours.* Excludes FRA_HES_HE1_NON (55 rows, 1.1 days)
+and FRA_HES_HE2_NON (43 rows, 0.9 days), both limited by soil water content rather than sap flux. The
+next smallest contributing site is ARG_MAZ at 575 rows, 12.0 days, so any threshold between 56 and 575
+rows selects the same sites.
 
 *No more than 50% negative values.* SAPFLUXNET flags negative sap flux with `RANGE_WARN` but retains
 the values, leaving treatment to the data user. Small negative values are kept throughout; a record

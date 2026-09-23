@@ -43,18 +43,15 @@ def data_import(feature_list, file_list, verbose=True, cap_quantile=0.75, seed=5
                                      usecols=['TIMESTAMP', 'interpolated'] + feature_list)
             target_df = pd.read_csv(target_directory + '/' + site + '_sapf_data.csv', index_col='TIMESTAMP')
             sensor_columns = [name for name in target_df.columns if name != 'interpolated']  # one column per tree
-            target_df[sensor_columns] = target_df[sensor_columns].mask(target_df[sensor_columns] > 200)  # drop the
-            # faulty sensor rather than the whole timestamp, averaging first hides a bad tree among its neighbours
+            target_df[sensor_columns] = target_df[sensor_columns].mask(target_df[sensor_columns] > 200)  # a
+            # reading above 200 cm/h is instrument error
 
             target_frame = pd.DataFrame({target: target_df[sensor_columns].mean(axis=1),  # average sap flux at the site
                                          'target_interpolated': target_df['interpolated']})
             feature_df = feature_df.rename(columns={'interpolated': 'drivers_interpolated'})
             combined_df = feature_df.join(target_frame, how='inner')  # joined on timestamp rather than row position
             combined_df = combined_df.dropna(subset=feature_list + [target])  # Removes rows with missing values
-            # Remove large sap flux values that are likely errors, the ceiling is in sapwood units
-            # now, where the highest site mean outside one faulty sensor is 73 cm/h
-            combined_df = combined_df.drop(combined_df[combined_df[target] > 200].index)
-            if len(combined_df) < 100:  # too little overlap between the drivers and the sap flux to fit anything
+            if len(combined_df) < 336:  # drops sites with less than a week of valid data
                 continue
             if (combined_df[target] < 0).mean() > 0.5:  # a record more than half below zero is not net
                 continue  # water transport, it is a zero flow baseline set too high
@@ -67,7 +64,6 @@ def data_import(feature_list, file_list, verbose=True, cap_quantile=0.75, seed=5
     df_out = pd.concat(site_frames)
     df_out = cap_by_location(df_out, cap_quantile, seed, verbose)
     df_out = df_out[['Site', 'Location'] + feature_list + [target, 'drivers_interpolated', 'target_interpolated']]
-    df_out.to_csv('data/modeling_data/working_data.csv')
     x = df_out[feature_list].values
     y = df_out[target].values
     if verbose:

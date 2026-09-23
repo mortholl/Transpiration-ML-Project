@@ -5,11 +5,11 @@ from sklearn.metrics import r2_score
 from utilities.cluster_creator import ClusterCreator
 from utilities.data_sanitizer import data_import
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
+from utilities.test_set_builder import cluster_key, load_test_mask
 import datetime
 import numpy as np
 from sklearn.metrics import mean_absolute_error
-from tensorflow.keras.wrappers.scikit_learn import KerasRegressor
+from scikeras.wrappers import KerasRegressor
 from sklearn.model_selection import GridSearchCV
 from sklearn.inspection import permutation_importance
 import pandas as pd
@@ -29,26 +29,26 @@ my_features = ['ta', 'vpd', 'ppfd_in', 'swc_shallow']
 
 
 # Define model creation in function
-def create_model(n_hidden=2, n_neuron=20, regul_weight=0.01, lr=0.001):
+def create_model(meta, n_hidden=2, n_neuron=20, regul_weight=0.01, lr=0.001):
     model = keras.models.Sequential()
-    model.add(keras.layers.Dense(n_neuron, activation='relu', input_shape=(X_train.shape[1:]),
-                                 kernel_regularizer=keras.regularizers.l2(regul_weight)))
+    model.add(keras.layers.Input(shape=(meta['n_features_in_'],)))  # scikeras passes the feature count in
+    model.add(keras.layers.Dense(n_neuron, activation='relu',       # meta, the shape is no longer read
+                                 kernel_regularizer=keras.regularizers.l2(regul_weight)))  # off X_train
     for i in range(1, n_hidden):
         model.add(keras.layers.Dense(n_neuron, activation='relu',
                                      kernel_regularizer=keras.regularizers.l2(regul_weight)))
-    keras.layers.BatchNormalization()
     model.add(keras.layers.Dense(1, name='output', activation=None))
     model.compile(loss='mse', optimizer=keras.optimizers.Adam(learning_rate=lr))
     return model
 
 
 # Wrap model in scikit learn estimator, define parameters to test
-sk_estimator = KerasRegressor(build_fn=create_model, batch_size=32, verbose=0)
-param_grid = {'n_hidden': [8, 10],
-              'n_neuron': [24, 32],
+sk_estimator = KerasRegressor(model=create_model, batch_size=32, verbose=0)
+param_grid = {'model__n_hidden': [8, 10],   # scikeras routes the model__ parameters to create_model and
+              'model__n_neuron': [24, 32],  # keeps the rest for fit(), so epochs stays unprefixed
               'epochs': [120, 150],
-              # 'regul_weight': [1e-1, 1e-2, 1e-3],
-              # 'lr': [1e-2, 1e-3, 1e-4],
+              # 'model__regul_weight': [1e-1, 1e-2, 1e-3],
+              # 'model__lr': [1e-2, 1e-3, 1e-4],
               }
 
 
@@ -66,9 +66,11 @@ with open('Neural_Networks/ann_results.csv', 'w', newline='') as csvfile:
             X, Y, info = data_import(my_features, my_files, return_info=True)
             n_points = len(X)
             n_locations = info['Location'].nunique()
-            rows = np.arange(n_points)  # carried through the split so test rows trace back to a site
-            X_train, X_test, Y_train, Y_test, _, test_rows = train_test_split(X, Y, rows, test_size=0.1,
-                                                                              random_state=51)
+            is_test = load_test_mask(cluster_key(identifier, data_cluster), info)  # drawn once by
+            X_train, X_test = X[~is_test], X[is_test]        # test_set_builder.py, so this model and the
+            Y_train, Y_test = Y[~is_test], Y[is_test]        # other one are scored on the same rows
+            order = np.random.default_rng(51).permutation(len(X_train))  # GridSearchCV folds by position,
+            X_train, Y_train = X_train[order], Y_train[order]            # so the training rows are shuffled
             scaler = StandardScaler()
             X_train = scaler.fit_transform(X_train)
             X_test = scaler.transform(X_test)  # transform, never fit, on held out data
@@ -103,14 +105,15 @@ with open('Neural_Networks/ann_results.csv', 'w', newline='') as csvfile:
             plt.annotate(mae_label, (0.8*max(Y_test), 0.2*max(Y_pred)))
             plt.savefig('Neural_Networks/plots/'+model_name+'.png')
             plt.clf()
-            outfile = 'Neural_Networks/models/'+model_name+'.h5'
-            model.model.save(outfile)
-            test_set = info.iloc[test_rows].copy()  # kept for inspection, a rerun regenerates it
+            outfile = 'Neural_Networks/models/'+model_name+'.keras'
+            model.model_.save(outfile)  # the fitted keras model behind the scikeras wrapper
+            test_set = info[is_test].copy()  # kept for inspection, a rerun regenerates it
             test_set['observed'] = Y_test
             test_set['predicted'] = Y_pred
             test_set.to_csv('Neural_Networks/test_sets/' + model_name + '_test.csv', index=False)
-            site_r2 = test_set.groupby('Site').apply(
-                lambda group: pd.Series({'n': len(group), 'r2': r2_score(group['observed'], group['predicted'])}))
+            site_r2 = test_set.groupby('Site')[['observed', 'predicted']].apply(  # columns named so the
+                lambda group: pd.Series({'n': len(group),  # grouping column is not passed to the lambda
+                                         'r2': r2_score(group['observed'], group['predicted'])}))
             site_r2.to_csv('Neural_Networks/test_sets/' + model_name + '_site_r2.csv')
             csvfile.write(f'{model_name}, {n_files}, {n_locations}, {n_points}, {r2}, {r2_train}, {mae}, {feature_importances}, {ann_grid.best_params_} \n')
             print(f'{model_name} complete')
