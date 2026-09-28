@@ -1,0 +1,823 @@
+{
+ "type": "FeatureCollection",
+ "name": "study_locations",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "AUS_WOM",
+    "label": "AUS_WOM",
+    "biome": "Temperate forest",
+    "pft": "evergreen",
+    "n_sites": 1,
+    "n_trees": 11,
+    "sites": "AUS_WOM"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     144.0944,
+     -37.4222
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "CAN_TUR_P39_POS_P39_PRE_P74",
+    "label": "CAN_TUR_P39 +1",
+    "biome": "Temperate forest",
+    "pft": "evergreen",
+    "n_sites": 2,
+    "n_trees": 49,
+    "sites": "CAN_TUR_P39; CAN_TUR_P74"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -80.35286,
+     42.70829
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "CHE_DAV_SEE",
+    "label": "CHE_DAV_SEE",
+    "biome": "Temperate forest",
+    "pft": "evergreen",
+    "n_sites": 1,
+    "n_trees": 5,
+    "sites": "CHE_DAV_SEE"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     9.8562,
+     46.81668
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "CZE_LIZ_LES",
+    "label": "CZE_LIZ_LES",
+    "biome": "Temperate forest",
+    "pft": "evergreen",
+    "n_sites": 1,
+    "n_trees": 6,
+    "sites": "CZE_LIZ_LES"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.67975,
+     49.06668
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "GBR_ABE_PLO",
+    "label": "GBR_ABE_PLO",
+    "biome": "Temperate forest",
+    "pft": "evergreen",
+    "n_sites": 1,
+    "n_trees": 15,
+    "sites": "GBR_ABE_PLO"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -3.8,
+     56.616
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "GBR_GUI_ST1_ST2_ST3",
+    "label": "GBR_GUI_ST1 +2",
+    "biome": "Temperate forest",
+    "pft": "evergreen",
+    "n_sites": 3,
+    "n_trees": 32,
+    "sites": "GBR_GUI_ST1; GBR_GUI_ST2; GBR_GUI_ST3"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -4.81667,
+     57.26667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "ITA_TOR",
+    "label": "ITA_TOR",
+    "biome": "Temperate forest",
+    "pft": "deciduous",
+    "n_sites": 1,
+    "n_trees": 4,
+    "sites": "ITA_TOR"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.56089,
+     45.82376
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "NZL_HUA_HUA",
+    "label": "NZL_HUA_HUA",
+    "biome": "Temperate forest",
+    "pft": "evergreen",
+    "n_sites": 1,
+    "n_trees": 6,
+    "sites": "NZL_HUA_HUA"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     174.4903,
+     -36.7958
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "USA_DUK_HAR",
+    "label": "USA_DUK_HAR",
+    "biome": "Temperate forest",
+    "pft": "deciduous",
+    "n_sites": 1,
+    "n_trees": 40,
+    "sites": "USA_DUK_HAR"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -79.09419,
+     36.97818
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "USA_HIL_HF1_POS_HF1_PRE_HF2",
+    "label": "USA_HIL",
+    "biome": "Temperate forest",
+    "pft": "mixed",
+    "n_sites": 1,
+    "n_trees": 80,
+    "sites": "USA_HIL"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -78.86412,
+     36.21737
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "USA_INM",
+    "label": "USA_INM",
+    "biome": "Temperate forest",
+    "pft": "deciduous",
+    "n_sites": 1,
+    "n_trees": 9,
+    "sites": "USA_INM"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -86.41324,
+     39.32323
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "USA_PAR_FER",
+    "label": "USA_PAR_FER",
+    "biome": "Temperate forest",
+    "pft": "evergreen",
+    "n_sites": 1,
+    "n_trees": 8,
+    "sites": "USA_PAR_FER"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -76.66792,
+     35.80311
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "USA_SIL_OAK_1PR_2PR",
+    "label": "USA_SIL_OAK",
+    "biome": "Temperate forest",
+    "pft": "mixed",
+    "n_sites": 1,
+    "n_trees": 40,
+    "sites": "USA_SIL_OAK"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -74.59556,
+     39.91563
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "USA_SYL_HL2",
+    "label": "USA_SYL_HL2",
+    "biome": "Temperate forest",
+    "pft": "mixed",
+    "n_sites": 1,
+    "n_trees": 20,
+    "sites": "USA_SYL_HL2"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -89.34765,
+     46.24202
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "USA_TNB",
+    "label": "USA_TNB",
+    "biome": "Temperate forest",
+    "pft": "deciduous",
+    "n_sites": 1,
+    "n_trees": 8,
+    "sites": "USA_TNB"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -84.70407,
+     36.4712
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "USA_TNO_TNP",
+    "label": "USA_TNO +1",
+    "biome": "Temperate forest",
+    "pft": "deciduous; mixed",
+    "n_sites": 2,
+    "n_trees": 18,
+    "sites": "USA_TNO; USA_TNP"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -84.2849,
+     35.9632
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "USA_TNY",
+    "label": "USA_TNY",
+    "biome": "Temperate forest",
+    "pft": "deciduous",
+    "n_sites": 1,
+    "n_trees": 8,
+    "sites": "USA_TNY"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -83.5012,
+     35.68764
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "USA_UMB_CON",
+    "label": "USA_UMB_CON",
+    "biome": "Temperate forest",
+    "pft": "mixed",
+    "n_sites": 1,
+    "n_trees": 57,
+    "sites": "USA_UMB_CON"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -84.71333,
+     45.55972
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "USA_UMB_GIR",
+    "label": "USA_UMB_GIR",
+    "biome": "Temperate forest",
+    "pft": "mixed",
+    "n_sites": 1,
+    "n_trees": 57,
+    "sites": "USA_UMB_GIR"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -84.6975,
+     45.5625
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "USA_WIL_WC1",
+    "label": "USA_WIL_WC1",
+    "biome": "Temperate forest",
+    "pft": "deciduous",
+    "n_sites": 1,
+    "n_trees": 16,
+    "sites": "USA_WIL_WC1"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -90.08667,
+     45.81306
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "USA_WVF",
+    "label": "USA_WVF",
+    "biome": "Temperate forest",
+    "pft": "deciduous",
+    "n_sites": 1,
+    "n_trees": 8,
+    "sites": "USA_WVF"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -79.69067,
+     39.05887
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "USA_PJS_P04_AMB_P08_AMB_P12_AMB",
+    "label": "USA_PJS_P04_AMB +2",
+    "biome": "Temperate grassland desert",
+    "pft": "evergreen",
+    "n_sites": 3,
+    "n_trees": 30,
+    "sites": "USA_PJS_P04_AMB; USA_PJS_P08_AMB; USA_PJS_P12_AMB"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -106.52944,
+     34.38639
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "ESP_SAN_A2_45I_A_45I_B2_100_B_100",
+    "label": "ESP_SAN_A2_45I +3",
+    "biome": "Tropical forest savanna",
+    "pft": "evergreen",
+    "n_sites": 4,
+    "n_trees": 12,
+    "sites": "ESP_SAN_A2_45I; ESP_SAN_A_45I; ESP_SAN_B2_100; ESP_SAN_B_100"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -5.79707,
+     37.2491
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "THA_KHU",
+    "label": "THA_KHU",
+    "biome": "Tropical forest savanna",
+    "pft": "deciduous",
+    "n_sites": 1,
+    "n_trees": 6,
+    "sites": "THA_KHU"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     103.081,
+     15.273
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "CRI_TAM_TOW",
+    "label": "CRI_TAM_TOW",
+    "biome": "Tropical rain forest",
+    "pft": "missing",
+    "n_sites": 1,
+    "n_trees": 26,
+    "sites": "CRI_TAM_TOW"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -84.62583,
+     10.38694
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "GUF_GUY_GUY",
+    "label": "GUF_GUY_GUY",
+    "biome": "Tropical rain forest",
+    "pft": "mixed",
+    "n_sites": 1,
+    "n_trees": 6,
+    "sites": "GUF_GUY_GUY"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -52.92486,
+     5.27877
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "GUF_GUY_ST2",
+    "label": "GUF_GUY_ST2",
+    "biome": "Tropical rain forest",
+    "pft": "evergreen",
+    "n_sites": 1,
+    "n_trees": 11,
+    "sites": "GUF_GUY_ST2"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -52.91222,
+     5.28167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "IDN_JAM_OIL",
+    "label": "IDN_JAM_OIL",
+    "biome": "Tropical rain forest",
+    "pft": "evergreen",
+    "n_sites": 1,
+    "n_trees": 10,
+    "sites": "IDN_JAM_OIL"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     102.79183,
+     -2.07089
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "IDN_JAM_RUB",
+    "label": "IDN_JAM_RUB",
+    "biome": "Tropical rain forest",
+    "pft": "deciduous",
+    "n_sites": 1,
+    "n_trees": 10,
+    "sites": "IDN_JAM_RUB"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     102.78322,
+     -2.09528
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "AUS_RIC_EUC_ELE",
+    "label": "AUS_RIC_EUC_ELE",
+    "biome": "Woodland/Shrubland",
+    "pft": "evergreen",
+    "n_sites": 1,
+    "n_trees": 10,
+    "sites": "AUS_RIC_EUC_ELE"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     150.74028,
+     -33.61778
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "DEU_STE_2P3_4P5",
+    "label": "DEU_STE_2P3 +1",
+    "biome": "Woodland/Shrubland",
+    "pft": "deciduous",
+    "n_sites": 2,
+    "n_trees": 20,
+    "sites": "DEU_STE_2P3; DEU_STE_4P5"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.0,
+     53.1
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "ESP_CAN",
+    "label": "ESP_CAN",
+    "biome": "Woodland/Shrubland",
+    "pft": "mixed",
+    "n_sites": 1,
+    "n_trees": 21,
+    "sites": "ESP_CAN"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     2.07361,
+     41.43099
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "ESP_TIL_MIX_OAK_PIN",
+    "label": "ESP_TIL_MIX +2",
+    "biome": "Woodland/Shrubland",
+    "pft": "evergreen",
+    "n_sites": 3,
+    "n_trees": 51,
+    "sites": "ESP_TIL_MIX; ESP_TIL_OAK; ESP_TIL_PIN"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     1.01172,
+     41.33112
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "ESP_VAL_SOR",
+    "label": "ESP_VAL_SOR",
+    "biome": "Woodland/Shrubland",
+    "pft": "evergreen",
+    "n_sites": 1,
+    "n_trees": 13,
+    "sites": "ESP_VAL_SOR"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     1.81356,
+     42.19605
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "FIN_PET",
+    "label": "FIN_PET",
+    "biome": "Woodland/Shrubland",
+    "pft": "deciduous",
+    "n_sites": 1,
+    "n_trees": 7,
+    "sites": "FIN_PET"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     27.23108,
+     69.49182
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "FRA_PUE",
+    "label": "FRA_PUE",
+    "biome": "Woodland/Shrubland",
+    "pft": "evergreen",
+    "n_sites": 1,
+    "n_trees": 25,
+    "sites": "FRA_PUE"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     3.59583,
+     43.74139
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "GBR_DEV_CON_DRO",
+    "label": "GBR_DEV_CON +1",
+    "biome": "Woodland/Shrubland",
+    "pft": "evergreen",
+    "n_sites": 2,
+    "n_trees": 8,
+    "sites": "GBR_DEV_CON; GBR_DEV_DRO"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -3.71667,
+     56.03333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "NLD_LOO",
+    "label": "NLD_LOO",
+    "biome": "Woodland/Shrubland",
+    "pft": "evergreen",
+    "n_sites": 1,
+    "n_trees": 6,
+    "sites": "NLD_LOO"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     5.74355,
+     52.16648
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "PRT_LEZ_ARN",
+    "label": "PRT_LEZ_ARN",
+    "biome": "Woodland/Shrubland",
+    "pft": "evergreen",
+    "n_sites": 1,
+    "n_trees": 4,
+    "sites": "PRT_LEZ_ARN"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -8.81667,
+     38.83333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "SWE_NOR_ST1_BEF_ST2_ST3_ST4_AFT_ST4_BEF_ST5_REF",
+    "label": "SWE_NOR_ST1_ST3 +4",
+    "biome": "Woodland/Shrubland",
+    "pft": "evergreen; mixed",
+    "n_sites": 5,
+    "n_trees": 192,
+    "sites": "SWE_NOR_ST1_ST3; SWE_NOR_ST2; SWE_NOR_ST4_AFT; SWE_NOR_ST4_BEF; SWE_NOR_ST5_REF"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     17.4776,
+     60.0842
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "ZAF_FRA_FRA",
+    "label": "ZAF_FRA_FRA",
+    "biome": "Woodland/Shrubland",
+    "pft": "deciduous",
+    "n_sites": 1,
+    "n_trees": 3,
+    "sites": "ZAF_FRA_FRA"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     19.06098,
+     -33.88433
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "ZAF_NOO_E3_IRR",
+    "label": "ZAF_NOO_E3_IRR",
+    "biome": "Woodland/Shrubland",
+    "pft": "deciduous",
+    "n_sites": 1,
+    "n_trees": 6,
+    "sites": "ZAF_NOO_E3_IRR"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     19.33752,
+     -33.20099
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "location": "ZAF_SOU_SOU",
+    "label": "ZAF_SOU_SOU",
+    "biome": "Woodland/Shrubland",
+    "pft": "deciduous",
+    "n_sites": 1,
+    "n_trees": 2,
+    "sites": "ZAF_SOU_SOU"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     19.0933,
+     -34.087
+    ]
+   }
+  }
+ ]
+}

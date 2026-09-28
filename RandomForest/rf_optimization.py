@@ -7,6 +7,7 @@ from utilities.data_sanitizer import data_import
 from sklearn.preprocessing import StandardScaler
 from utilities.test_set_builder import cluster_key, load_test_mask
 import datetime
+import os
 from sklearn.model_selection import GridSearchCV
 import numpy as np
 import pandas as pd
@@ -14,6 +15,8 @@ import joblib
 
 
 begin_time = datetime.datetime.now()
+for folder in ['models', 'plots', 'test_sets']:  # git does not keep empty folders, so a fresh checkout may lack them
+    os.makedirs('RandomForest/' + folder, exist_ok=True)
 
 # Create clusters of files to select from
 cluster_creator = ClusterCreator.build_clusters()
@@ -31,26 +34,26 @@ param_grid = {'n_estimators': [600, 800, 1200],
 rf = RandomForestRegressor(n_estimators=500, max_depth=9, random_state=51)
 
 with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
-    csvfile.write(f'Data set, n sites, n locations, n data points, R2 test, R2 train, MAE, {",".join(my_features)}, Best parameters \n')
+    csvfile.write(f'Data set, n sites, n locations, n data points, R2 test, R2 train, R2 CV, MAE, {",".join(my_features)}, Best parameters\n')
 
     # Loop over all clusters
     for identifier, cluster_group in zip(['pft_', 'biome_'], [func_clusters, biome_clusters]):  # add 'k_means_' and k_clusters to include the k-means groups
         for data_cluster in cluster_group:
             # Get data
             my_files = cluster_group[data_cluster]
-            n_files = len(my_files)
             model_name = cluster_key(identifier, data_cluster) + '_rf'
             X, Y, info = data_import(my_features, my_files, return_info=True)
+            n_files = info['Site'].nunique()
             n_points = len(X)
             n_locations = info['Location'].nunique()
-            is_test = load_test_mask(cluster_key(identifier, data_cluster), info)  # drawn once by
-            X_train, X_test = X[~is_test], X[is_test]        # test_set_builder.py, so this model and the
-            Y_train, Y_test = Y[~is_test], Y[is_test]        # other one are scored on the same rows
+            is_test = load_test_mask(cluster_key(identifier, data_cluster), info)  # drawn once by test_set_builder.py
+            X_train, X_test = X[~is_test], X[is_test]
+            Y_train, Y_test = Y[~is_test], Y[is_test]
             order = np.random.default_rng(51).permutation(len(X_train))  # GridSearchCV folds by position,
             X_train, Y_train = X_train[order], Y_train[order]            # so the training rows are shuffled
             scaler = StandardScaler()
             X_train = scaler.fit_transform(X_train)
-            X_test = scaler.transform(X_test)  # transform, never fit, on held out data
+            X_test = scaler.transform(X_test)  # transform on held out data
             joblib.dump(scaler, 'RandomForest/models/' + model_name + '_scaler.joblib', compress=3)
 
             # Grid search to find optimal hyperparameters
@@ -63,19 +66,19 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
             Y_pred = model.predict(X_test)
             mae = mean_absolute_error(Y_test, Y_pred)
             r2 = r2_score(Y_test, Y_pred)
-            r2_train = rf_grid.best_score_
+            r2_train = r2_score(Y_train, model.predict(X_train))  # the final model on its own training rows
+            r2_cv = rf_grid.best_score_  # mean R2 on the validation folds, the score that picked the parameters
             plt.scatter(Y_test, Y_pred)
-            plt.xlabel('True values [$cm^3/s$]')
-            plt.ylabel('Predicted values [$cm^3/s$]')
+            plt.xlabel('Observed sap flux [cm h$^{-1}$]')
+            plt.ylabel('Predicted sap flux [cm h$^{-1}$]')
             plt.title(model_name)
             r2_label = '$R^2$ = ' + str(round(r2, 3))
-            mae_label = 'MAE = ' + str(int(round(mae, 0)))
+            mae_label = 'MAE = ' + str(round(mae, 2))
             plt.annotate(r2_label, (0.8*max(Y_test), 0.1*max(Y_pred)))
             plt.annotate(mae_label, (0.8*max(Y_test), 0.2*max(Y_pred)))
             plt.savefig('RandomForest/plots/'+model_name+'.png')
             plt.clf()
-            joblib.dump(model, 'RandomForest/models/' + model_name + '.joblib', compress=3)  # a forest
-            # is mostly repeated node arrays, which compress well, and joblib closes the file itself
+            joblib.dump(model, 'RandomForest/models/' + model_name + '.joblib', compress=3)  # compression
             test_set = info[is_test].copy()  # kept for inspection, a rerun regenerates it
             test_set['observed'] = Y_test
             test_set['predicted'] = Y_pred
@@ -84,7 +87,7 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
                 lambda group: pd.Series({'n': len(group),  # grouping column is not passed to the lambda
                                          'r2': r2_score(group['observed'], group['predicted'])}))
             site_r2.to_csv('RandomForest/test_sets/' + model_name + '_site_r2.csv')
-            csvfile.write(f'{model_name}, {n_files}, {n_locations}, {n_points}, {r2}, {r2_train}, {mae}, {",".join(feature_importances)}, {rf_grid.best_params_} \n')
+            csvfile.write(f'{model_name}, {n_files}, {n_locations}, {n_points}, {r2}, {r2_train}, {r2_cv}, {mae}, {",".join(feature_importances)}, {str(rf_grid.best_params_).replace(",", ";")}\n')
             print(f'{model_name} complete')
 
 end_time = datetime.datetime.now()

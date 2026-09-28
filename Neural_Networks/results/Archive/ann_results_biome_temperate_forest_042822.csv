@@ -1,0 +1,2 @@
+Data set, n locations, n data points, R2 test, R2 train, MAE, ta,vpd,ppfd_in,swc_shallow, Best parameters 
+biome_temperate_forest, 39, 883163, 0.5163707827767666, 0.5094612407749843, 1156.5252429222544, 0.29469752827734313, 0.22095003102148178, 0.2463983672245218, 0.23795407347665334, {'epochs': 150, 'n_hidden': 10, 'n_neuron': 32} 
