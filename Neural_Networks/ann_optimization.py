@@ -11,7 +11,6 @@ import numpy as np
 from sklearn.metrics import mean_absolute_error
 from scikeras.wrappers import KerasRegressor
 from sklearn.model_selection import GridSearchCV
-from sklearn.inspection import permutation_importance
 import pandas as pd
 import joblib
 import time
@@ -71,7 +70,7 @@ param_grid = {'model__n_hidden': [8, 10],   # scikeras routes the model__ parame
 
 
 with open('Neural_Networks/ann_results.csv', 'w', newline='') as csvfile:
-    csvfile.write(f'Data set, n sites, n locations, n data points, R2 test, R2 train, R2 CV, MAE, {",".join(my_features)}, Best parameters\n')
+    csvfile.write(f'Data set, n sites, n locations, n data points, R2 test, R2 train, R2 CV, MAE, Best parameters\n')
 
     # Loop over all clusters
     for identifier, cluster_group in zip(['pft_', 'biome_'], [func_clusters, biome_clusters]):  # add 'k_means_' and k_clusters to include the k-means groups
@@ -109,10 +108,6 @@ with open('Neural_Networks/ann_results.csv', 'w', newline='') as csvfile:
             r2 = r2_score(Y_test, Y_pred)
             r2_train = r2_score(Y_train, model.predict(X_train))  # the final model on its own training rows
             r2_cv = ann_grid.best_score_  # mean R2 on the validation folds, the score that picked the parameters
-            feature_importances = permutation_importance(model, X_train, Y_train)
-            feature_importances = feature_importances.importances_mean
-            feature_importances = feature_importances / np.sum(feature_importances)
-            feature_importances = ','.join(str(round(n, 4)) for n in feature_importances)  # plain numbers, one column each
             plt.scatter(Y_test, Y_pred)
             plt.xlabel('Observed sap flux [cm h$^{-1}$]')
             plt.ylabel('Predicted sap flux [cm h$^{-1}$]')
@@ -133,7 +128,7 @@ with open('Neural_Networks/ann_results.csv', 'w', newline='') as csvfile:
                 lambda group: pd.Series({'n': len(group),  # grouping column is not passed to the lambda
                                          'r2': r2_score(group['observed'], group['predicted'])}))
             site_r2.to_csv('Neural_Networks/test_sets/' + model_name + '_site_r2.csv')
-            csvfile.write(f'{model_name}, {n_files}, {n_locations}, {n_points}, {r2}, {r2_train}, {r2_cv}, {mae}, {feature_importances}, {str(ann_grid.best_params_).replace(",", ";")}\n')
+            csvfile.write(f'{model_name}, {n_files}, {n_locations}, {n_points}, {r2}, {r2_train}, {r2_cv}, {mae}, {str(ann_grid.best_params_).replace(",", ";")}\n')
             print(f'{model_name} complete')
 
 end_time = datetime.datetime.now()

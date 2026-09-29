@@ -34,7 +34,7 @@ param_grid = {'n_estimators': [600, 800, 1200],
 rf = RandomForestRegressor(n_estimators=500, max_depth=9, random_state=51)
 
 with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
-    csvfile.write(f'Data set, n sites, n locations, n data points, R2 test, R2 train, R2 CV, MAE, {",".join(my_features)}, Best parameters\n')
+    csvfile.write(f'Data set, n sites, n locations, n data points, R2 test, R2 train, R2 CV, MAE, Best parameters\n')
 
     # Loop over all clusters
     for identifier, cluster_group in zip(['pft_', 'biome_'], [func_clusters, biome_clusters]):  # add 'k_means_' and k_clusters to include the k-means groups
@@ -62,7 +62,6 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
 
             # Get metrics
             model = rf_grid.best_estimator_
-            feature_importances = [str(round(n, 4)) for n in model.feature_importances_]
             Y_pred = model.predict(X_test)
             mae = mean_absolute_error(Y_test, Y_pred)
             r2 = r2_score(Y_test, Y_pred)
@@ -87,7 +86,7 @@ with open('RandomForest/rf_results.csv', 'w', newline='') as csvfile:
                 lambda group: pd.Series({'n': len(group),  # grouping column is not passed to the lambda
                                          'r2': r2_score(group['observed'], group['predicted'])}))
             site_r2.to_csv('RandomForest/test_sets/' + model_name + '_site_r2.csv')
-            csvfile.write(f'{model_name}, {n_files}, {n_locations}, {n_points}, {r2}, {r2_train}, {r2_cv}, {mae}, {",".join(feature_importances)}, {str(rf_grid.best_params_).replace(",", ";")}\n')
+            csvfile.write(f'{model_name}, {n_files}, {n_locations}, {n_points}, {r2}, {r2_train}, {r2_cv}, {mae}, {str(rf_grid.best_params_).replace(",", ";")}\n')
             print(f'{model_name} complete')
 
 end_time = datetime.datetime.now()

@@ -42,7 +42,6 @@ rf_grid = GridSearchCV(rf, param_grid, cv=5, scoring='r2', verbose=3, n_jobs=1, 
 rf_grid.fit(X_train, Y_train)
 
 model = rf_grid.best_estimator_
-feature_importances = [str(round(n, 4)) for n in model.feature_importances_]
 Y_pred = model.predict(X_test)
 mae = mean_absolute_error(Y_test, Y_pred)
 r2 = r2_score(Y_test, Y_pred)
@@ -66,5 +65,5 @@ outfile = 'RandomForest/rf_'+model_name+'.sav'
 pickle.dump(model, open(outfile, 'wb'))  # the fitted best estimator, not the unfitted rf given to the grid search
 with open('RandomForest/rf_results_'+model_name+'.csv', 'w', newline='') as csvfile:
     csvfile.write(f'Data set ')
-    csvfile.write(f'R2 test, R2 train, MAE, {",".join(my_features)} \n')
-    csvfile.write(f'{r2}, {r2_train}, {mae}, {",".join(feature_importances)} \n')
+    csvfile.write(f'R2 test, R2 train, MAE \n')
+    csvfile.write(f'{r2}, {r2_train}, {mae} \n')

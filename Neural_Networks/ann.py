@@ -10,7 +10,6 @@ from tensorflow import keras
 import matplotlib.pyplot as plt
 from tensorflow.keras.wrappers.scikit_learn import KerasRegressor
 from sklearn.model_selection import GridSearchCV
-from sklearn.inspection import permutation_importance
 
 
 cluster_creator = ClusterCreator.build_clusters()
@@ -71,10 +70,6 @@ Y_pred = model.predict(X_test)
 mae = mean_absolute_error(Y_test, Y_pred)
 r2 = r2_score(Y_test, Y_pred)
 r2_train = ann_grid.best_score_
-feature_importances = permutation_importance(model, X_train, Y_train)
-feature_importances = feature_importances.importances_mean
-feature_importances = feature_importances / np.sum(feature_importances)
-feature_importances = f'{[feature for feature in feature_importances]}'.replace('[', '').replace(']', '')
 plt.scatter(Y_test, Y_pred)
 plt.xlabel('True values')
 plt.ylabel('Predicted values')
@@ -88,8 +83,8 @@ plt.clf()
 outfile = 'Neural_Networks/models/'+model_name+'.h5'
 model.model.save(outfile)
 with open('Neural_Networks/ann_results_'+model_name+'.csv', 'w', newline='') as csvfile:
-    csvfile.write(f'Data set, n sites, n data points, R2 test, R2 train, MAE, {",".join(my_features)}, Best parameters \n')
-    csvfile.write(f'{model_name}, {n_files}, {n_points}, {r2}, {r2_train}, {mae}, {feature_importances}, {ann_grid.best_params_} \n')
+    csvfile.write(f'Data set, n sites, n data points, R2 test, R2 train, MAE, Best parameters \n')
+    csvfile.write(f'{model_name}, {n_files}, {n_points}, {r2}, {r2_train}, {mae}, {ann_grid.best_params_} \n')
 print(f'{model_name} complete')
 
 plt.scatter(Y_test, Y_pred)
