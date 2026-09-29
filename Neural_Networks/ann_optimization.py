@@ -1,5 +1,5 @@
 import tensorflow as tf
-from tensorflow import keras
+import keras
 import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score
 from utilities.cluster_creator import ClusterCreator

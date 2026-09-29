@@ -10,6 +10,7 @@ matplotlib>=3.8
 
 scipy>=1.11           # utilities/correlation_finder.py only
 seaborn>=0.13         # utilities/results_plotter.py only
+uncertainties>=3.2    # paper_visualizations/model_performance_figures.py only, regression confidence bands
 
 # Neural_Networks/ann_optimization.py only, the rest of the pipeline runs without these
 tensorflow>=2.16      # CPU only on native Windows, GPU needs WSL2
