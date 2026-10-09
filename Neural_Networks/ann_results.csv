@@ -1,9 +1,9 @@
-Data set, n sites, n locations, n data points, R2 test, R2 train, R2 CV, MAE, ta,vpd,ppfd_in,swc_shallow, Best parameters
-pft_deciduous_ann, 16, 15, 231220, 0.6980461979129984, 0.7051276880992116, 0.6958141197980622, 1.82626899550429, 0.3324,0.2259,0.3332,0.1085, {'epochs': 150; 'model__n_hidden': 8; 'model__n_neuron': 24}
-pft_evergreen_ann, 33, 20, 684066, 0.5246042129051004, 0.5205214902948905, 0.5165500374144321, 1.8828459046125892, 0.3224,0.2229,0.3051,0.1496, {'epochs': 150; 'model__n_hidden': 10; 'model__n_neuron': 32}
-pft_mixed_ann, 10, 9, 272255, 0.6599988920606747, 0.6700480792916839, 0.6683236447864719, 1.9094805851761993, 0.259,0.2544,0.3749,0.1117, {'epochs': 150; 'model__n_hidden': 8; 'model__n_neuron': 32}
-biome_WoodlandShrubland_ann, 22, 14, 430267, 0.6355263502029054, 0.6373886878799555, 0.6311609103294988, 1.5444642346427917, 0.1758,0.2927,0.3671,0.1644, {'epochs': 150; 'model__n_hidden': 10; 'model__n_neuron': 24}
-biome_Temperate forest_ann, 25, 21, 616721, 0.5411288879123455, 0.5480781643310794, 0.5453457013306701, 2.0704622257482224, 0.326,0.2139,0.3724,0.0877, {'epochs': 120; 'model__n_hidden': 8; 'model__n_neuron': 32}
-biome_Tropical rain forest_ann, 5, 5, 49084, 0.9161769131940585, 0.9168865093545346, 0.9116744408915942, 1.2713238388557795, 0.1328,0.315,0.3515,0.2007, {'epochs': 150; 'model__n_hidden': 8; 'model__n_neuron': 24}
-biome_Tropical forest savanna_ann, 5, 2, 42263, 0.8027302260667539, 0.8092542667592886, 0.8270159078756892, 1.2713868187551693, 0.2627,0.2643,0.2887,0.1843, {'epochs': 150; 'model__n_hidden': 8; 'model__n_neuron': 32}
-biome_Temperate grassland desert_ann, 3, 1, 244582, 0.7635127093994389, 0.7601636599813903, 0.7594174490187907, 0.5006494149948678, 0.0608,0.1263,0.4207,0.3922, {'epochs': 120; 'model__n_hidden': 8; 'model__n_neuron': 24}
+Data set, n sites, n locations, n data points, R2 test, R2 train, R2 CV, MAE, Best parameters
+pft_deciduous_ann, 16, 15, 231220, 0.6980461979129984, 0.7051276880992116, 0.6958141197980622, 1.82626899550429, {'epochs': 150; 'model__n_hidden': 8; 'model__n_neuron': 24}
+pft_evergreen_ann, 33, 20, 684066, 0.5246042129051004, 0.5205214902948905, 0.5165500374144321, 1.8828459046125892, {'epochs': 150; 'model__n_hidden': 10; 'model__n_neuron': 32}
+pft_mixed_ann, 10, 9, 272255, 0.6599988920606747, 0.6700480792916839, 0.6683236447864719, 1.9094805851761993, {'epochs': 150; 'model__n_hidden': 8; 'model__n_neuron': 32}
+biome_WoodlandShrubland_ann, 22, 14, 430267, 0.6355263502029054, 0.6373886878799555, 0.6311609103294988, 1.5444642346427917, {'epochs': 150; 'model__n_hidden': 10; 'model__n_neuron': 24}
+biome_Temperate forest_ann, 25, 21, 616721, 0.5411288879123455, 0.5480781643310794, 0.5453457013306701, 2.0704622257482224, {'epochs': 120; 'model__n_hidden': 8; 'model__n_neuron': 32}
+biome_Tropical rain forest_ann, 5, 5, 49084, 0.9161769131940585, 0.9168865093545346, 0.9116744408915942, 1.2713238388557795, {'epochs': 150; 'model__n_hidden': 8; 'model__n_neuron': 24}
+biome_Tropical forest savanna_ann, 5, 2, 42263, 0.8027302260667539, 0.8092542667592886, 0.8270159078756892, 1.2713868187551693, {'epochs': 150; 'model__n_hidden': 8; 'model__n_neuron': 32}
+biome_Temperate grassland desert_ann, 3, 1, 244582, 0.7635127093994389, 0.7601636599813903, 0.7594174490187907, 0.5006494149948678, {'epochs': 120; 'model__n_hidden': 8; 'model__n_neuron': 24}

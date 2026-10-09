@@ -6,6 +6,7 @@ Replaces the performance figures in 'SAPFLUXNET transpiration ML project visuali
 which is an archive of the original figures:
     cell 2, panel a (R2 violins, PFT vs biome)   ->  model_performance_cluster_r2.png
     new, site-level test R2                      ->  model_performance_site_r2.png
+    the two above stacked as (a) and (b)         ->  model_performance_cluster_site_r2.png
     cell 3 (numsites_r2.png)                     ->  model_performance_numlocations_r2.png
 Clusters are only compared within panels of similar size (number of locations), per the review.
 Feature importance figures are handled separately.
@@ -57,8 +58,8 @@ size_panels = [
 ]
 panel_widths = [4, 2, 2]
 
-color1 = '#377eb8'  # RF
-color2 = '#4daf4a'  # NN
+color1 = '#0072B2'  # RF, Okabe-Ito blue (colour blind safe)
+color2 = '#D55E00'  # NN, Okabe-Ito vermillion
 hatch1 = '.'
 hatch2 = '/'
 
@@ -75,22 +76,30 @@ def tidy(ax):
 # ---------------------------------------------------------------------------------------------- cluster test R2
 barWidth = 0.36
 
-fig, ax = plt.subplots(1, 3, figsize=(11, 3.8), sharey=True, gridspec_kw={'width_ratios': panel_widths})
 
-for ax1, (title, in_panel) in zip(ax, size_panels):
-    panel = RF_trim[in_panel(RF_trim['n locations_rf'])]
-    r1 = np.arange(len(panel))
-    ax1.bar(r1 - barWidth / 2, panel['R2 test_rf'], barWidth, color=color1, hatch=hatch1, edgecolor='k', label='RF')
-    ax1.bar(r1 + barWidth / 2, panel['R2 test_nn'], barWidth, color=color2, hatch=hatch2, edgecolor='k', label='ANN')
-    ax1.set_xticks(r1)
+def set_panel_xaxis(ax1, panel, title):  # same category positions and limits in the bar and site panels
+    ax1.set_xticks(range(len(panel)))
     ax1.set_xticklabels([cluster_label(row) for _, row in panel.iterrows()], fontsize=7.5)
+    ax1.set_xlim(-0.5, len(panel) - 0.5)
     ax1.set_title(title, fontsize=10)
     tidy(ax1)
 
-ax[0].set_ylim(0, 1.05)
-ax[0].set_ylabel('Test set R$^2$')
-ax[0].legend(frameon=False, ncol=2, loc='upper left', bbox_to_anchor=(0, 1.02))
 
+def plot_cluster_r2(ax):
+    for ax1, (title, in_panel) in zip(ax, size_panels):
+        panel = RF_trim[in_panel(RF_trim['n locations_rf'])]
+        r1 = np.arange(len(panel))
+        ax1.bar(r1 - barWidth / 2, panel['R2 test_rf'], barWidth, color=color1, hatch=hatch1, edgecolor='k', label='RF')
+        ax1.bar(r1 + barWidth / 2, panel['R2 test_nn'], barWidth, color=color2, hatch=hatch2, edgecolor='k', label='NN')
+        set_panel_xaxis(ax1, panel, title)
+
+    ax[0].set_ylim(0, 1.05)
+    ax[0].set_ylabel('Pooled test set R$^2$')
+    ax[0].legend(frameon=False, ncol=2, loc='upper left', bbox_to_anchor=(0, 1.02))
+
+
+fig, ax = plt.subplots(1, 3, figsize=(11, 3.8), sharey=True, gridspec_kw={'width_ratios': panel_widths})
+plot_cluster_r2(ax)
 fig.tight_layout()
 fig.savefig(os.path.join(folder, 'model_performance_cluster_r2.png'), dpi=300)
 
@@ -106,35 +115,46 @@ for key in RF_trim['key']:
 site_r2 = pd.concat(site_r2, ignore_index=True)
 
 r2_floor = -1  # a few sites fall far below zero (down to about -40); they are drawn at the floor and counted
-rng = np.random.default_rng(0)  # fixed jitter so the figure is reproducible
+
+
+def plot_site_r2(ax):
+    rng = np.random.default_rng(0)  # fixed jitter so the figure is reproducible
+    for ax1, (title, in_panel) in zip(ax, size_panels):
+        panel = RF_trim[in_panel(RF_trim['n locations_rf'])]
+        for i, key in enumerate(panel['key']):
+            sites = site_r2[site_r2['key'] == key]
+            for offset, column, color in ((-0.18, 'r2_rf', color1), (0.18, 'r2_nn', color2)):
+                y = sites[column].clip(lower=r2_floor)
+                ax1.boxplot(y, positions=[i + offset], widths=0.3, showfliers=False,
+                            medianprops=dict(color='k'), boxprops=dict(color=color))
+                ax1.scatter(i + offset + rng.uniform(-0.06, 0.06, len(y)), y, s=10, color=color, alpha=0.8, zorder=3)
+                n_clipped = (sites[column] < r2_floor).sum()
+                if n_clipped:
+                    ax1.annotate(f'{n_clipped}↓', (i + offset, r2_floor - 0.08), ha='center', fontsize=7)
+        set_panel_xaxis(ax1, panel, title)
+        ax1.axhline(0.5, color='grey', linewidth=0.5)  # the R2 floor used for the site level analyses
+
+    ax[0].set_ylim(r2_floor - 0.15, 1)
+    ax[0].set_ylabel('Site test R$^2$ (clipped at -1)')
+    ax[-1].legend([Line2D([], [], marker='o', ls='', color=color1), Line2D([], [], marker='o', ls='', color=color2)],
+                  ['RF', 'NN'], frameon=False, loc='lower right')
+
 
 fig, ax = plt.subplots(1, 3, figsize=(11, 4), sharey=True, gridspec_kw={'width_ratios': panel_widths})
-
-for ax1, (title, in_panel) in zip(ax, size_panels):
-    panel = RF_trim[in_panel(RF_trim['n locations_rf'])]
-    for i, key in enumerate(panel['key']):
-        sites = site_r2[site_r2['key'] == key]
-        for offset, column, color in ((-0.18, 'r2_rf', color1), (0.18, 'r2_nn', color2)):
-            y = sites[column].clip(lower=r2_floor)
-            ax1.boxplot(y, positions=[i + offset], widths=0.3, showfliers=False,
-                        medianprops=dict(color='k'), boxprops=dict(color=color))
-            ax1.scatter(i + offset + rng.uniform(-0.06, 0.06, len(y)), y, s=10, color=color, alpha=0.8, zorder=3)
-            n_clipped = (sites[column] < r2_floor).sum()
-            if n_clipped:
-                ax1.annotate(f'{n_clipped}↓', (i + offset, r2_floor - 0.08), ha='center', fontsize=7)
-    ax1.set_xticks(range(len(panel)))
-    ax1.set_xticklabels([cluster_label(row) for _, row in panel.iterrows()], fontsize=7.5)
-    ax1.set_title(title, fontsize=10)
-    ax1.axhline(0, color='grey', linewidth=0.5)
-    tidy(ax1)
-
-ax[0].set_ylim(r2_floor - 0.15, 1)
-ax[0].set_ylabel('Site test R$^2$ (clipped at -1)')
-ax[-1].legend([Line2D([], [], marker='o', ls='', color=color1), Line2D([], [], marker='o', ls='', color=color2)],
-              ['RF', 'ANN'], frameon=False, loc='lower right')
-
+plot_site_r2(ax)
 fig.tight_layout()
 fig.savefig(os.path.join(folder, 'model_performance_site_r2.png'), dpi=300)
+
+# ---------------------------------------------------------------------------------------------- combined cluster and site R2
+# (a) cluster test R2 above (b) site test R2, on one grid so the size panels share their edges and widths
+fig, ax = plt.subplots(2, 3, figsize=(11, 7.8), sharey='row', gridspec_kw={'width_ratios': panel_widths})
+plot_cluster_r2(ax[0])
+plot_site_r2(ax[1])
+for row, letter in zip(ax, 'ab'):
+    row[0].text(-0.2, 1.08, f'({letter})', transform=row[0].transAxes, fontsize=12, fontweight='bold', va='bottom')
+fig.tight_layout()
+fig.align_ylabels(ax[:, 0])
+fig.savefig(os.path.join(folder, 'performance_r2_summary.png'), dpi=300)
 
 # ---------------------------------------------------------------------------------------------- R2 vs number of locations
 def f(x, a, b):
@@ -156,7 +176,7 @@ px = np.arange(0, 25, 1)
 
 fig, pt = plt.subplots(figsize=(7.5, 4.5))
 
-for label, PFT, biome, data, color in (('RF', RF_PFT, RF_biome, RF, color1), ('ANN', NN_PFT, NN_biome, NN, color2)):
+for label, PFT, biome, data, color in (('RF', RF_PFT, RF_biome, RF, color1), ('NN', NN_PFT, NN_biome, NN, color2)):
     popt, nom, std = conf_int(data['n locations'], data['R2 test'], px)
     y_pred = f(data['n locations'], *popt)
     print(f'{label}: slope {popt[0]:.4f} per location, intercept {popt[1]:.3f}, '

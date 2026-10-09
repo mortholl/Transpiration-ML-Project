@@ -1,57 +1,44 @@
 from utilities.cluster_creator import ClusterCreator
 from utilities.data_sanitizer import data_import
-import matplotlib.pyplot as plt
-import numpy as np
+from utilities.test_set_builder import cluster_key
 import pandas as pd
 
-# Create clusters of files to select from
-cluster_creator = ClusterCreator.build_clusters()
-k_clusters = cluster_creator.k_cluster_dict
-func_clusters = cluster_creator.func_cluster_dict
-biome_clusters = cluster_creator.biome_cluster_dict
+# Climate and data averages for every PFT and biome cluster, and for every site within each cluster, so the
+# feature importance figures can plot importance against climate without loading the data themselves
+# The averages are taken over the rows the models were trained and tested on, after the location cap; a site
+# can keep a different number of rows in its PFT and its biome cluster, so the site table is keyed by both
+# MAP and MAT are the site values in cluster_info.csv, a cluster's are the average over its sites
+# Run from the project folder after site_merger.py
 
+cluster_file = 'data/modeling_data/cluster_statistics.csv'
+site_file = 'data/modeling_data/site_statistics.csv'
+
+# Must match the feature list in the optimization scripts
 my_features = ['ta', 'vpd', 'ppfd_in', 'swc_shallow']
+average_names = {feature: feature + '_avg' for feature in my_features}  # the column names the notebook used
 
-avg_dict = {}
-var_dict = {}
+if __name__ == '__main__':
+    cluster_creator = ClusterCreator.build_clusters()
+    site_climate = pd.read_csv('data/modeling_data/cluster_info.csv', index_col='Site')[['MAP', 'MAT']]
+    groups = zip(['pft_', 'biome_'], [cluster_creator.func_cluster_dict, cluster_creator.biome_cluster_dict])
+    cluster_rows, site_tables = [], []
+    for identifier, cluster_group in groups:  # the same clusters the optimization scripts loop over, k-means
+        for data_cluster in cluster_group:    # is left out, its labels move between runs
+            key = cluster_key(identifier, data_cluster)
+            X, Y, info = data_import(my_features, cluster_group[data_cluster], verbose=False, return_info=True)
+            data = pd.DataFrame(X, columns=my_features).rename(columns=average_names)
+            data['Sap flux average'] = Y
+            data['Site'] = info['Site'].values
 
-for k, k_cluster in k_clusters.items():
-    X, Y = data_import(my_features, k_cluster)
-    feat_avg = [float(x) for x in np.average(X, axis=0)]
-    feat_var = [float(x) for x in np.var(X, axis=0)]
-    sf_avg = float(np.average(Y))
-    sf_var = float(np.var(Y))
-    avg_dict.update({k: [feat_avg, sf_avg]})
-    var_dict.update({k: [feat_var, sf_var]})
+            sites = data.groupby('Site').mean().join(site_climate)
+            sites.insert(0, 'Data set', key)
+            site_tables.append(sites.reset_index())
 
-for func, func_cluster in func_clusters.items():
-    X, Y = data_import(my_features, func_cluster)
-    feat_avg = [float(x) for x in np.average(X, axis=0)]
-    feat_var = [float(x) for x in np.var(X, axis=0)]
-    sf_avg = float(np.average(Y))
-    sf_var = float(np.var(Y))
-    if func == 0:
-        func = "deciduous"
-    if func == 1:
-        func = "evergreen"
-    if func == 2:
-        func = "mixed"
-    avg_dict.update({func: [feat_avg, sf_avg]})
-    var_dict.update({func: [feat_var, sf_var]})
+            cluster = data.drop(columns='Site').mean()
+            cluster_rows.append({'Data set': key, 'n sites': len(sites), 'MAP': sites['MAP'].mean(),
+                                 'MAT': sites['MAT'].mean(), **cluster.to_dict()})
+            print(f'{key} complete', flush=True)
 
-for biome, biome_cluster in biome_clusters.items():
-    X, Y = data_import(my_features, biome_cluster)
-    feat_avg = [float(x) for x in np.average(X, axis=0)]
-    feat_var = [float(x) for x in np.var(X, axis=0)]
-    sf_avg = float(np.average(Y))
-    sf_var = float(np.var(Y))
-    avg_dict.update({biome: [feat_avg, sf_avg]})
-    var_dict.update({biome: [feat_var, sf_var]})
-
-avg_df = pd.DataFrame(avg_dict)
-var_df = pd.DataFrame(var_dict)
-df = pd.concat([avg_df, var_df], axis=0)
-df = df.T
-
-df.to_csv("data/modeling_data/cluster_statistics.csv",
-          header=['Feature average', 'Sap flux average', 'Feature variance', 'Sap flux variance'])
+    pd.DataFrame(cluster_rows).to_csv(cluster_file, index=False)
+    pd.concat(site_tables, ignore_index=True).to_csv(site_file, index=False)
+    print(f'Written to {cluster_file} and {site_file}')

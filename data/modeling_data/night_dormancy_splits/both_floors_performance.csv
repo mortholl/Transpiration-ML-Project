@@ -1,0 +1,33 @@
+Data set,Model,Condition,n test points,share removed,R2 test
+pft_deciduous,RF,all,23122,0.0,0.7689042358965765
+pft_deciduous,RF,both floors,10510,0.5454545454545454,0.668189759816499
+pft_deciduous,ANN,all,23122,0.0,0.698046198946762
+pft_deciduous,ANN,both floors,10510,0.5454545454545454,0.569766734721318
+pft_evergreen,RF,all,68407,0.0,0.6161245071158472
+pft_evergreen,RF,both floors,27183,0.6026283859838906,0.5231344273439853
+pft_evergreen,ANN,all,68407,0.0,0.5246042126454448
+pft_evergreen,ANN,both floors,27183,0.6026283859838906,0.42360443182149377
+pft_mixed,RF,all,27226,0.0,0.7353189130232666
+pft_mixed,RF,both floors,11865,0.5642033350473812,0.6137332131495932
+pft_mixed,ANN,all,27226,0.0,0.6599988921756673
+pft_mixed,ANN,both floors,11865,0.5642033350473812,0.5097382191520498
+biome_WoodlandShrubland,RF,all,43027,0.0,0.7260475467454518
+biome_WoodlandShrubland,RF,both floors,17009,0.6046900783229134,0.6386418391528419
+biome_WoodlandShrubland,ANN,all,43027,0.0,0.6355263499723648
+biome_WoodlandShrubland,ANN,both floors,17009,0.6046900783229134,0.5163958586971937
+biome_Temperate forest,RF,all,61673,0.0,0.6246406769904771
+biome_Temperate forest,RF,both floors,25377,0.5885233408460753,0.5029915166778074
+biome_Temperate forest,ANN,all,61673,0.0,0.5411288878713525
+biome_Temperate forest,ANN,both floors,25377,0.5885233408460753,0.3901156555418811
+biome_Tropical rain forest,RF,all,4909,0.0,0.918426825072413
+biome_Tropical rain forest,RF,both floors,2067,0.578936646974944,0.8536578676722486
+biome_Tropical rain forest,ANN,all,4909,0.0,0.916176913576884
+biome_Tropical rain forest,ANN,both floors,2067,0.578936646974944,0.8545296246396393
+biome_Tropical forest savanna,RF,all,4227,0.0,0.8694190883005402
+biome_Tropical forest savanna,RF,both floors,2524,0.40288620771232553,0.8097252307806877
+biome_Tropical forest savanna,ANN,all,4227,0.0,0.8027302266331441
+biome_Tropical forest savanna,ANN,both floors,2524,0.40288620771232553,0.7247489229769368
+biome_Temperate grassland desert,RF,all,24459,0.0,0.8174672068656278
+biome_Temperate grassland desert,RF,both floors,10901,0.5543153849298826,0.7285124246635211
+biome_Temperate grassland desert,ANN,all,24459,0.0,0.7635127092284527
+biome_Temperate grassland desert,ANN,both floors,10901,0.5543153849298826,0.6507665357047008
